@@ -1,14 +1,60 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
+<!--<ion-header>-->
+<!--  <ion-navbar>-->
+<!--    <ion-title>-->
+<!--      Sign In-->
+<!--    </ion-title>-->
+<!--  </ion-navbar>-->
+<!--</ion-header>-->
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-grid>
+    <ion-row>
+      <ion-col offset-80 width-20>Log in</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <img src="#">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h1>Welcome to Rare Genomics</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button round block>Continue with Facebook</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button color="light" round block>Create Account</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <a>More options</a>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p>By signing up, I agree to Rare Genomic's <a>Terms of Service</a> and <a>Privacy Policy</a></p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list no-lines>
+
+    <ion-item>
+      <ion-input type="text" placeholder="Username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="password" placeholder="Password"></ion-input>
+    </ion-item>
+
+  </ion-list>
+  <div padding>
+    <ion-input type="text" placeholder="Username"></ion-input>
+    <button ion-button color="primary" block>Sign In</button>
+  </div>
 </ion-content>
