@@ -1,60 +1,48 @@
-<!--<ion-header>-->
-<!--  <ion-navbar>-->
-<!--    <ion-title>-->
-<!--      Sign In-->
-<!--    </ion-title>-->
-<!--  </ion-navbar>-->
-<!--</ion-header>-->
+<ion-header>
+  <ion-navbar padding>
+    <!-- <ion-title>
+      Sign In
+    </ion-title> -->
+    <ion-buttons end>
+      <!-- <button ion-button icon-only (click)="openModal()">
+        <ion-icon name="options"></ion-icon>
+      </button> -->
+      Log in
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 
 <ion-content padding>
   <ion-grid>
     <ion-row>
-      <ion-col offset-80 width-20>Log in</ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <img src="#">
+      <ion-col width-20>
+        <img src="/assets/logo-white.png">
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <h1>Welcome to Rare Genomics</h1>
+        <h4>Welcome to Rare Genomics</h4>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <button ion-button round block>Continue with Facebook</button>
+        <button class="facebook-login" ion-button round block icon-left><ion-icon name="logo-facebook"></ion-icon>Continue with Facebook</button>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <button ion-button color="light" round block>Create Account</button>
+        <button class="create-account" ion-button color="light" round block>Create Account</button>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <a>More options</a>
+        <a class="more-options">More options</a>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <p>By signing up, I agree to Rare Genomic's <a>Terms of Service</a> and <a>Privacy Policy</a></p>
+        <p>By signing up, I agree to Rare Genomics's <a>Terms of Service</a> and <a>Privacy Policy</a></p>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-list no-lines>
-
-    <ion-item>
-      <ion-input type="text" placeholder="Username"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-input type="password" placeholder="Password"></ion-input>
-    </ion-item>
-
-  </ion-list>
-  <div padding>
-    <ion-input type="text" placeholder="Username"></ion-input>
-    <button ion-button color="primary" block>Sign In</button>
-  </div>
 </ion-content>

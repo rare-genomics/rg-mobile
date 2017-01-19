@@ -1,3 +1,43 @@
 page-home {
+  ion-header {
+    ion-navbar {
+      .toolbar-background {
+        background: none;
+        border-bottom: 0px !important;
+      }
+      ion-buttons {
+        color: #FFF;
+      }
+    }
+  }
+  ion-content {
     background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+    img {
+      margin-bottom: 2em;
+    }
+    h4 {
+      color: #FFF;
+    }
+    .facebook-login {
+      background: #FFF;
+      color: #21c6db;
+    }
+    .create-account {
+      background: none;
+      border: 1px solid #FFF;
+      color: #FFF;
+    }
+    a {
+      color: #FFF;
+      text-decoration: underline;
+      &.more-options {
+        text-decoration: none;
+      }
+    }
+    p {
+      color: #FFF;
+      opacity: 0.5;
+      font-size: 12px;
+    }
+  }
 }
