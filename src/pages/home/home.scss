@@ -1,5 +1,16 @@
 page-home {
+  a {
+    color: #FFF;
+    text-decoration: underline;
+    cursor: pointer;
+    &.more-options, &.header-anchor {
+      text-decoration: none;
+    }
+  }
   ion-header {
+    &.header-md::after {
+      background: none;
+    }
     ion-navbar {
       .toolbar-background {
         background: none;
@@ -18,20 +29,22 @@ page-home {
     h4 {
       color: #FFF;
     }
+    [ion-button] {
+      box-shadow: none;
+    }
     .facebook-login {
       background: #FFF;
       color: #21c6db;
+      &.activated {
+        background-color: #FFF !important;
+      }
     }
     .create-account {
       background: none;
       border: 1px solid #FFF;
       color: #FFF;
-    }
-    a {
-      color: #FFF;
-      text-decoration: underline;
-      &.more-options {
-        text-decoration: none;
+      &.activated {
+        background: none !important;
       }
     }
     p {
