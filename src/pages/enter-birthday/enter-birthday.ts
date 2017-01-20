@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { NotificationsPromptPage } from '../notifications-prompt/notifications-prompt';
 
 @Component({
   selector: 'page-enter-birthday',
@@ -11,5 +12,8 @@ export class EnterBirthdayPage {
 
   goBack() {
     this.navCtrl.pop();
+  }
+  notificationsPrompt() {
+    this.navCtrl.push(NotificationsPromptPage);
   }
 }

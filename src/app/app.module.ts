@@ -6,6 +6,7 @@ import { CreateAccountPage } from '../pages/create-account/create-account';
 import { EmailAddressPage } from '../pages/email-address/email-address';
 import { CreatePasswordPage } from '../pages/create-password/create-password';
 import { EnterBirthdayPage } from '../pages/enter-birthday/enter-birthday';
+import { NotificationsPromptPage } from '../pages/notifications-prompt/notifications-prompt';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { EnterBirthdayPage } from '../pages/enter-birthday/enter-birthday';
     CreateAccountPage,
     EmailAddressPage,
     CreatePasswordPage,
-    EnterBirthdayPage
+    EnterBirthdayPage,
+    NotificationsPromptPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -26,7 +28,8 @@ import { EnterBirthdayPage } from '../pages/enter-birthday/enter-birthday';
     CreateAccountPage,
     EmailAddressPage,
     CreatePasswordPage,
-    EnterBirthdayPage
+    EnterBirthdayPage,
+    NotificationsPromptPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

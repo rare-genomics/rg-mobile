@@ -1,0 +1,46 @@
+<ion-header no-border>
+  <ion-grid>
+    <ion-row>
+    </ion-row>
+  </ion-grid>
+  <ion-toolbar padding>
+    <ion-buttons start>
+      <button ion-button icon-only clear (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-20>
+        <ion-icon name="notifications" class="big-icon"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h1>Turn on notifications?</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p>We can let you know when someone messages you, or notify you about other important account activity.</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button clear round class="skip">Skip</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button round icon-left class="notify">
+          Yes, notify me
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>
