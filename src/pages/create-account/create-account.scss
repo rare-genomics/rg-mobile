@@ -3,6 +3,13 @@ page-create-account {
     .toolbar-background {
       background: none;
     }
+    ion-grid {
+      padding: 0;
+      ion-row {
+        width: 20%;
+        border-top: 5px solid #097770;
+      }
+    }
     ion-icon {
       color: #FFF;
     }
@@ -12,6 +19,9 @@ page-create-account {
     h1 {
       color: #FFF;
       margin-bottom: 2em;
+    }
+    input {
+      color: #FFF;
     }
     ion-item {
       background: none !important;
@@ -30,6 +40,7 @@ page-create-account {
       width: 3em;
       height: 3em;
       border-radius: 50%;
+      color: #21c6db;
     }
   }
 }

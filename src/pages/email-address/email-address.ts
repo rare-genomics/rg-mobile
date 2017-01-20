@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { CreatePasswordPage } from '../create-password/create-password';
 
 @Component({
   selector: 'page-email-address',
@@ -11,5 +12,8 @@ export class EmailAddressPage {
 
   goBack() {
     this.navCtrl.pop();
+  }
+  createPassword() {
+    this.navCtrl.push(CreatePasswordPage);
   }
 }

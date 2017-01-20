@@ -4,13 +4,15 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { CreateAccountPage } from '../pages/create-account/create-account';
 import { EmailAddressPage } from '../pages/email-address/email-address';
+import { CreatePasswordPage } from '../pages/create-password/create-password';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     CreateAccountPage,
-    EmailAddressPage
+    EmailAddressPage,
+    CreatePasswordPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -20,7 +22,8 @@ import { EmailAddressPage } from '../pages/email-address/email-address';
     MyApp,
     HomePage,
     CreateAccountPage,
-    EmailAddressPage
+    EmailAddressPage,
+    CreatePasswordPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
