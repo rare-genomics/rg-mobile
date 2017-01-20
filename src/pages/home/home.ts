@@ -4,6 +4,8 @@ import { NavController } from 'ionic-angular';
 
 import { AlertController } from 'ionic-angular';
 
+import { CreateAccountPage } from '../create-account/create-account';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -19,6 +21,10 @@ export class HomePage {
       buttons: ['Ok']
     });
     alert.present()
+  }
+
+  createAccount() {
+    this.navCtrl.push(CreateAccountPage);
   }
 
 }
