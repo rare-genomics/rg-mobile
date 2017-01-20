@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { EmailAddressPage } from '../email-address/email-address';
 
 @Component({
   selector: 'page-create-account',
@@ -12,4 +13,9 @@ export class CreateAccountPage {
   goBack() {
     this.navCtrl.pop();
   }
+
+  emailAddress() {
+    this.navCtrl.push(EmailAddressPage);
+  }
+
 }
