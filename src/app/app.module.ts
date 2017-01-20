@@ -5,6 +5,7 @@ import { HomePage } from '../pages/home/home';
 import { CreateAccountPage } from '../pages/create-account/create-account';
 import { EmailAddressPage } from '../pages/email-address/email-address';
 import { CreatePasswordPage } from '../pages/create-password/create-password';
+import { EnterBirthdayPage } from '../pages/enter-birthday/enter-birthday';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { CreatePasswordPage } from '../pages/create-password/create-password';
     HomePage,
     CreateAccountPage,
     EmailAddressPage,
-    CreatePasswordPage
+    CreatePasswordPage,
+    EnterBirthdayPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -23,7 +25,8 @@ import { CreatePasswordPage } from '../pages/create-password/create-password';
     HomePage,
     CreateAccountPage,
     EmailAddressPage,
-    CreatePasswordPage
+    CreatePasswordPage,
+    EnterBirthdayPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

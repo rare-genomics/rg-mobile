@@ -1,0 +1,49 @@
+page-enter-birthday {
+  ion-header {
+    .toolbar-background {
+      background: none;
+    }
+    ion-grid {
+      padding: 0;
+      ion-row {
+        border-top: 5px solid #097770;
+        width: 80%;
+      }
+    }
+    ion-icon {
+      color: #FFF;
+    }
+  }
+  ion-content {
+    background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+    h1 {
+      color: #FFF;
+      margin-bottom: 2em;
+    }
+    p {
+      color: #FFF;
+    }
+    input {
+      color: #FFF;
+    }
+    ion-item {
+      background: none !important;
+      border: none !important;
+      padding: 0 !important;
+      .item-inner {
+        border-bottom: 1px solid #FFF !important;
+        ion-label {
+          color: #FFF;
+          text-transform: uppercase;
+        }
+      }
+    }
+    .button[icon-only] {
+      background: rgba(255, 255, 255, 0.5);
+      width: 3em;
+      height: 3em;
+      border-radius: 50%;
+      color: #21c6db;
+    }
+  }
+}

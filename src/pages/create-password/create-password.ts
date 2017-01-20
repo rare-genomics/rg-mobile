@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { EnterBirthdayPage } from '../enter-birthday/enter-birthday';
 
 @Component({
   selector: 'page-create-password',
@@ -11,5 +12,8 @@ export class CreatePasswordPage {
 
   goBack() {
     this.navCtrl.pop();
+  }
+  enterBirthday() {
+    this.navCtrl.push(EnterBirthdayPage);
   }
 }
