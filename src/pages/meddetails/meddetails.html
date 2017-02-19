@@ -11,31 +11,30 @@
             < Medication < New medication</ion-title>
     </ion-navbar>
     <ion-list>
+        <form (ngSubmit)="saveMedicine()">
+            <ion-item>
+                <ion-label floating>Discription</ion-label>
+                <ion-input name="med_discription" type="text" [(ngModel)]="todo.discription"></ion-input>
+            </ion-item>
 
-        <ion-item>
-            <ion-label floating>Discription</ion-label>
-            <ion-input type="text"></ion-input>
-        </ion-item>
+            <ion-item>
+                <ion-label floating>Dosages</ion-label>
+                <ion-input name="med_dosages" type="text" [(ngModel)]="todo.dosages"></ion-input>
+            </ion-item>
 
-        <ion-item>
-            <ion-label floating>Dosages</ion-label>
-            <ion-input type="text"></ion-input>
-        </ion-item>
+            <ion-item>
+                <ion-label>Time to take medicine</ion-label>
+                <ion-datetime name="med_datetime" displayFormat="HH:mm" [(ngModel)]="todo.datetime">
+                </ion-datetime>
+            </ion-item>
 
-        <ion-item>
-            <ion-label>Time to take medicine</ion-label>
-            <ion-datetime displayFormat="HH:mm" [(ngModel)]="myDate">
-            </ion-datetime>
-        </ion-item>
+            <ion-item>
+                <ion-label>Alarm</ion-label>
+                <ion-checkbox name="med_alarm" [(ngModel)]="todo.alarm"></ion-checkbox>
+            </ion-item>
 
-        <ion-item>
-            <ion-label>Alarm</ion-label>
-            <ion-checkbox></ion-checkbox>
-        </ion-item>
-        <button ion-button round color="dark" (click)="saveMedicine()">
-					Save 				
-				</button>
-
+            <button ion-button type="submit" block>Save medicine</button>
+        </form>
     </ion-list>
 </ion-header>
 

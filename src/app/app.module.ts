@@ -39,6 +39,9 @@ import { MeddetailsPage } from '../pages/meddetails/meddetails';
     MedhomePage,
     MeddetailsPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Storage
+    ]
 })
 export class AppModule {}
