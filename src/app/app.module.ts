@@ -8,6 +8,10 @@ import { CreatePasswordPage } from '../pages/create-password/create-password';
 import { EnterBirthdayPage } from '../pages/enter-birthday/enter-birthday';
 import { NotificationsPromptPage } from '../pages/notifications-prompt/notifications-prompt';
 
+
+import { MedhomePage } from '../pages/medhome/medhome';
+import { MeddetailsPage } from '../pages/meddetails/meddetails';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -16,7 +20,9 @@ import { NotificationsPromptPage } from '../pages/notifications-prompt/notificat
     EmailAddressPage,
     CreatePasswordPage,
     EnterBirthdayPage,
-    NotificationsPromptPage
+    NotificationsPromptPage,
+    MedhomePage,
+    MeddetailsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -29,7 +35,9 @@ import { NotificationsPromptPage } from '../pages/notifications-prompt/notificat
     EmailAddressPage,
     CreatePasswordPage,
     EnterBirthdayPage,
-    NotificationsPromptPage
+    NotificationsPromptPage,
+    MedhomePage,
+    MeddetailsPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
