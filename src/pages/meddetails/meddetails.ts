@@ -15,11 +15,11 @@ import { Storage } from '@ionic/storage';
 })
 
 export class MeddetailsPage {
-  newMed = true;  
+  medId;
   todo = {}
   constructor(public navCtrl: NavController, public navParams: NavParams, storage: Storage, public params:NavParams) {
     if(params.get("medId") != null){
-      this.newMed = false;
+      this.medId = params.get("medId");
       console.log("Deve setar campos");
       let storage = new Storage();
     
@@ -28,8 +28,8 @@ export class MeddetailsPage {
           if(val[i]['id'] == params.get("medId")){
             this.todo['discription'] = val[i]['discription'];
             this.todo['dosages'] = val[i]['dosages'];
-            this.todo['med_datetime'] = val[i]['med_datetime'];
-            this.todo['med_alarm'] = val[i]['med_alarm'];
+            this.todo['datetime'] = val[i]['datetime'];
+            this.todo['alarm'] = val[i]['alarm'];
           }
         }
       });
@@ -40,14 +40,19 @@ export class MeddetailsPage {
     console.log('ionViewDidLoad MeddetailsPage');
   }
   saveMedicine(){
+    if(this.medId){
+      console.log("Deletando item");
+      this.deleteMedicine();
+    }   
+    
     let storage = new Storage();
     storage.get('medicine').then((val) => {
-      let localId = 1;
-      if(val != null){
-        localId = val.length + 1;
-      }
+      // let localId = Math.floor(Date.now());
+      // if(val != null){
+      //   localId = val.length + 1;
+      // }
       let currentTodo = {        
-        'id' : localId,
+        'id' : Math.floor(Date.now()),
         'discription' : this.todo['discription'],
         'dosages' : this.todo['dosages'],
         'datetime' : this.todo['datetime'],
@@ -64,6 +69,25 @@ export class MeddetailsPage {
     this.navCtrl.pop();    
   }
 
+  deleteMedicineButton(){
+    this.deleteMedicine();
+    this.navCtrl.pop();
+  }
+
+  deleteMedicine(){
+    let storage = new Storage();    
+    storage.get('medicine').then((val) => {      
+      let newArray = [];
+      for(let i in val){   
+          if(val[i]['id'] != this.medId){            
+            newArray.push(val[i]);
+          }
+      }
+      storage.remove('medicine');
+      storage.set('medicine', newArray);
+    });    
+  }
+  
   // printa(){
   //   let storage = new Storage();
   //   storage.get('medicine').then((val) => {
