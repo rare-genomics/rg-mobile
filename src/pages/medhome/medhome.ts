@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MeddetailsPage } from '../meddetails/meddetails';
 import { Storage } from '@ionic/storage';
-// import { Storage } from '@ionic/storage';
 /*
   Generated class for the Medhome page.
 
@@ -23,17 +22,19 @@ export class MedhomePage {
   }
 
   loadList(){
-    console.log("lendo lista");
     let storage = new Storage();
     this.medications = [];
     storage.get('medicine').then((val) => {
       for(let i in val){
-          this.medications[i] = val[i];
+          let temparray = {};          
+          temparray['discription'] = val[i]['discription'];
+          temparray['dosages'] = val[i]['dosages'];
+          temparray['datetime'] = val[i]['datetime'];
+          temparray['alarm'] = val[i]['alarm'];
+          temparray['id'] = val[i]['id'];
+          this.medications.push(temparray);
       }
     });
-  }
-  onPageWillEnter() {
-        console.log("Showing the first page!");
   }
 
   gotoMeddetails() {

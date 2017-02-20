@@ -20,9 +20,7 @@ export class MeddetailsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, storage: Storage, public params:NavParams) {
     if(params.get("medId") != null){
       this.medId = params.get("medId");
-      console.log("Deve setar campos");
-      let storage = new Storage();
-    
+      let storage = new Storage();   
       storage.get('medicine').then((val) => {      
         for(let i in val){   
           if(val[i]['id'] == params.get("medId")){
@@ -36,62 +34,55 @@ export class MeddetailsPage {
     }
   }
   
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MeddetailsPage');
-  }
   saveMedicine(){
-    if(this.medId){
-      console.log("Deletando item");
-      this.deleteMedicine();
-    }   
-    
     let storage = new Storage();
     storage.get('medicine').then((val) => {
-      // let localId = Math.floor(Date.now());
-      // if(val != null){
-      //   localId = val.length + 1;
-      // }
-      let currentTodo = {        
-        'id' : Math.floor(Date.now()),
-        'discription' : this.todo['discription'],
-        'dosages' : this.todo['dosages'],
-        'datetime' : this.todo['datetime'],
-        'alarm' : this.todo['alarm']
-      };
-
-    if(val == null){
-          val = [currentTodo];
+     if(this.medId){
+        for(let i in val){               
+            if(val[i]['id'] == this.medId){            
+              val[i]['discription'] = this.todo['discription'];
+              val[i]['dosages'] = this.todo['dosages'];
+              val[i]['datetime'] = this.todo['datetime'];
+              val[i]['alarm'] = this.todo['alarm'];              
+              break;
+            }
+        }
+      } else {
+        let currentTodo = {        
+          'id' : Math.floor(Date.now()),
+          'discription' : this.todo['discription'],
+          'dosages' : this.todo['dosages'],
+          'datetime' : this.todo['datetime'],
+          'alarm' : this.todo['alarm']
+        };
+        if(val == null){
+          let objt = [];
+          objt.push(currentTodo);
+          val = objt;
         } else {
           val.push(currentTodo);
         }
-        storage.set('medicine', val);      
+     }
+     storage.set('medicine', val);
     });    
     this.navCtrl.pop();    
-  }
-
-  deleteMedicineButton(){
-    this.deleteMedicine();
-    this.navCtrl.pop();
   }
 
   deleteMedicine(){
     let storage = new Storage();    
     storage.get('medicine').then((val) => {      
-      let newArray = [];
+      let arraySlice = [];
+      let countLocal = 0;
       for(let i in val){   
-          if(val[i]['id'] != this.medId){            
-            newArray.push(val[i]);
+          if(val[i]['id'] != this.medId){ 
+                 arraySlice.push(val[i]);      
+            // delete val[i];
+            // arraySlice.slice(countLocal,countLocal+1);
+            // countLocal++;
           }
-      }
-      storage.remove('medicine');
-      storage.set('medicine', newArray);
-    });    
+      }      
+      storage.set('medicine', arraySlice);
+    });
+    this.navCtrl.pop();    
   }
-  
-  // printa(){
-  //   let storage = new Storage();
-  //   storage.get('medicine').then((val) => {
-  //     console.log(val);
-  //   });
-  // }
 }
