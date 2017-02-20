@@ -75,10 +75,7 @@ export class MeddetailsPage {
       let countLocal = 0;
       for(let i in val){   
           if(val[i]['id'] != this.medId){ 
-                 arraySlice.push(val[i]);      
-            // delete val[i];
-            // arraySlice.slice(countLocal,countLocal+1);
-            // countLocal++;
+            arraySlice.push(val[i]);      
           }
       }      
       storage.set('medicine', arraySlice);
