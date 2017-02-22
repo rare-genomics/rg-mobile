@@ -6,6 +6,8 @@ import { AlertController } from 'ionic-angular';
 
 import { CreateAccountPage } from '../create-account/create-account';
 
+import { MedhomePage } from '../medhome/medhome';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -25,6 +27,11 @@ export class HomePage {
 
   createAccount() {
     this.navCtrl.push(CreateAccountPage);
+  }
+
+  gotoMedicationHome() {
+    console.log("teste");
+    this.navCtrl.push(MedhomePage);
   }
 
 }
