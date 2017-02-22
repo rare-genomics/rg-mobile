@@ -17,7 +17,7 @@ export class MedhomePage {
   medications: any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     this.loadList();
   }
 
@@ -27,7 +27,7 @@ export class MedhomePage {
     storage.get('medicine').then((val) => {
       for(let i in val){
           let temparray = {};          
-          temparray['discription'] = val[i]['discription'];
+          temparray['description'] = val[i]['description'];
           temparray['dosages'] = val[i]['dosages'];
           temparray['datetime'] = val[i]['datetime'];
           temparray['alarm'] = val[i]['alarm'];

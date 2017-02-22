@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
+import { LocalNotifications } from 'ionic-native';
 /*
   Generated class for the Meddetails page.
 
@@ -24,7 +24,7 @@ export class MeddetailsPage {
       storage.get('medicine').then((val) => {      
         for(let i in val){   
           if(val[i]['id'] == params.get("medId")){
-            this.todo['discription'] = val[i]['discription'];
+            this.todo['description'] = val[i]['description'];
             this.todo['dosages'] = val[i]['dosages'];
             this.todo['datetime'] = val[i]['datetime'];
             this.todo['alarm'] = val[i]['alarm'];
@@ -40,7 +40,7 @@ export class MeddetailsPage {
      if(this.medId){
         for(let i in val){               
             if(val[i]['id'] == this.medId){            
-              val[i]['discription'] = this.todo['discription'];
+              val[i]['description'] = this.todo['description'];
               val[i]['dosages'] = this.todo['dosages'];
               val[i]['datetime'] = this.todo['datetime'];
               val[i]['alarm'] = this.todo['alarm'];              
@@ -50,7 +50,7 @@ export class MeddetailsPage {
       } else {
         let currentTodo = {        
           'id' : Math.floor(Date.now()),
-          'discription' : this.todo['discription'],
+          'description' : this.todo['description'],
           'dosages' : this.todo['dosages'],
           'datetime' : this.todo['datetime'],
           'alarm' : this.todo['alarm']
@@ -64,7 +64,7 @@ export class MeddetailsPage {
         }
      }
      storage.set('medicine', val);
-    });    
+    });        
     this.navCtrl.pop();    
   }
 
@@ -72,7 +72,6 @@ export class MeddetailsPage {
     let storage = new Storage();    
     storage.get('medicine').then((val) => {      
       let arraySlice = [];
-      let countLocal = 0;
       for(let i in val){   
           if(val[i]['id'] != this.medId){ 
             arraySlice.push(val[i]);      
@@ -82,4 +81,14 @@ export class MeddetailsPage {
     });
     this.navCtrl.pop();    
   }
+
+  addNotification(){
+    LocalNotifications.schedule({
+      id: 1,
+      text: 'Single ILocalNotification',
+      sound: 'file://sound.mp3',
+      data: { secret: "teste" }
+    });
+  }
+  
 }

@@ -14,8 +14,8 @@
     <ion-list>
         <form (ngSubmit)="saveMedicine()">
             <ion-item>
-                <ion-label floating>Discription</ion-label>
-                <ion-input name="med_discription" type="text" [(ngModel)]="todo.discription"></ion-input>
+                <ion-label floating>Description</ion-label>
+                <ion-input name="med_description" type="text" [(ngModel)]="todo.description"></ion-input>
             </ion-item>
 
             <ion-item>
@@ -36,6 +36,7 @@
             <button ion-button round center large type="submit">Save</button>
         </form><br><br>
         <button *ngIf="medId" color="danger" large ion-button round (click)="deleteMedicine()">Delete</button>
+        <button *ngIf="medId" color="danger" large ion-button round (click)="addNotification()">Test alarm</button>
     </ion-list>
     <!--</ion-header>-->
 </ion-content>
