@@ -83,12 +83,21 @@ export class MeddetailsPage {
   }
 
   addNotification(){
+    // LocalNotifications.schedule({
+    //   id: 1,
+    //   text: 'Single ILocalNotification',
+    //   sound: 'file://sound.mp3',
+    //   data: { secret: "teste" }
+    // });
+var now             = new Date().getTime(),
+    _5_sec_from_now = new Date(now + 60*1000);
     LocalNotifications.schedule({
-      id: 1,
-      text: 'Single ILocalNotification',
-      sound: 'file://sound.mp3',
-      data: { secret: "teste" }
-    });
+    text: "Delayed Notification 2",
+    at: _5_sec_from_now,    
+    led: "FF0000",
+    // sound: 'file://alarm_bell.mp3'
+    sound: 'file://assets/images/alarm_bell.mp3'
+});
   }
   
 }
