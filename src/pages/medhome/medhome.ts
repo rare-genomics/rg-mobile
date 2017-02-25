@@ -13,26 +13,26 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'medhome.html',
   providers: [Storage]
 })
-export class MedhomePage {  
+export class MedhomePage {
   medications: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams) { }
 
   ionViewDidEnter() {
     this.loadList();
   }
 
-  loadList(){
+  loadList() {
     let storage = new Storage();
     this.medications = [];
     storage.get('medicine').then((val) => {
-      for(let i in val){
-          let temparray = {};          
-          temparray['description'] = val[i]['description'];
-          temparray['dosages'] = val[i]['dosages'];
-          temparray['datetime'] = val[i]['datetime'];
-          temparray['alarm'] = val[i]['alarm'];
-          temparray['id'] = val[i]['id'];
-          this.medications.push(temparray);
+      for (let i in val) {
+        let temparray = {};
+        temparray['description'] = val[i]['description'];
+        temparray['dosages'] = val[i]['dosages'];
+        temparray['datetime'] = val[i]['datetime'];
+        temparray['alarm'] = val[i]['alarm'];
+        temparray['id'] = val[i]['id'];
+        this.medications.push(temparray);
       }
     });
   }
@@ -41,11 +41,11 @@ export class MedhomePage {
     this.navCtrl.push(MeddetailsPage);
   }
 
-  openMed(medId){
+  openMed(medId) {
     this.navCtrl.push(MeddetailsPage, {
-      'medId':medId
+      'medId': medId
     });
-    console.log("Deve abrir "+medId);
+    console.log("Deve abrir " + medId);
   }
-  
+
 }

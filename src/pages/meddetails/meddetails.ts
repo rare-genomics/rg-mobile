@@ -17,13 +17,13 @@ import { LocalNotifications } from 'ionic-native';
 export class MeddetailsPage {
   medId;
   todo = {}
-  constructor(public navCtrl: NavController, public navParams: NavParams, storage: Storage, public params:NavParams) {
-    if(params.get("medId") != null){
+  constructor(public navCtrl: NavController, public navParams: NavParams, storage: Storage, public params: NavParams) {
+    if (params.get("medId") != null) {
       this.medId = params.get("medId");
-      let storage = new Storage();   
-      storage.get('medicine').then((val) => {      
-        for(let i in val){   
-          if(val[i]['id'] == params.get("medId")){
+      let storage = new Storage();
+      storage.get('medicine').then((val) => {
+        for (let i in val) {
+          if (val[i]['id'] == params.get("medId")) {
             this.todo['description'] = val[i]['description'];
             this.todo['dosages'] = val[i]['dosages'];
             this.todo['datetime'] = val[i]['datetime'];
@@ -33,71 +33,110 @@ export class MeddetailsPage {
       });
     }
   }
-  
-  saveMedicine(){
+
+  saveMedicine() {
     let storage = new Storage();
     storage.get('medicine').then((val) => {
-     if(this.medId){
-        for(let i in val){               
-            if(val[i]['id'] == this.medId){            
-              val[i]['description'] = this.todo['description'];
-              val[i]['dosages'] = this.todo['dosages'];
-              val[i]['datetime'] = this.todo['datetime'];
-              val[i]['alarm'] = this.todo['alarm'];              
-              break;
-            }
+      if (this.medId) {
+        for (let i in val) {
+          if (val[i]['id'] == this.medId) {
+            val[i]['description'] = this.todo['description'];
+            val[i]['dosages'] = this.todo['dosages'];
+            val[i]['datetime'] = this.todo['datetime'];
+            val[i]['alarm'] = this.todo['alarm'];
+            break;
+          }
         }
       } else {
-        let currentTodo = {        
-          'id' : Math.floor(Date.now()),
-          'description' : this.todo['description'],
-          'dosages' : this.todo['dosages'],
-          'datetime' : this.todo['datetime'],
-          'alarm' : this.todo['alarm']
+        this.medId = Math.floor(Date.now())
+        let currentTodo = {
+          'id': this.medId,
+          'description': this.todo['description'],
+          'dosages': this.todo['dosages'],
+          'datetime': this.todo['datetime'],
+          'alarm': this.todo['alarm']
         };
-        if(val == null){
+        if (val == null) {
           let objt = [];
           objt.push(currentTodo);
           val = objt;
         } else {
           val.push(currentTodo);
         }
-     }
-     storage.set('medicine', val);
-    });        
-    this.navCtrl.pop();    
+      }
+      storage.set('medicine', val);
+    });
+    this.setNotifications();
+    this.navCtrl.pop();
   }
 
-  deleteMedicine(){
-    let storage = new Storage();    
-    storage.get('medicine').then((val) => {      
+  deleteMedicine() {
+    let storage = new Storage();
+    storage.get('medicine').then((val) => {
       let arraySlice = [];
-      for(let i in val){   
-          if(val[i]['id'] != this.medId){ 
-            arraySlice.push(val[i]);      
-          }
-      }      
+      for (let i in val) {
+        if (val[i]['id'] != this.medId) {
+          arraySlice.push(val[i]);
+        }
+      }
       storage.set('medicine', arraySlice);
     });
-    this.navCtrl.pop();    
+    this.setNotifications();
+    this.navCtrl.pop();
   }
 
-  addNotification(){
+  setNotifications() {
+    LocalNotifications.clearAll();
+    LocalNotifications.cancelAll();
+    let storage = new Storage();
+    console.log("Horario:" + this.todo['datetime'].toString());
+
+
+    let allAlarms = [];
+    storage.get('medicine').then((val) => {
+      let hasAlarms = false;
+      for (let i in val) {
+        if (val[i]['alarm'] == true) {
+          hasAlarms = true;
+          console.log("adding alarm");
+          let now = new Date();
+          let firstAtDate = new Date(now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + this.todo['datetime'].toString());
+          allAlarms.push({
+            id: val[i]['id'],
+            title: val[i]['description'],
+            text: val[i]['dosages'],
+            at: firstAtDate,
+            every: "day",
+            led: "FF0000",
+            sound: 'file://assets/sounds/alarm_bell.mp3'
+          });
+        }
+      }
+      console.log("HasC:" + hasAlarms);
+      if (hasAlarms) {
+        console.log("Ading alarm because has");
+        LocalNotifications.schedule(allAlarms);
+      }
+    });
+
+
     // LocalNotifications.schedule({
-    //   id: 1,
-    //   text: 'Single ILocalNotification',
-    //   sound: 'file://sound.mp3',
-    //   data: { secret: "teste" }
-    // });
-var now             = new Date().getTime(),
-    _5_sec_from_now = new Date(now + 60*1000);
-    LocalNotifications.schedule({
-    text: "Delayed Notification 2",
-    at: _5_sec_from_now,    
-    led: "FF0000",
-    // sound: 'file://alarm_bell.mp3'
-    sound: 'file://assets/images/alarm_bell.mp3'
-});
+    //         id: val[i]['id'],
+    //         title: val[i]['description'],
+    //         text: val[i]['dosages'],
+    //         at: firstAtDate,
+    //         every: "day",
+    //         led: "FF0000",
+    //         sound: 'file://assets/sounds/alarm_bell.mp3'
+    //       });
   }
-  
+
+  testNotification() {
+    LocalNotifications.schedule({
+      title: this.todo['description'],
+      text: this.todo['dosages'],
+      led: "FF0000",
+      sound: 'file://assets/sounds/alarm_bell.mp3'
+    });
+  }
 }
