@@ -94,14 +94,13 @@ export class MeddetailsPage {
 
     let allAlarms = [];
     storage.get('medicine').then((val) => {
-      let hasAlarms = false;
+      let hasAlarms = 0;
       for (let i in val) {
         if (val[i]['alarm'] == true) {
-          hasAlarms = true;
           console.log("adding alarm");
-          let now = new Date();
+          let now = new Date();          
           let firstAtDate = new Date(now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + this.todo['datetime'].toString());
-          allAlarms.push({
+          allAlarms[hasAlarms] = {
             id: val[i]['id'],
             title: val[i]['description'],
             text: val[i]['dosages'],
@@ -109,11 +108,12 @@ export class MeddetailsPage {
             every: "day",
             led: "FF0000",
             sound: 'file://assets/sounds/alarm_bell.mp3'
-          });
+          };
+          hasAlarms++;
         }
       }
       console.log("HasC:" + hasAlarms);
-      if (hasAlarms) {
+      if (hasAlarms > 0) {
         console.log("Ading alarm because has");
         LocalNotifications.schedule(allAlarms);
       }
