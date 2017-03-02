@@ -8,13 +8,19 @@ import { CreateAccountPage } from '../create-account/create-account';
 
 import { MedhomePage } from '../medhome/medhome';
 
+import { InitDatabase } from '../../providers/init-database';
+
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  providers: [InitDatabase]
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController) { }
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private db: InitDatabase) { 
+    console.log("Inicia banco de dados");
+    this.db.createDatabase();
+  }
 
   doAlert() {
     let alert = this.alertCtrl.create({

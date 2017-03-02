@@ -1,39 +1,38 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MeddetailsPage } from '../meddetails/meddetails';
-import { Storage } from '@ionic/storage';
-/*
-  Generated class for the Medhome page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+import { InitDatabase } from '../../providers/init-database';
 @Component({
   selector: 'page-medhome',
   templateUrl: 'medhome.html',
-  providers: [Storage]
+  providers: [InitDatabase]
 })
 export class MedhomePage {
-  medications: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) { }
+  medications = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams, private db: InitDatabase) {
+  }
 
-  ionViewDidEnter() {
+  ionViewWillEnter() {
+    this.medications = [];
     this.loadList();
   }
 
   loadList() {
-    let storage = new Storage();
-    this.medications = [];
-    storage.get('medicine').then((val) => {
-      for (let i in val) {
-        let temparray = {};
-        temparray['description'] = val[i]['description'];
-        temparray['dosages'] = val[i]['dosages'];
-        temparray['datetime'] = val[i]['datetime'];
-        temparray['alarm'] = val[i]['alarm'];
-        temparray['id'] = val[i]['id'];
-        this.medications.push(temparray);
-      }
+    let bridge = { 'medications': this.medications };
+    this.db._db.transaction(function (tx) {
+      tx.executeSql('SELECT id, description, dosages, time, alarm FROM alarms', [], function (tx, res) {
+        var len = res.rows.length;
+        for (var i = 0; i < len; i++) {
+          let temparray = {};
+          temparray['id'] = res.rows.item(i).id;
+          temparray['description'] = res.rows.item(i).description;
+          temparray['dosages'] = res.rows.item(i).dosages;
+          temparray['time'] = res.rows.item(i).time;
+          temparray['alarm'] = res.rows.item(i).alarm;
+          bridge.medications.push(temparray);
+        }
+      }, function (e) {
+      });
     });
   }
 
@@ -41,11 +40,10 @@ export class MedhomePage {
     this.navCtrl.push(MeddetailsPage);
   }
 
-  openMed(medId) {
+  openMed(medId) {    
     this.navCtrl.push(MeddetailsPage, {
       'medId': medId
     });
-    console.log("Deve abrir " + medId);
   }
 
 }
