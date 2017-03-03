@@ -1,31 +1,20 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-// import { Storage } from '@ionic/storage';
 import { LocalNotifications } from 'ionic-native';
 import { InitDatabase } from '../../providers/init-database';
-
-// import { Sql } from "../providers/Sql";
-/*
-  Generated class for the Meddetails page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
-// const DB_NAME: string = '__ionicstorage';
-// const win: any = window;
+import { ScheduleMedication } from '../../providers/schedule-medication';
 
 @Component({
   selector: 'page-meddetails',
   templateUrl: 'meddetails.html',
-  providers: [InitDatabase]
-  // providers: [Storage]
+  providers: [InitDatabase, ScheduleMedication]
 })
 
 export class MeddetailsPage {
   medId;
   todo = {}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private db: InitDatabase) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private db: InitDatabase, private schedmed: ScheduleMedication ) {
     console.log("Medid" + navParams.get("medId"));
     if (navParams.get("medId") != null) {
       this.loadMedicine(navParams.get("medId"));
@@ -42,7 +31,7 @@ export class MeddetailsPage {
           bridge.todo['id'] = res.rows.item(i).id;
           bridge.todo['description'] = res.rows.item(i).description;
           bridge.todo['dosages'] = res.rows.item(i).dosages;
-          bridge.todo['datetime'] = res.rows.item(i).datetime;
+          bridge.todo['time'] = res.rows.item(i).time;
           bridge.todo['alarm'] = res.rows.item(i).alarm;
         }
       }, function (e) {
@@ -52,11 +41,9 @@ export class MeddetailsPage {
 
   saveMedicine() {
     this.replaceUndefined();
-    let todo = this.todo;
-    console.log("Saving:" + todo['id']);    
+    let todo = this.todo; 
     if (todo['id'] != null) {
       // Changing
-      console.log("TODO:" + todo['id']);
       this.db._db.transaction(function (tx) {
         tx.executeSql('UPDATE alarms SET description = ?, dosages = ?, time = ?, alarm = ? WHERE id = ?', [
           todo['description'],
@@ -83,6 +70,7 @@ export class MeddetailsPage {
         });
       });
     }
+    this.schedmed.setAlarms();
     this.navCtrl.pop();
   }
 

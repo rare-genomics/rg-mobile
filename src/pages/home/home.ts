@@ -16,7 +16,7 @@ import { InitDatabase } from '../../providers/init-database';
   providers: [InitDatabase]
 })
 export class HomePage {
-
+  
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, private db: InitDatabase) { 
     console.log("Inicia banco de dados");
     this.db.createDatabase();
