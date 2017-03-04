@@ -29,32 +29,32 @@ export class ScheduleMedication {
         var len = res.rows.length;
         let allAlarms = [];
         let hasAlarms = 0;
+        let dateNow = new Date();
         for (var i = 0; i < len; i++) {
-          let date1 = new Date();
-          let day = date1.getDate();
+          let tomorrow = new Date();
           for (let iii = 0; iii < alarmAhead; iii++) {
-            date1.setHours(res.rows.item(i).time.split(":")[0]);
-            date1.setMinutes(res.rows.item(i).time.split(":")[1]);
-            date1.setSeconds(0);
-            // let id_local = res.rows.item(i).id + "_" + iii;
-            allAlarms[hasAlarms] = {
-              id: hasAlarms,
-              title: res.rows.item(i).description,
-              text: res.rows.item(i).dosages,
-              at: date1,
-              led: "FF0000",
-              sound: 'file://assets/sounds/alarm_bell.mp3'
-            };
-            date1 = new Date(date1.setDate(day++));
-            hasAlarms++;
+            tomorrow.setHours(res.rows.item(i).time.split(":")[0]);
+            tomorrow.setMinutes(res.rows.item(i).time.split(":")[1]);
+            tomorrow.setSeconds(0);
+            if (tomorrow >= dateNow) {
+              allAlarms[hasAlarms] = {
+                id: hasAlarms,
+                title: res.rows.item(i).description,
+                text: res.rows.item(i).dosages,
+                at: new Date(tomorrow),
+                led: "FF0000",
+                sound: 'file://assets/sounds/alarm_bell.mp3'
+              };
+              hasAlarms++;
+            }
+            tomorrow.setDate(tomorrow.getDate() + 1);
           }
         }
         if (hasAlarms > 0) {
-          console.log(allAlarms);
           LocalNotifications.schedule(allAlarms);
         }
       }, function (e) {
       });
     });
-  }
+  }     
 }

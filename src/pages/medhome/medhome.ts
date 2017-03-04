@@ -10,11 +10,15 @@ import { InitDatabase } from '../../providers/init-database';
 export class MedhomePage {
   medications = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, private db: InitDatabase) {
+    setInterval(() => {
+      this.medications.length;
+    }, 1000);
   }
 
   ionViewWillEnter() {
     this.medications = [];
     this.loadList();
+    console.log(this.medications);
   }
 
   loadList() {
@@ -40,10 +44,9 @@ export class MedhomePage {
     this.navCtrl.push(MeddetailsPage);
   }
 
-  openMed(medId) {    
+  openMed(medId) {
     this.navCtrl.push(MeddetailsPage, {
       'medId': medId
     });
   }
-
 }

@@ -14,8 +14,7 @@ export class MeddetailsPage {
   medId;
   todo = {}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private db: InitDatabase, private schedmed: ScheduleMedication ) {
-    console.log("Medid" + navParams.get("medId"));
+  constructor(public navCtrl: NavController, public navParams: NavParams, private db: InitDatabase, private schedmed: ScheduleMedication) {
     if (navParams.get("medId") != null) {
       this.loadMedicine(navParams.get("medId"));
     }
@@ -41,7 +40,7 @@ export class MeddetailsPage {
 
   saveMedicine() {
     this.replaceUndefined();
-    let todo = this.todo; 
+    let todo = this.todo;
     if (todo['id'] != null) {
       // Changing
       this.db._db.transaction(function (tx) {
@@ -74,14 +73,14 @@ export class MeddetailsPage {
     this.navCtrl.pop();
   }
 
-  replaceUndefined(){
-    if(this.todo['dosages'] == undefined){
+  replaceUndefined() {
+    if (this.todo['dosages'] == undefined) {
       this.todo['dosages'] = null;
     }
-    if(this.todo['time'] == undefined){
+    if (this.todo['time'] == undefined) {
       this.todo['time'] = null;
     }
-    if(this.todo['alarm'] == undefined){
+    if (this.todo['alarm'] == undefined) {
       this.todo['alarm'] = false;
     }
   }
@@ -96,81 +95,9 @@ export class MeddetailsPage {
         console.log(e.message + " Error updating the database " + e);
       });
     });
-    // this.setNotifications();
+    this.schedmed.setAlarms();    
     this.navCtrl.pop();
   }
-
-  setNotifications() {
-    // LocalNotifications.clearAll();
-    // LocalNotifications.cancelAll();
-    // let storage = new Storage();
-    // console.log("Horario:" + this.todo['datetime'].toString());
-
-
-    // let allAlarms = [];
-    // storage.get('medicine').then((val) => {
-    //   let hasAlarms = 0;
-    //   for (let i in val) {
-    //     if (val[i]['alarm'] == true) {
-    //       console.log("adding alarm");
-    //       let now = new Date();
-    //       console.log()
-    //       let firstAtDate = new Date(now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + val[i]['datetime'].toString());
-    //       allAlarms[hasAlarms] = {
-    //         id: val[i]['id'],
-    //         title: val[i]['description'],
-    //         text: val[i]['dosages'],
-    //         at: firstAtDate,
-    //         every: "day",
-    //         led: "FF0000",
-    //         sound: 'file://assets/sounds/alarm_bell.mp3'
-    //       };
-    //       hasAlarms++;
-    //     }
-    //   }
-    //   console.log("HasC:" + hasAlarms);
-    //   if (hasAlarms > 0) {
-    //     console.log("Ading alarm because has");
-    //     LocalNotifications.schedule(allAlarms);
-    //   }
-    // });
-  }
-
-  // setNotifications_bkp() {
-  //   LocalNotifications.clearAll();
-  //   LocalNotifications.cancelAll();
-  //   let storage = new Storage();
-  //   console.log("Horario:" + this.todo['datetime'].toString());
-
-
-  //   let allAlarms = [];
-  //   storage.get('medicine').then((val) => {
-  //     let hasAlarms = 0;
-  //     for (let i in val) {
-  //       if (val[i]['alarm'] == true) {
-  //         console.log("adding alarm");
-  //         let now = new Date();
-  //         console.log()
-  //         let firstAtDate = new Date(now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + val[i]['datetime'].toString());
-  //         allAlarms[hasAlarms] = {
-  //           id: val[i]['id'],
-  //           title: val[i]['description'],
-  //           text: val[i]['dosages'],
-  //           at: firstAtDate,
-  //           every: "day",
-  //           led: "FF0000",
-  //           sound: 'file://assets/sounds/alarm_bell.mp3'
-  //         };
-  //         hasAlarms++;
-  //       }
-  //     }
-  //     console.log("HasC:" + hasAlarms);
-  //     if (hasAlarms > 0) {
-  //       console.log("Ading alarm because has");
-  //       LocalNotifications.schedule(allAlarms);
-  //     }
-  //   });
-  // }
 
   testNotification() {
     LocalNotifications.schedule({
