@@ -36,7 +36,6 @@ export class HomePage {
   }
 
   gotoMedicationHome() {
-    console.log("teste");
     this.navCtrl.push(MedhomePage);
   }
 

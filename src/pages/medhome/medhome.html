@@ -1,13 +1,5 @@
-<ion-header>
-    <ion-toolbar color="dark">
-        <img src="assets/images/logo.png" width="30">
-    </ion-toolbar>
-    <button ion-button round color="dark" (click)="gotoMeddetails()" icon-right>
-               New medication <ion-icon><img src="assets/icon/addnew.ico" width="30"></ion-icon>
-     </button>
-</ion-header>
-
 <ion-content padding>
+    <img src="assets/icon/addnew.ico" width="30" (click)="gotoMeddetails()">
     <ion-list>
         <ion-item *ngFor="let medication of medications" (click)="openMed(medication['id'])">
             <ion-avatar item-left>
@@ -20,24 +12,3 @@
         </ion-item>
     </ion-list>
 </ion-content>
-
-<ion-footer>
-    <ion-toolbar color="dark" small>
-        <ion-grid>
-            <ion-row>
-                <ion-col>
-                    <img src="assets/icon/calendar.ico" width="50%">
-                </ion-col>
-                <ion-col>
-                    <img src="assets/icon/records.ico" width="50%">
-                </ion-col>
-                <ion-col>
-                    <img src="assets/icon/health.ico" width="50%">
-                </ion-col>
-                <ion-col>
-                    <img src="assets/icon/medication.ico" width="50%">
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </ion-toolbar>
-</ion-footer>

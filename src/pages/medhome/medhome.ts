@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MeddetailsPage } from '../meddetails/meddetails';
 import { InitDatabase } from '../../providers/init-database';
+import { AlertController } from 'ionic-angular';
 @Component({
   selector: 'page-medhome',
   templateUrl: 'medhome.html',
@@ -9,7 +10,7 @@ import { InitDatabase } from '../../providers/init-database';
 })
 export class MedhomePage {
   medications = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private db: InitDatabase) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private db: InitDatabase, public alertCtrl: AlertController) {
     setInterval(() => {
       this.medications.length;
     }, 1000);

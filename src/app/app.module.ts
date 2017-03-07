@@ -10,7 +10,6 @@ import { NotificationsPromptPage } from '../pages/notifications-prompt/notificat
 
 import { MedhomePage } from '../pages/medhome/medhome';
 import { MeddetailsPage } from '../pages/meddetails/meddetails';
-// import { initDatabase } from '../../providers/initDatabase';
 
 @NgModule({
   declarations: [
@@ -40,9 +39,9 @@ import { MeddetailsPage } from '../pages/meddetails/meddetails';
     MeddetailsPage
   ],
   providers: [
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Storage, 
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    Storage,
     // initDatabase
-    ]
+  ]
 })
-export class AppModule {}
+export class AppModule { }
