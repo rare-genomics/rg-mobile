@@ -14,7 +14,7 @@ import { ScheduleMedication } from '../../providers/schedule-medication';
 export class HomePage {
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, private db: InitDatabase, private schedmed: ScheduleMedication) {
-    console.log("Inicia banco de dados");
+    console.log("Inicia banco de dados");    
     this.db.createDatabase();
   }
 
@@ -39,4 +39,7 @@ export class HomePage {
     this.navCtrl.push(MedhomePage);
   }
 
+  dropDatabase(){
+    this.db.dropDatabase();
+  }
 }

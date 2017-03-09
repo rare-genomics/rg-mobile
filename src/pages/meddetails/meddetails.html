@@ -5,6 +5,8 @@
     </ion-navbar>
     <ion-list>
         <form (ngSubmit)="saveMedicine()">
+            <img *ngIf="!todo.image" src="assets/icon/camera.ico" (click)="runCamera()">
+            <img [src]="todo.image" *ngIf="todo.image" (click)="runCamera()" />
             <ion-item>
                 <ion-label floating>Description</ion-label>
                 <ion-input name="med_description" type="text" [(ngModel)]="todo.description"></ion-input>
@@ -12,7 +14,7 @@
 
             <ion-item>
                 <ion-label floating>Dosages</ion-label>
-                <ion-input name="med_dosages" type="text" [(ngModel)]="todo.dosages"></ion-input>
+                <ion-input name="med_dosages" type="number" [(ngModel)]="todo.dosages"></ion-input>
             </ion-item>
 
             <ion-item>

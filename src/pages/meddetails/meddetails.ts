@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { LocalNotifications } from 'ionic-native';
 import { InitDatabase } from '../../providers/init-database';
 import { ScheduleMedication } from '../../providers/schedule-medication';
+import { Camera } from 'ionic-native';
 
 @Component({
   selector: 'page-meddetails',
@@ -12,7 +13,7 @@ import { ScheduleMedication } from '../../providers/schedule-medication';
 
 export class MeddetailsPage {
   medId;
-  todo = {}
+  todo = {};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private db: InitDatabase, private schedmed: ScheduleMedication) {
     if (navParams.get("medId") != null) {
@@ -23,7 +24,7 @@ export class MeddetailsPage {
   loadMedicine(medId) {
     let bridge = { 'todo': this.todo };
     this.db._db.transaction(function (tx) {
-      tx.executeSql('SELECT id, description, dosages, time, alarm FROM alarms WHERE id=?', [medId], function (tx, res) {
+      tx.executeSql('SELECT id, description, dosages, time, alarm, image FROM alarms WHERE id=?', [medId], function (tx, res) {
         var len = res.rows.length;
         for (var i = 0; i < len; i++) {
           console.log("Desc:" + res.rows.item(i).description);
@@ -32,10 +33,12 @@ export class MeddetailsPage {
           bridge.todo['dosages'] = res.rows.item(i).dosages;
           bridge.todo['time'] = res.rows.item(i).time;
           bridge.todo['alarm'] = res.rows.item(i).alarm;
+          bridge.todo['image'] = res.rows.item(i).image;          
         }
       }, function (e) {
       });
     });
+    console.log("lendo imagem3:" + bridge.todo['image']);
   }
 
   saveMedicine() {
@@ -44,11 +47,12 @@ export class MeddetailsPage {
     if (todo['id'] != null) {
       // Changing
       this.db._db.transaction(function (tx) {
-        tx.executeSql('UPDATE alarms SET description = ?, dosages = ?, time = ?, alarm = ? WHERE id = ?', [
+        tx.executeSql('UPDATE alarms SET description = ?, dosages = ?, time = ?, alarm = ?, image = ? WHERE id = ?', [
           todo['description'],
           todo['dosages'],
           todo['time'],
           todo['alarm'],
+          todo['image'],
           todo['id']
         ], function (tx, res) {
         }, function (e) {
@@ -58,11 +62,12 @@ export class MeddetailsPage {
     } else {
       // Creating a new one
       this.db._db.transaction(function (tx) {
-        tx.executeSql('INSERT INTO alarms (description, dosages, time, alarm) VALUES (?,?,?,?)', [
+        tx.executeSql('INSERT INTO alarms (description, dosages, time, alarm, image) VALUES (?,?,?,?,?)', [
           todo['description'],
           todo['dosages'],
           todo['time'],
-          todo['alarm']
+          todo['alarm'],
+          todo['image']
         ], function (tx, res) {
         }, function (e) {
           console.log(e.message + " Error to insert in the database " + e);
@@ -95,7 +100,7 @@ export class MeddetailsPage {
         console.log(e.message + " Error updating the database " + e);
       });
     });
-    this.schedmed.setAlarms();    
+    this.schedmed.setAlarms();
     this.navCtrl.pop();
   }
 
@@ -106,5 +111,22 @@ export class MeddetailsPage {
       led: "FF0000",
       sound: 'file://assets/sounds/alarm_bell.mp3'
     });
+  }
+
+  runCamera() {
+    Camera.getPicture(
+      {
+        destinationType: Camera.DestinationType.DATA_URL,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        saveToPhotoAlbum: false,
+        targetWidth: 360,
+        targetHeight: 360
+      }
+    ).then((imageData) => {
+      this.todo['image'] = 'data:image/jpeg;base64,' + imageData;
+    }, (err) => {
+      // Handle error
+    });
+
   }
 }

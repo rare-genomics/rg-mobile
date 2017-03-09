@@ -33,10 +33,16 @@
         },
         "cordova-sqlite-storage": {
             "PACKAGE_NAME": "com.ionicframework.rgmobile370969"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.ionicframework.rgmobile370969"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-app-event": {
+            "PACKAGE_NAME": "com.ionicframework.rgmobile370969"
+        },
+        "cordova-plugin-compat": {
             "PACKAGE_NAME": "com.ionicframework.rgmobile370969"
         }
     }

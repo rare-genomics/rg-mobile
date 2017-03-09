@@ -3,7 +3,8 @@
     <ion-list>
         <ion-item *ngFor="let medication of medications" (click)="openMed(medication['id'])">
             <ion-avatar item-left>
-                <img src="assets/icon/medication.ico">
+                <img *ngIf="!medication['image']" src="assets/icon/medication.ico">
+                <img [src]="medication['image']" *ngIf="medication['image']" />
             </ion-avatar>
             <h2>{{medication['description']}}</h2>
             <h3>{{medication['dosages']}}</h3>

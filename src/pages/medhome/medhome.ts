@@ -25,7 +25,7 @@ export class MedhomePage {
   loadList() {
     let bridge = { 'medications': this.medications };
     this.db._db.transaction(function (tx) {
-      tx.executeSql('SELECT id, description, dosages, time, alarm FROM alarms', [], function (tx, res) {
+      tx.executeSql('SELECT id, description, dosages, time, alarm, image FROM alarms', [], function (tx, res) {
         var len = res.rows.length;
         for (var i = 0; i < len; i++) {
           let temparray = {};
@@ -34,6 +34,7 @@ export class MedhomePage {
           temparray['dosages'] = res.rows.item(i).dosages;
           temparray['time'] = res.rows.item(i).time;
           temparray['alarm'] = res.rows.item(i).alarm;
+          temparray['image'] = res.rows.item(i).image;
           bridge.medications.push(temparray);
         }
       }, function (e) {
