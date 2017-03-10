@@ -10,6 +10,8 @@ import { NotificationsPromptPage } from '../pages/notifications-prompt/notificat
 
 import { MedhomePage } from '../pages/medhome/medhome';
 import { MeddetailsPage } from '../pages/meddetails/meddetails';
+import { CaregiverPage } from '../pages/caregiver/caregiver';
+import { CaregiverDetailsPage } from '../pages/caregiver-details/caregiver-details';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { MeddetailsPage } from '../pages/meddetails/meddetails';
     EnterBirthdayPage,
     NotificationsPromptPage,
     MedhomePage,
-    MeddetailsPage
+    MeddetailsPage,
+    CaregiverPage,
+    CaregiverDetailsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -36,7 +40,9 @@ import { MeddetailsPage } from '../pages/meddetails/meddetails';
     EnterBirthdayPage,
     NotificationsPromptPage,
     MedhomePage,
-    MeddetailsPage
+    MeddetailsPage,
+    CaregiverPage,
+    CaregiverDetailsPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

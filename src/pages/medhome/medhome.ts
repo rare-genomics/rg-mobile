@@ -19,7 +19,6 @@ export class MedhomePage {
   ionViewWillEnter() {
     this.medications = [];
     this.loadList();
-    console.log(this.medications);
   }
 
   loadList() {

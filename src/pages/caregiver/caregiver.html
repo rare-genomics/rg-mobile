@@ -1,0 +1,12 @@
+<ion-content padding>
+    <img src="assets/icon/addnew.ico" width="50" (click)="gotoCaregiverDetails()">
+    <ion-list>
+        <ion-item *ngFor="let caregiver of caregivers" (click)="openCare(caregiver['id'])">
+            <ion-thumbnail item-left>
+                <img src="assets/icon/caregiver.ico">
+            </ion-thumbnail>
+            <h2>{{caregiver['name']}}</h2>
+            <h3>{{caregiver['telefone']}}</h3>
+        </ion-item>
+    </ion-list>
+</ion-content>

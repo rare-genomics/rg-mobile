@@ -4,6 +4,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { HomePage } from '../pages/home/home';
 import { MedhomePage } from '../pages/medhome/medhome';
+import { CaregiverPage } from '../pages/caregiver/caregiver';
 
 
 @Component({
@@ -20,7 +21,9 @@ export class MyApp {
   }
 
   gotoMedicationHome(){
-    // this.rootPage = MedhomePage;
     this.nav.push(MedhomePage);
+  }
+  gotoCaregiver(){
+    this.nav.push(CaregiverPage);
   }
 }
