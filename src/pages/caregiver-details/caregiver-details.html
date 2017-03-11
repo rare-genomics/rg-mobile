@@ -26,8 +26,8 @@
                 <ion-input name="care_notes" type="text" [(ngModel)]="todo.notes"></ion-input>
             </ion-item><br>
 
-            <button ion-button round medium large type="submit">Save</button>
-        </form><br><br>
-        <button *ngIf="todo.id" color="danger" large ion-button (click)="deleteData()">Delete</button>
+            <button ion-button round small large type="submit">Save</button>
+        </form><br>
+        <button *ngIf="todo.id" color="danger" round small ion-button (click)="deleteData()">Delete</button>
     </ion-list>
 </ion-content>
