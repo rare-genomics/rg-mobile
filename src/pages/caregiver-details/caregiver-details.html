@@ -1,5 +1,6 @@
 <ion-content padding>
-    <ion-list>
+    <ion-list><br><br><br>
+        <!--<a ng-href="tel:123456">Call (03) 9533 1100</a>-->
         <form (ngSubmit)="saveData()">
             <ion-item>
                 <ion-label floating>Name</ion-label>
@@ -12,18 +13,18 @@
             </ion-item>
 
             <ion-item>
-                <ion-label>Phone</ion-label>
+                <ion-label floating>Phone</ion-label>
                 <ion-input name="care_phone" type="number" [(ngModel)]="todo.phone"></ion-input>
             </ion-item>
-
             <ion-item>
-                <ion-label>Address</ion-label>
+                <ion-label floating>Address</ion-label>
                 <ion-input name="care_address" type="text" [(ngModel)]="todo.address"></ion-input>
-            </ion-item><br>
+            </ion-item>
             <ion-item>
-                <ion-label>Notes</ion-label>
+                <ion-label floating>Notes</ion-label>
                 <ion-input name="care_notes" type="text" [(ngModel)]="todo.notes"></ion-input>
             </ion-item><br>
+
             <button ion-button round medium large type="submit">Save</button>
         </form><br><br>
         <button *ngIf="todo.id" color="danger" large ion-button round (click)="deleteData()">Delete</button>

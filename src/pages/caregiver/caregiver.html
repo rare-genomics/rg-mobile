@@ -6,7 +6,10 @@
                 <img src="assets/icon/caregiver.ico">
             </ion-thumbnail>
             <h2>{{caregiver['name']}}</h2>
-            <h3>{{caregiver['telefone']}}</h3>
+            <h3>
+                <ion-icon name="call" *ngIf="caregiver['phone']"></ion-icon> {{caregiver['phone']}}</h3>
+            <h3>
+                <ion-icon name="compass" *ngIf="caregiver['address']"></ion-icon> {{caregiver['address']}}</h3>
         </ion-item>
     </ion-list>
 </ion-content>

@@ -16,6 +16,7 @@ export class CaregiverDetailsPage {
     }
   }
   loadData(localId) {
+    console.log("Loading data:" + localId);
     let bridge = { 'todo': this.todo };
     this.db._db.transaction(function (tx) {
       tx.executeSql('SELECT id, name, email, phone, address, notes FROM caregiver WHERE id=?', [localId], function (tx, res) {
@@ -27,6 +28,8 @@ export class CaregiverDetailsPage {
           bridge.todo['phone'] = res.rows.item(i).phone;
           bridge.todo['address'] = res.rows.item(i).address;
           bridge.todo['notes'] = res.rows.item(i).notes;
+          console.log("nome:" + res.rows.item(i).name);
+          console.log("Localid:" + localId);
         }
       }, function (e) {
       });
@@ -53,26 +56,26 @@ export class CaregiverDetailsPage {
       });
     } else {
       // Creating a new one
-      // this.db._db.transaction(function (tx) {
-      //   tx.executeSql('INSERT INTO caregiver (name, email, phone, address, notes) VALUES (?,?,?,?,?)', [
-      //     todo['name'],
-      //     todo['email'],
-      //     todo['phone'],
-      //     todo['address'],
-      //     todo['notes']
-      //   ], function (tx, res) {
-      //   }, function (e) {
-      //     console.log(e.message + " Error to insert in the database " + e);
-      //   });
-      // });
       this.db._db.transaction(function (tx) {
-        tx.executeSql('INSERT INTO caregiver (name) VALUES (?)', [
-          todo['name']
+        tx.executeSql('INSERT INTO caregiver (name, email, phone, address, notes) VALUES (?,?,?,?,?)', [
+          todo['name'],
+          todo['email'],
+          todo['phone'],
+          todo['address'],
+          todo['notes']
         ], function (tx, res) {
         }, function (e) {
           console.log(e.message + " Error to insert in the database " + e);
         });
       });
+      // this.db._db.transaction(function (tx) {
+      //   tx.executeSql('INSERT INTO caregiver (name) VALUES (?)', [
+      //     todo['name']
+      //   ], function (tx, res) {
+      //   }, function (e) {
+      //     console.log(e.message + " Error to insert in the database " + e);
+      //   });
+      // });
     }
     this.navCtrl.pop();
   }

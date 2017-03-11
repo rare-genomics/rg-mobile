@@ -24,13 +24,14 @@ export class CaregiverPage {
   loadList() {
     let bridge = { 'caregiver': this.caregivers };
     this.db._db.transaction(function (tx) {
-      tx.executeSql('SELECT id, name, telefone FROM caregiver', [], function (tx, res) {
+      tx.executeSql('SELECT id, name, phone, address FROM caregiver', [], function (tx, res) {
         var len = res.rows.length;
         for (var i = 0; i < len; i++) {
           let temparray = {};
           temparray['id'] = res.rows.item(i).id;
           temparray['name'] = res.rows.item(i).name;
-          temparray['telefone'] = res.rows.item(i).telefone;
+          temparray['phone'] = res.rows.item(i).phone;
+          temparray['address'] = res.rows.item(i).address;
           bridge.caregiver.push(temparray);
         }
       }, function (e) {

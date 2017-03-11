@@ -88,6 +88,9 @@ export class MeddetailsPage {
     if (this.todo['alarm'] == undefined) {
       this.todo['alarm'] = false;
     }
+    if (this.todo['image'] == undefined) {
+      this.todo['image'] = null;
+    }
   }
 
   deleteMedicine() {
