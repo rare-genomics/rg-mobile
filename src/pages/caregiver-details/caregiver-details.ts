@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { InitDatabase } from '../../providers/init-database';
+import { CallNumber, SMS } from 'ionic-native';
 
 @Component({
   selector: 'page-caregiver-details',
@@ -106,5 +107,24 @@ export class CaregiverDetailsPage {
       });
     });
     this.navCtrl.pop();
+  }
+
+  makeCall() {
+    CallNumber.callNumber(this.todo['phone'], true).then(() => console.log('Launched dialer!')).catch(() => console.log('Error launching dialer'));
+  }
+  sendSMS() {
+    console.log("Cheguei aqui 1");
+    var options = {
+      replaceLineBreaks: true,
+      android: {
+        intent: ""
+      }
+    }
+    SMS.send(this.todo['phone'], 'Test RGI', options)
+      .then(() => {
+        alert("Sucess");
+      }, () => {
+        alert("Failed");
+      });
   }
 }

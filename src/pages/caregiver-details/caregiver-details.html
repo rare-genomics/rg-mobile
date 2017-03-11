@@ -1,6 +1,7 @@
 <ion-content padding>
     <ion-list><br><br><br>
-        <!--<a ng-href="tel:123456">Call (03) 9533 1100</a>-->
+        <button *ngIf="todo.phone" color="primary" small ion-button (click)="makeCall()">Call</button>
+        <button *ngIf="todo.phone" color="primary" small ion-button (click)="sendSMS()">SMS</button>
         <form (ngSubmit)="saveData()">
             <ion-item>
                 <ion-label floating>Name</ion-label>
@@ -27,6 +28,6 @@
 
             <button ion-button round medium large type="submit">Save</button>
         </form><br><br>
-        <button *ngIf="todo.id" color="danger" large ion-button round (click)="deleteData()">Delete</button>
+        <button *ngIf="todo.id" color="danger" large ion-button (click)="deleteData()">Delete</button>
     </ion-list>
 </ion-content>
