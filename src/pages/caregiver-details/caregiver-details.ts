@@ -106,14 +106,22 @@ export class CaregiverDetailsPage {
         console.log(e.message + " Error updating the database " + e);
       });
     });
+    this.db._db.transaction(function (tx) {
+      tx.executeSql('UPDATE alarms SET caregiver_id = NULL WHERE caregiver_id = ?', [
+        todo['id']
+      ], function (tx, res) {
+      }, function (e) {
+        console.log(e.message + " Error updating the database " + e);
+      });
+    });
     this.navCtrl.pop();
   }
 
   makeCall() {
     CallNumber.callNumber(this.todo['phone'], true).then(() => console.log('Launched dialer!')).catch(() => console.log('Error launching dialer'));
   }
+
   sendSMS() {
-    console.log("Cheguei aqui 1");
     var options = {
       replaceLineBreaks: true,
       android: {
@@ -127,24 +135,4 @@ export class CaregiverDetailsPage {
         alert("Failed");
       });
   }
-  // sendEmail() {
-  //   console.log("Checando email");
-  //   EmailComposer.isAvailable().then((available: boolean) => {
-  //     if (available) {
-  //       console.log("Its possible to send email");
-  //     } else {
-  //       console.log("Cannot send email");
-  //     }
-  //   });
-
-    // let email = {
-    //   to: 'thiago.maia@raregenomics.org',      
-    //   subject: 'Teste email',
-    //   body: 'Testing the email',
-    //   isHtml: false
-    // };
-
-    // // Send a text message using default options
-    // EmailComposer.open(email);
-  // }
 }

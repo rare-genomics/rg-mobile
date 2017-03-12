@@ -3,6 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { MeddetailsPage } from '../meddetails/meddetails';
 import { InitDatabase } from '../../providers/init-database';
 import { AlertController } from 'ionic-angular';
+import { Printer, PrintOptions } from 'ionic-native';
+
 @Component({
   selector: 'page-medhome',
   templateUrl: 'medhome.html',
@@ -10,10 +12,13 @@ import { AlertController } from 'ionic-angular';
 })
 export class MedhomePage {
   medications = [];
+  havePrint = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private db: InitDatabase, public alertCtrl: AlertController) {
     setInterval(() => {
       this.medications.length;
+      this.havePrint;
     }, 1000);
+    this.checkPrinter();
   }
 
   ionViewWillEnter() {
@@ -50,5 +55,19 @@ export class MedhomePage {
     this.navCtrl.push(MeddetailsPage, {
       'medId': medId
     });
+  }
+
+  checkPrinter() {
+    Printer.isAvailable().then((imageData) => {
+      this.havePrint = true;
+    }, (err) => {
+      this.havePrint = false;
+    });
+  }
+
+  print() {
+    // Need to be improved to print just the content and not just the document
+    let options: PrintOptions = {};
+    Printer.print(document.documentElement.innerHTML, options);
   }
 }
