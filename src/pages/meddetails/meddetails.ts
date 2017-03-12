@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { LocalNotifications } from 'ionic-native';
 import { InitDatabase } from '../../providers/init-database';
 import { ScheduleMedication } from '../../providers/schedule-medication';
+import { CaregiverDetailsPage } from '../caregiver-details/caregiver-details';
 import { Camera } from 'ionic-native';
 
 @Component({
@@ -14,17 +15,42 @@ import { Camera } from 'ionic-native';
 export class MeddetailsPage {
   medId;
   todo = {};
+  caregivers = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private db: InitDatabase, private schedmed: ScheduleMedication) {
+    this.loadCaregivers();
     if (navParams.get("medId") != null) {
       this.loadMedicine(navParams.get("medId"));
     }
+    // this.caregivers = [
+    //   {"id": 1,
+    //    "name": "Dr A"
+    //   },
+    //   {"id": 2,
+    //    "name": "Dr B"
+    //   }
+    //   ];
+  }
+  loadCaregivers() {
+    let bridge = { 'caregivers': this.caregivers };
+    this.db._db.transaction(function (tx) {
+      tx.executeSql('SELECT id, name FROM caregiver', [], function (tx, res) {
+        var len = res.rows.length;
+        for (var i = 0; i < len; i++) {
+          let temparray = {};
+          temparray['id'] = res.rows.item(i).id;
+          temparray['name'] = res.rows.item(i).name;
+          bridge.caregivers.push(temparray);
+        }
+      }, function (e) {
+      });
+    });
   }
 
   loadMedicine(medId) {
     let bridge = { 'todo': this.todo };
     this.db._db.transaction(function (tx) {
-      tx.executeSql('SELECT id, description, dosages, time, alarm, image FROM alarms WHERE id=?', [medId], function (tx, res) {
+      tx.executeSql('SELECT id, description, dosages, time, alarm, image, caregiver_id, insurance FROM alarms WHERE id=?', [medId], function (tx, res) {
         var len = res.rows.length;
         for (var i = 0; i < len; i++) {
           console.log("Desc:" + res.rows.item(i).description);
@@ -33,12 +59,13 @@ export class MeddetailsPage {
           bridge.todo['dosages'] = res.rows.item(i).dosages;
           bridge.todo['time'] = res.rows.item(i).time;
           bridge.todo['alarm'] = res.rows.item(i).alarm;
-          bridge.todo['image'] = res.rows.item(i).image;          
+          bridge.todo['image'] = res.rows.item(i).image;
+          bridge.todo['caregiver_id'] = res.rows.item(i).caregiver_id;
+          bridge.todo['insurance'] = res.rows.item(i).insurance;
         }
       }, function (e) {
       });
     });
-    console.log("lendo imagem3:" + bridge.todo['image']);
   }
 
   saveMedicine() {
@@ -47,12 +74,14 @@ export class MeddetailsPage {
     if (todo['id'] != null) {
       // Changing
       this.db._db.transaction(function (tx) {
-        tx.executeSql('UPDATE alarms SET description = ?, dosages = ?, time = ?, alarm = ?, image = ? WHERE id = ?', [
+        tx.executeSql('UPDATE alarms SET description = ?, dosages = ?, time = ?, alarm = ?, image = ?, caregiver_id = ?, insurance = ? WHERE id = ?', [
           todo['description'],
           todo['dosages'],
           todo['time'],
           todo['alarm'],
           todo['image'],
+          todo['caregiver_id'],
+          todo['insurance'],
           todo['id']
         ], function (tx, res) {
         }, function (e) {
@@ -62,12 +91,14 @@ export class MeddetailsPage {
     } else {
       // Creating a new one
       this.db._db.transaction(function (tx) {
-        tx.executeSql('INSERT INTO alarms (description, dosages, time, alarm, image) VALUES (?,?,?,?,?)', [
+        tx.executeSql('INSERT INTO alarms (description, dosages, time, alarm, image, caregiver_id, insurance) VALUES (?,?,?,?,?,?,?)', [
           todo['description'],
           todo['dosages'],
           todo['time'],
           todo['alarm'],
-          todo['image']
+          todo['image'],
+          todo['caregiver_id'],
+          todo['insurance']
         ], function (tx, res) {
         }, function (e) {
           console.log(e.message + " Error to insert in the database " + e);
@@ -90,6 +121,12 @@ export class MeddetailsPage {
     }
     if (this.todo['image'] == undefined) {
       this.todo['image'] = null;
+    }
+    if (this.todo['caregiver_id'] == undefined) {
+      this.todo['caregiver_id'] = null;
+    }
+    if (this.todo['insurance'] == undefined) {
+      this.todo['insurance'] = null;
     }
   }
 
@@ -130,6 +167,11 @@ export class MeddetailsPage {
     }, (err) => {
       // Handle error
     });
+  }
 
+  contactCaregiver() {
+    this.navCtrl.push(CaregiverDetailsPage, {
+      'localId': this.todo['caregiver_id']
+    });
   }
 }

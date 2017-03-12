@@ -127,4 +127,24 @@ export class CaregiverDetailsPage {
         alert("Failed");
       });
   }
+  // sendEmail() {
+  //   console.log("Checando email");
+  //   EmailComposer.isAvailable().then((available: boolean) => {
+  //     if (available) {
+  //       console.log("Its possible to send email");
+  //     } else {
+  //       console.log("Cannot send email");
+  //     }
+  //   });
+
+    // let email = {
+    //   to: 'thiago.maia@raregenomics.org',      
+    //   subject: 'Teste email',
+    //   body: 'Testing the email',
+    //   isHtml: false
+    // };
+
+    // // Send a text message using default options
+    // EmailComposer.open(email);
+  // }
 }

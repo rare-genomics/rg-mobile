@@ -23,7 +23,7 @@ export class InitDatabase {
   createDatabase() {
     console.log("Creating database");
     this._db.transaction(function (tx) {
-      tx.executeSql('CREATE TABLE IF NOT EXISTS alarms (id INTEGER PRIMARY KEY, description TEXT, dosages REAL, time TIME, alarm BOOLEAN, image TEXT, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)');      
+      tx.executeSql('CREATE TABLE IF NOT EXISTS alarms (id INTEGER PRIMARY KEY, description TEXT, dosages REAL, time TIME, alarm BOOLEAN, image TEXT, caregiver_id INTEGER, insurance TEXT, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)');      
       tx.executeSql('CREATE TABLE IF NOT EXISTS caregiver (id INTEGER PRIMARY KEY, name TEXT, email TEXT, phone TEXT, address TEXT, notes TEXT, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)');      
     });
   }

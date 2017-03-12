@@ -10,7 +10,7 @@
             <!--</ion-avatar>-->
             <h2>{{medication['description']}}</h2>
             <h3>{{medication['dosages']}}</h3>
-            <p>Member health insurance</p>
+            <p>{{medication['insurance']}}</p>
             <ion-icon name="alarm" *ngIf="medication['alarm']=='true'"></ion-icon> {{medication['time']}}
         </ion-item>
     </ion-list>

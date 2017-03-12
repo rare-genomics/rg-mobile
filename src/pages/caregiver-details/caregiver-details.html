@@ -1,7 +1,10 @@
 <ion-content padding>
+    <ion-navbar>
+    </ion-navbar>
     <ion-list><br><br><br>
         <button *ngIf="todo.phone" color="primary" small ion-button (click)="makeCall()">Call</button>
         <button *ngIf="todo.phone" color="primary" small ion-button (click)="sendSMS()">SMS</button>
+        <a *ngIf="todo.email" href="mailto:{{todo.email}}"><button color="primary" small ion-button>E-mail</button></a>
         <form (ngSubmit)="saveData()">
             <ion-item>
                 <ion-label floating>Name</ion-label>

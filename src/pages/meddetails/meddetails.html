@@ -26,10 +26,25 @@
             <ion-item>
                 <ion-label>Alarm</ion-label>
                 <ion-checkbox name="med_alarm" [(ngModel)]="todo.alarm"></ion-checkbox>
-            </ion-item><br>
-            <button ion-button round medium large type="submit">Save</button>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Caregiver</ion-label>
+                <ion-select name="med_caregiver" [(ngModel)]="todo.caregiver_id">
+                    <ion-option *ngFor="let caregiver of caregivers" [value]="caregiver.id">{{caregiver.name}}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Insurance details</ion-label>
+                <ion-input name="med_insurance" type="text" [(ngModel)]="todo.insurance"></ion-input>
+            </ion-item>
+
+            <button ion-button medium large block type="submit">Save</button>
         </form><br><br>
-        <button *ngIf="todo.id" color="danger" large ion-button round (click)="deleteMedicine()">Delete</button><br><br>
-        <button ion-button large round (click)="testNotification()">Test alarm</button>
+        <button *ngIf="todo.caregiver_id" ion-button large block (click)="contactCaregiver()">Contact caregiver</button>
+        <button *ngIf="todo.id" color="danger" large block ion-button (click)="deleteMedicine()">Delete</button><br><br>
+        <button ion-button large block (click)="testNotification()">Test alarm</button>
     </ion-list>
+
 </ion-content>
