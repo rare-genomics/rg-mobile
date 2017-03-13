@@ -4,12 +4,17 @@
             <ion-row>
 
                 <ion-col>
-                    <a href="http://www.raregenomics.org/"><img src="assets/images/logo.png" width="5%"></a>
-                </ion-col>
-                <!--<ion-col>
+                    <a href="http://www.raregenomics.org/"><img src="assets/images/logo.png" height="40"></a>
                 </ion-col>
                 <ion-col>
-                </ion-col>-->
+                    <img src="assets/icon/caregiver.ico" height="40" (click)="gotoCaregiver()">
+                </ion-col>
+                <ion-col>
+
+                </ion-col>
+                <ion-col>
+                    <button color="danger" round small ion-button (click)="callEmergency()">911</button>
+                </ion-col>
             </ion-row>
         </ion-grid>
     </ion-toolbar>
@@ -34,9 +39,7 @@
                 <ion-col>
                     <img src="assets/icon/medication.ico" width="45%" (click)="gotoMedicationHome()">
                 </ion-col>
-                <ion-col>
-                    <img src="assets/icon/caregiver.ico" width="45%" (click)="gotoCaregiver()">
-                </ion-col>
+
             </ion-row>
         </ion-grid>
     </ion-toolbar>

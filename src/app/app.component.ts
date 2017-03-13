@@ -1,5 +1,5 @@
 import { Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { StatusBar, Splashscreen, CallNumber } from 'ionic-native';
 import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { HomePage } from '../pages/home/home';
@@ -20,10 +20,13 @@ export class MyApp {
     });
   }
 
-  gotoMedicationHome(){
+  gotoMedicationHome() {
     this.nav.push(MedhomePage);
   }
-  gotoCaregiver(){
+  gotoCaregiver() {
     this.nav.push(CaregiverPage);
+  }
+  callEmergency() {
+    CallNumber.callNumber("911", true).then(() => console.log('Launched dialer!')).catch(() => console.log('Error launching dialer'));
   }
 }
