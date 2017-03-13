@@ -65,9 +65,46 @@ export class MedhomePage {
     });
   }
 
+  makeEmail() {
+    // E-mail new line fail depending on the mail client
+    let text = "";    
+    for (let i = 0; i < this.medications.length; i++) {
+      text += "Description: " + this.medications[i].description + "%0D%0A";
+      if (this.medications[i].dosages != null) {
+        text += "Dosages: " + this.medications[i].dosages + "%0D%0A";
+      }
+      if (this.medications[i].time != null) {
+        text += "Time: " + this.medications[i].time + "%0D%0A";
+      }
+      if (this.medications[i].insurance != null) {
+        text += "Insurance: " + this.medications[i].insurance + "%0D%0A";
+      }
+      text += "%0D%0A"
+    }    
+    return text;
+  }
+
+  makePrint() {
+    // Here we can use html tags to make the printed version
+    let text = "";
+    for (let i = 0; i < this.medications.length; i++) {
+      text += "<b>Description:</b> " + this.medications[i].description + "<br>";
+      if (this.medications[i].dosages != null) {
+        text += "<b>Dosages:</b> " + this.medications[i].dosages + "<br>";
+      }
+      if (this.medications[i].time != null) {
+        text += "<b>Time:</b> " + this.medications[i].time + "<br>";
+      }
+      if (this.medications[i].insurance != null) {
+        text += "<b>Insurance:</b> " + this.medications[i].insurance + "<br>";
+      }
+      text += "<br>"
+    }    
+    return text;
+  }
+
   print() {
-    // Need to be improved to print just the content and not just the document
     let options: PrintOptions = {};
-    Printer.print(document.documentElement.innerHTML, options);
+    Printer.print(this.makePrint(), options);
   }
 }

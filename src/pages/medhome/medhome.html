@@ -3,6 +3,7 @@
     <div name="medhomehtml">
         <img src="assets/icon/addnew.ico" width="30" (click)="gotoMeddetails()">
         <button *ngIf="havePrint==true" ion-button small block (click)="print()">Print</button>
+        <a href="mailto:?subject=Medications&body={{makeEmail()}}"><button color="primary" small ion-button block>E-mail</button></a>
         <ion-list>
             <ion-item *ngFor="let medication of medications" (click)="openMed(medication['id'])">
                 <!--<ion-avatar item-left>-->

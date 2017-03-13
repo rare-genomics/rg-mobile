@@ -69,14 +69,6 @@ export class CaregiverDetailsPage {
           console.log(e.message + " Error to insert in the database " + e);
         });
       });
-      // this.db._db.transaction(function (tx) {
-      //   tx.executeSql('INSERT INTO caregiver (name) VALUES (?)', [
-      //     todo['name']
-      //   ], function (tx, res) {
-      //   }, function (e) {
-      //     console.log(e.message + " Error to insert in the database " + e);
-      //   });
-      // });
     }
     this.navCtrl.pop();
   }
