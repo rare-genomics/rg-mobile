@@ -29,7 +29,7 @@ export class MedhomePage {
   loadList() {
     let bridge = { 'medications': this.medications };
     this.db._db.transaction(function (tx) {
-      tx.executeSql('SELECT id, description, dosages, time, alarm, image, insurance FROM alarms', [], function (tx, res) {
+      tx.executeSql('SELECT id, description, dosages, time, alarm, image, insurance, pharmacy FROM alarms', [], function (tx, res) {
         var len = res.rows.length;
         for (var i = 0; i < len; i++) {
           let temparray = {};
@@ -40,6 +40,7 @@ export class MedhomePage {
           temparray['alarm'] = res.rows.item(i).alarm;
           temparray['image'] = res.rows.item(i).image;
           temparray['insurance'] = res.rows.item(i).insurance;
+          temparray['pharmacy'] = res.rows.item(i).pharmacy;
           bridge.medications.push(temparray);
         }
       }, function (e) {
@@ -79,6 +80,9 @@ export class MedhomePage {
       if (this.medications[i].insurance != null) {
         text += "Insurance: " + this.medications[i].insurance + "%0D%0A";
       }
+      if (this.medications[i].pharmacy != null) {
+        text += "Pharmacy: " + this.medications[i].pharmacy + "%0D%0A";
+      }
       text += "%0D%0A"
     }    
     return text;
@@ -97,6 +101,9 @@ export class MedhomePage {
       }
       if (this.medications[i].insurance != null) {
         text += "<b>Insurance:</b> " + this.medications[i].insurance + "<br>";
+      }
+      if (this.medications[i].pharmacy != null) {
+        text += "<b>Pharmacy:</b> " + this.medications[i].pharmacy + "<br>";
       }
       text += "<br>"
     }    

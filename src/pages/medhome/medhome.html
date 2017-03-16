@@ -1,39 +1,52 @@
-<ion-header clear padding>
+<ion-header>
     <ion-toolbar>
         <ion-title>
             <ion-grid>
                 <ion-row>
-                    <ion-col>
+                    <ion-col class="toolbartitle">
                         Medications in-Take
                     </ion-col>
                     <ion-col>
                     </ion-col>
                     <ion-col>
-                        <button clear (click)="print()"><ion-icon name="print"></ion-icon></button>
-                    </ion-col>
-                    <ion-col>
-                        <a href="mailto:?subject=Medications&body={{makeEmail()}}"><button clear><ion-icon name="mail"></ion-icon></button></a>
-                    </ion-col>
-                    <ion-col>
-                        <ion-icon name="add-circle" (click)="gotoMeddetails()"></ion-icon>
+                        <ion-buttons start>
+                            <button *ngIf="havePrint==true" ion-button class="btnTop" (click)="print()">
+                                <ion-icon name="print"></ion-icon>
+                            </button>
+                            <a href="mailto:?subject=Medications&body={{makeEmail()}}">
+                                <button ion-button class="btnTop">
+                                    <ion-icon name="mail"></ion-icon>
+                                </button>
+                            </a>
+                            <button class="btnTop" ion-button (click)="gotoMeddetails()">
+                                <ion-icon name="add-circle"></ion-icon>
+                            </button>
+                        </ion-buttons>
+
                     </ion-col>
                 </ion-row>
             </ion-grid>
-            <!--<button *ngIf="havePrint==true " ion-button small block (click)="print() ">Print</button>-->
         </ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content padding>
-    <ion-list>
-        <ion-item *ngFor="let medication of medications " (click)="openMed(medication[ 'id']) ">
-            <ion-thumbnail item-left>
-                <img *ngIf="!medication[ 'image'] " src="assets/icon/medication.ico ">
-                <img [src]="medication[ 'image'] " *ngIf="medication[ 'image'] " />
-            </ion-thumbnail>
-            <h2>{{medication['description']}}</h2>
-            <h3>{{medication['dosages']}}</h3>
-            <p>{{medication['insurance']}}</p>
-            <ion-icon name="alarm " *ngIf="medication[ 'alarm']=='true' "></ion-icon> {{medication['time']}}
-        </ion-item>
-    </ion-list>
+    <ion-grid>
+        <ion-row>
+            <ion-col class="labelFormList">
+                <ion-list>
+                    <ion-item *ngFor="let medication of medications " (click)="openMed(medication[ 'id']) ">
+                        <ion-thumbnail item-left>
+                            <img *ngIf="!medication[ 'image'] " src="assets/icon/medication.ico ">
+                            <img [src]="medication[ 'image'] " *ngIf="medication[ 'image'] " />
+                        </ion-thumbnail>
+                        <h1>{{medication['description']}}</h1>
+                        <h3>{{medication['dosages']}}</h3>
+                        <h3>{{medication['insurance']}}</h3>
+                        <h3>{{medication['pharmacy']}}</h3>
+                        <ion-icon name="alarm" *ngIf="medication['alarm']=='true' && medication['time']"></ion-icon> {{medication['time']}}
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

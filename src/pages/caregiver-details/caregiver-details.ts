@@ -127,4 +127,8 @@ export class CaregiverDetailsPage {
         alert("Failed");
       });
   }
+
+  closeWindow(){
+    this.navCtrl.pop();
+  }
 }

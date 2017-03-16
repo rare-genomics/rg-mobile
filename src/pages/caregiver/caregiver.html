@@ -1,15 +1,44 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            <ion-grid>
+                <ion-row>
+                    <ion-col class="toolbartitle">
+                        Caregiver
+                    </ion-col>
+                    <ion-col>
+                    </ion-col>
+                    <ion-col>
+                        <ion-buttons start>
+                            <button class="btnTop" ion-button (click)="gotoCaregiverDetails()">
+                                <ion-icon name="add-circle"></ion-icon>
+                            </button>
+                        </ion-buttons>
+
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
 <ion-content padding>
-    <img src="assets/icon/addnew.ico" width="50" (click)="gotoCaregiverDetails()">
-    <ion-list>
-        <ion-item *ngFor="let caregiver of caregivers" (click)="openCare(caregiver['id'])">
-            <ion-thumbnail item-left>
-                <img src="assets/icon/caregiver.ico">
-            </ion-thumbnail>
-            <h2>{{caregiver['name']}}</h2>
-            <h3>
-                <ion-icon name="call" *ngIf="caregiver['phone']"></ion-icon> {{caregiver['phone']}}</h3>
-            <h3>
-                <ion-icon name="compass" *ngIf="caregiver['address']"></ion-icon> {{caregiver['address']}}</h3>
-        </ion-item>
-    </ion-list>
+    <ion-grid>
+        <ion-row>
+            <ion-col class="labelFormList">
+                <ion-list>
+                    <ion-item *ngFor="let caregiver of caregivers" (click)="openCare(caregiver['id'])">
+                        <ion-thumbnail item-left>
+                            <img src="assets/icon/caregiver.ico">
+                        </ion-thumbnail>
+                        <h2>{{caregiver['name']}}</h2>
+                        <h3>
+                            <ion-icon name="call" *ngIf="caregiver['phone']"></ion-icon> {{caregiver['phone']}}</h3>
+                        <h3>
+                            <ion-icon name="compass" *ngIf="caregiver['address']"></ion-icon> {{caregiver['address']}}</h3>
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

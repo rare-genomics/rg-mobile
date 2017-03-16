@@ -1,36 +1,112 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <button class="btnTopWhite" ion-button (click)="closeWindow()">
+                                <ion-icon name="arrow-dropleft"></ion-icon>
+                        </button>
+                    </ion-col>
+                    <ion-col class="toolbartitle">
+                        Caregiver details
+                    </ion-col>
+                    <ion-col>
+                        <ion-buttons start>
+                            <button *ngIf="todo.phone" ion-button class="btnTop" (click)="makeCall()">
+                                <ion-icon name="call"></ion-icon>
+                            </button>
+                            <a *ngIf="todo.email" href="mailto:{{todo.email}}">
+                                <button ion-button class="btnTop">
+                                    <ion-icon name="mail"></ion-icon>
+                                </button>
+                            </a>
+                            <button *ngIf="todo.phone" class="btnTop" (click)="sendSMS()">SMS</button>
+                        </ion-buttons>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
 <ion-content padding>
-    <ion-navbar>
-    </ion-navbar>
-    <ion-list><br><br><br>
-        <button *ngIf="todo.phone" color="primary" small ion-button (click)="makeCall()">Call</button>
-        <button *ngIf="todo.phone" color="primary" small ion-button (click)="sendSMS()">SMS</button>
-        <a *ngIf="todo.email" href="mailto:{{todo.email}}"><button color="primary" small ion-button>E-mail</button></a>
-        <form (ngSubmit)="saveData()">
-            <ion-item>
-                <ion-label floating>Name</ion-label>
-                <ion-input name="care_name" type="text" [(ngModel)]="todo.name"></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-label floating>Email</ion-label>
-                <ion-input name="care_email" type="text" [(ngModel)]="todo.email"></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-label floating>Phone</ion-label>
-                <ion-input name="care_phone" type="number" [(ngModel)]="todo.phone"></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label floating>Address</ion-label>
-                <ion-input name="care_address" type="text" [(ngModel)]="todo.address"></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label floating>Notes</ion-label>
-                <ion-input name="care_notes" type="text" [(ngModel)]="todo.notes"></ion-input>
-            </ion-item><br>
-
-            <button ion-button round small large type="submit">Save</button>
-        </form><br>
-        <button *ngIf="todo.id" color="danger" round small ion-button (click)="deleteData()">Delete</button>
-    </ion-list>
+    <ion-grid>
+        <ion-row>
+            <ion-col class="labelForm">
+                <ion-label>Name</ion-label>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="formFill">
+                <ion-item>
+                    <ion-input name="care_name" type="text" [(ngModel)]="todo.name"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="labelForm">
+                <ion-label>Email</ion-label>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="formFill">
+                <ion-item>
+                    <ion-input name="care_email" type="text" [(ngModel)]="todo.email"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="labelForm">
+                <ion-label>Phone</ion-label>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="formFill">
+                <ion-item>
+                    <ion-input name="care_phone" type="number" [(ngModel)]="todo.phone"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="labelForm">
+                <ion-label>Address</ion-label>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="formFill">
+                <ion-item>
+                    <ion-input name="care_address" type="text" [(ngModel)]="todo.address"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="labelForm">
+                <ion-label>Notes</ion-label>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="formFill">
+                <ion-item>
+                    <ion-input name="care_notes" type="text" [(ngModel)]="todo.notes"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
+<ion-footer no-border>
+    <ion-toolbar>
+        <ion-title>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <button class="btnSave" ion-button medium block (click)="saveData()">Save</button>
+                    </ion-col>
+                    <ion-col *ngIf="todo.id">
+                        <button class="btnDelete" ion-button medium block (click)="deleteData()">Delete</button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-title>
+    </ion-toolbar>
+</ion-footer>

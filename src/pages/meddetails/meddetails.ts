@@ -5,6 +5,7 @@ import { InitDatabase } from '../../providers/init-database';
 import { ScheduleMedication } from '../../providers/schedule-medication';
 import { CaregiverDetailsPage } from '../caregiver-details/caregiver-details';
 import { Camera } from 'ionic-native';
+import { Printer, PrintOptions } from 'ionic-native';
 
 @Component({
   selector: 'page-meddetails',
@@ -16,21 +17,16 @@ export class MeddetailsPage {
   medId;
   todo = {};
   caregivers = [];
+  havePrint = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private db: InitDatabase, private schedmed: ScheduleMedication) {
     this.loadCaregivers();
     if (navParams.get("medId") != null) {
       this.loadMedicine(navParams.get("medId"));
     }
-    // this.caregivers = [
-    //   {"id": 1,
-    //    "name": "Dr A"
-    //   },
-    //   {"id": 2,
-    //    "name": "Dr B"
-    //   }
-    //   ];
+    this.checkPrinter();
   }
+
   loadCaregivers() {
     let bridge = { 'caregivers': this.caregivers };
     this.db._db.transaction(function (tx) {
@@ -50,7 +46,7 @@ export class MeddetailsPage {
   loadMedicine(medId) {
     let bridge = { 'todo': this.todo };
     this.db._db.transaction(function (tx) {
-      tx.executeSql('SELECT id, description, dosages, time, alarm, image, caregiver_id, insurance FROM alarms WHERE id=?', [medId], function (tx, res) {
+      tx.executeSql('SELECT id, description, dosages, time, alarm, image, caregiver_id, insurance, pharmacy FROM alarms WHERE id=?', [medId], function (tx, res) {
         var len = res.rows.length;
         for (var i = 0; i < len; i++) {
           console.log("Desc:" + res.rows.item(i).description);
@@ -62,19 +58,20 @@ export class MeddetailsPage {
           bridge.todo['image'] = res.rows.item(i).image;
           bridge.todo['caregiver_id'] = res.rows.item(i).caregiver_id;
           bridge.todo['insurance'] = res.rows.item(i).insurance;
+          bridge.todo['pharmacy'] = res.rows.item(i).pharmacy;
         }
       }, function (e) {
       });
     });
   }
 
-  saveMedicine() {
+  save() {
     this.replaceUndefined();
     let todo = this.todo;
     if (todo['id'] != null) {
       // Changing
       this.db._db.transaction(function (tx) {
-        tx.executeSql('UPDATE alarms SET description = ?, dosages = ?, time = ?, alarm = ?, image = ?, caregiver_id = ?, insurance = ? WHERE id = ?', [
+        tx.executeSql('UPDATE alarms SET description = ?, dosages = ?, time = ?, alarm = ?, image = ?, caregiver_id = ?, insurance = ?, pharmacy = ? WHERE id = ?', [
           todo['description'],
           todo['dosages'],
           todo['time'],
@@ -82,6 +79,7 @@ export class MeddetailsPage {
           todo['image'],
           todo['caregiver_id'],
           todo['insurance'],
+          todo['pharmacy'],
           todo['id']
         ], function (tx, res) {
         }, function (e) {
@@ -91,14 +89,15 @@ export class MeddetailsPage {
     } else {
       // Creating a new one
       this.db._db.transaction(function (tx) {
-        tx.executeSql('INSERT INTO alarms (description, dosages, time, alarm, image, caregiver_id, insurance) VALUES (?,?,?,?,?,?,?)', [
+        tx.executeSql('INSERT INTO alarms (description, dosages, time, alarm, image, caregiver_id, insurance, pharmacy) VALUES (?,?,?,?,?,?,?,?)', [
           todo['description'],
           todo['dosages'],
           todo['time'],
           todo['alarm'],
           todo['image'],
           todo['caregiver_id'],
-          todo['insurance']
+          todo['insurance'],
+          todo['pharmacy']
         ], function (tx, res) {
         }, function (e) {
           console.log(e.message + " Error to insert in the database " + e);
@@ -109,6 +108,10 @@ export class MeddetailsPage {
     this.navCtrl.pop();
   }
 
+  closeWindow(){
+    this.navCtrl.pop();
+  }
+  
   replaceUndefined() {
     if (this.todo['dosages'] == undefined) {
       this.todo['dosages'] = null;
@@ -127,6 +130,9 @@ export class MeddetailsPage {
     }
     if (this.todo['insurance'] == undefined) {
       this.todo['insurance'] = null;
+    }
+    if (this.todo['pharmacy'] == undefined) {
+      this.todo['pharmacy'] = null;
     }
   }
 
@@ -173,5 +179,51 @@ export class MeddetailsPage {
     this.navCtrl.push(CaregiverDetailsPage, {
       'localId': this.todo['caregiver_id']
     });
+  }
+
+  checkPrinter() {
+    Printer.isAvailable().then((imageData) => {
+      this.havePrint = true;
+    }, (err) => {
+      this.havePrint = false;
+    });
+  }
+
+  makeEmail() {
+    // E-mail new line fail depending on the mail client
+    let text = "";
+    text += "Description: " + this.todo['description'] + "%0D%0A";
+    if (this.todo['dosages'] != null) {
+      text += "Dosages: " + this.todo['dosages'] + "%0D%0A";
+    }
+    if (this.todo['insurance'] != null) {
+      text += "Insurance details: " + this.todo['insurance'] + "%0D%0A";
+    }
+    if (this.todo['pharmacy'] != null) {
+      text += "Pharmacy: " + this.todo['pharmacy'] + "%0D%0A";
+    }
+
+    return text;
+  }
+
+  makePrint() {
+    // Here we can use html tags to make the printed version
+    let text = "";
+    text += "<b>Description:</b> " + this.todo['description'] + "<br>";
+    if (this.todo['dosages'] != null) {
+      text += "<b>Dosages:</b> " + this.todo['dosages'] + "<br>";
+    }
+    if (this.todo['insurance'] != null) {
+      text += "<b>Insurance details:</b> " + this.todo['insurance'] + "<br>";
+    }
+    if (this.todo['pharmacy'] != null) {
+      text += "<b>Pharmacy:</b> " + this.todo['pharmacy'] + "<br>";
+    }
+    return text;
+  }
+
+  print() {
+    let options: PrintOptions = {};
+    Printer.print(this.makePrint(), options);
   }
 }
