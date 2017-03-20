@@ -1,85 +1,229 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+import { LocalNotifications } from 'ionic-native';
+import { InitDatabase } from '../../providers/init-database';
+import { ScheduleMedication } from '../../providers/schedule-medication';
+import { CaregiverDetailsPage } from '../caregiver-details/caregiver-details';
+import { Camera } from 'ionic-native';
+import { Printer, PrintOptions } from 'ionic-native';
 
-/*
-  Generated class for the Meddetails page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-meddetails',
   templateUrl: 'meddetails.html',
-  providers: [Storage]
+  providers: [InitDatabase, ScheduleMedication]
 })
 
 export class MeddetailsPage {
   medId;
-  todo = {}
-  constructor(public navCtrl: NavController, public navParams: NavParams, storage: Storage, public params:NavParams) {
-    if(params.get("medId") != null){
-      this.medId = params.get("medId");
-      let storage = new Storage();   
-      storage.get('medicine').then((val) => {      
-        for(let i in val){   
-          if(val[i]['id'] == params.get("medId")){
-            this.todo['discription'] = val[i]['discription'];
-            this.todo['dosages'] = val[i]['dosages'];
-            this.todo['datetime'] = val[i]['datetime'];
-            this.todo['alarm'] = val[i]['alarm'];
-          }
-        }
-      });
+  todo = {};
+  caregivers = [];
+  havePrint = false;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private db: InitDatabase, private schedmed: ScheduleMedication) {
+    this.loadCaregivers();
+    if (navParams.get("medId") != null) {
+      this.loadMedicine(navParams.get("medId"));
     }
-  }
-  
-  saveMedicine(){
-    let storage = new Storage();
-    storage.get('medicine').then((val) => {
-     if(this.medId){
-        for(let i in val){               
-            if(val[i]['id'] == this.medId){            
-              val[i]['discription'] = this.todo['discription'];
-              val[i]['dosages'] = this.todo['dosages'];
-              val[i]['datetime'] = this.todo['datetime'];
-              val[i]['alarm'] = this.todo['alarm'];              
-              break;
-            }
-        }
-      } else {
-        let currentTodo = {        
-          'id' : Math.floor(Date.now()),
-          'discription' : this.todo['discription'],
-          'dosages' : this.todo['dosages'],
-          'datetime' : this.todo['datetime'],
-          'alarm' : this.todo['alarm']
-        };
-        if(val == null){
-          let objt = [];
-          objt.push(currentTodo);
-          val = objt;
-        } else {
-          val.push(currentTodo);
-        }
-     }
-     storage.set('medicine', val);
-    });    
-    this.navCtrl.pop();    
+    this.checkPrinter();
   }
 
-  deleteMedicine(){
-    let storage = new Storage();    
-    storage.get('medicine').then((val) => {      
-      let arraySlice = [];
-      let countLocal = 0;
-      for(let i in val){   
-          if(val[i]['id'] != this.medId){ 
-            arraySlice.push(val[i]);      
-          }
-      }      
-      storage.set('medicine', arraySlice);
+  loadCaregivers() {
+    let bridge = { 'caregivers': this.caregivers };
+    this.db._db.transaction(function (tx) {
+      tx.executeSql('SELECT id, name FROM caregiver', [], function (tx, res) {
+        var len = res.rows.length;
+        for (var i = 0; i < len; i++) {
+          let temparray = {};
+          temparray['id'] = res.rows.item(i).id;
+          temparray['name'] = res.rows.item(i).name;
+          bridge.caregivers.push(temparray);
+        }
+      }, function (e) {
+      });
     });
-    this.navCtrl.pop();    
+  }
+
+  loadMedicine(medId) {
+    let bridge = { 'todo': this.todo };
+    this.db._db.transaction(function (tx) {
+      tx.executeSql('SELECT id, description, dosages, time, alarm, image, caregiver_id, insurance, pharmacy FROM alarms WHERE id=?', [medId], function (tx, res) {
+        var len = res.rows.length;
+        for (var i = 0; i < len; i++) {
+          console.log("Desc:" + res.rows.item(i).description);
+          bridge.todo['id'] = res.rows.item(i).id;
+          bridge.todo['description'] = res.rows.item(i).description;
+          bridge.todo['dosages'] = res.rows.item(i).dosages;
+          bridge.todo['time'] = res.rows.item(i).time;
+          bridge.todo['alarm'] = res.rows.item(i).alarm;
+          bridge.todo['image'] = res.rows.item(i).image;
+          bridge.todo['caregiver_id'] = res.rows.item(i).caregiver_id;
+          bridge.todo['insurance'] = res.rows.item(i).insurance;
+          bridge.todo['pharmacy'] = res.rows.item(i).pharmacy;
+        }
+      }, function (e) {
+      });
+    });
+  }
+
+  save() {
+    this.replaceUndefined();
+    let todo = this.todo;
+    if (todo['id'] != null) {
+      // Changing
+      this.db._db.transaction(function (tx) {
+        tx.executeSql('UPDATE alarms SET description = ?, dosages = ?, time = ?, alarm = ?, image = ?, caregiver_id = ?, insurance = ?, pharmacy = ? WHERE id = ?', [
+          todo['description'],
+          todo['dosages'],
+          todo['time'],
+          todo['alarm'],
+          todo['image'],
+          todo['caregiver_id'],
+          todo['insurance'],
+          todo['pharmacy'],
+          todo['id']
+        ], function (tx, res) {
+        }, function (e) {
+          console.log(e.message + " Error updating the database " + e);
+        });
+      });
+    } else {
+      // Creating a new one
+      this.db._db.transaction(function (tx) {
+        tx.executeSql('INSERT INTO alarms (description, dosages, time, alarm, image, caregiver_id, insurance, pharmacy) VALUES (?,?,?,?,?,?,?,?)', [
+          todo['description'],
+          todo['dosages'],
+          todo['time'],
+          todo['alarm'],
+          todo['image'],
+          todo['caregiver_id'],
+          todo['insurance'],
+          todo['pharmacy']
+        ], function (tx, res) {
+        }, function (e) {
+          console.log(e.message + " Error to insert in the database " + e);
+        });
+      });
+    }
+    this.schedmed.setAlarms();
+    this.navCtrl.pop();
+  }
+
+  closeWindow(){
+    this.navCtrl.pop();
+  }
+  
+  replaceUndefined() {
+    if (this.todo['dosages'] == undefined) {
+      this.todo['dosages'] = null;
+    }
+    if (this.todo['time'] == undefined) {
+      this.todo['time'] = null;
+    }
+    if (this.todo['alarm'] == undefined) {
+      this.todo['alarm'] = false;
+    }
+    if (this.todo['image'] == undefined) {
+      this.todo['image'] = null;
+    }
+    if (this.todo['caregiver_id'] == undefined) {
+      this.todo['caregiver_id'] = null;
+    }
+    if (this.todo['insurance'] == undefined) {
+      this.todo['insurance'] = null;
+    }
+    if (this.todo['pharmacy'] == undefined) {
+      this.todo['pharmacy'] = null;
+    }
+  }
+
+  deleteMedicine() {
+    let todo = this.todo;
+    this.db._db.transaction(function (tx) {
+      tx.executeSql('DELETE FROM alarms WHERE id = ?', [
+        todo['id']
+      ], function (tx, res) {
+      }, function (e) {
+        console.log(e.message + " Error updating the database " + e);
+      });
+    });
+    this.schedmed.setAlarms();
+    this.navCtrl.pop();
+  }
+
+  testNotification() {
+    LocalNotifications.schedule({
+      title: this.todo['description'],
+      text: this.todo['dosages'],
+      led: "FF0000",
+      sound: 'file://assets/sounds/alarm_bell.mp3'
+    });
+  }
+
+  runCamera() {
+    Camera.getPicture(
+      {
+        destinationType: Camera.DestinationType.DATA_URL,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        saveToPhotoAlbum: false,
+        targetWidth: 360,
+        targetHeight: 360
+      }
+    ).then((imageData) => {
+      this.todo['image'] = 'data:image/jpeg;base64,' + imageData;
+    }, (err) => {
+      // Handle error
+    });
+  }
+
+  contactCaregiver() {
+    this.navCtrl.push(CaregiverDetailsPage, {
+      'localId': this.todo['caregiver_id']
+    });
+  }
+
+  checkPrinter() {
+    Printer.isAvailable().then((imageData) => {
+      this.havePrint = true;
+    }, (err) => {
+      this.havePrint = false;
+    });
+  }
+
+  makeEmail() {
+    // E-mail new line fail depending on the mail client
+    let text = "";
+    text += "Description: " + this.todo['description'] + "%0D%0A";
+    if (this.todo['dosages'] != null) {
+      text += "Dosages: " + this.todo['dosages'] + "%0D%0A";
+    }
+    if (this.todo['insurance'] != null) {
+      text += "Insurance details: " + this.todo['insurance'] + "%0D%0A";
+    }
+    if (this.todo['pharmacy'] != null) {
+      text += "Pharmacy: " + this.todo['pharmacy'] + "%0D%0A";
+    }
+
+    return text;
+  }
+
+  makePrint() {
+    // Here we can use html tags to make the printed version
+    let text = "";
+    text += "<b>Description:</b> " + this.todo['description'] + "<br>";
+    if (this.todo['dosages'] != null) {
+      text += "<b>Dosages:</b> " + this.todo['dosages'] + "<br>";
+    }
+    if (this.todo['insurance'] != null) {
+      text += "<b>Insurance details:</b> " + this.todo['insurance'] + "<br>";
+    }
+    if (this.todo['pharmacy'] != null) {
+      text += "<b>Pharmacy:</b> " + this.todo['pharmacy'] + "<br>";
+    }
+    return text;
+  }
+
+  print() {
+    let options: PrintOptions = {};
+    Printer.print(this.makePrint(), options);
   }
 }

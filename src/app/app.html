@@ -1,1 +1,46 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-header color="dark">
+    <ion-toolbar no-border color="dark">
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <a href="http://www.raregenomics.org/"><img src="assets/images/logo.png" height="40"></a><br>
+                    <font color="white">home</font>
+                </ion-col>
+                <ion-col>
+                    <img src="assets/icon/caregiver.ico" height="40" (click)="gotoCaregiver()"><br>
+                    <font color="white">caregiver</font>
+                </ion-col>
+                <ion-col>
+                    <button class="btnEmergency" (click)="callEmergency()"><b>911</b></button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-nav #myNav [root]="rootPage"></ion-nav>
+</ion-content>
+<ion-footer no-border>
+    <ion-toolbar color="dark" no-border>
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <img src="assets/icon/calendar.ico" height="40" width="40"><br>
+                    <font color="white">calendar</font>
+                </ion-col>
+                <ion-col>
+                    <img src="assets/icon/records.ico" height="40" width="40"><br>
+                    <font color="white">records</font>
+                </ion-col>
+                <ion-col>
+                    <img src="assets/icon/health.ico" height="40" width="40"><br>
+                    <font color="white">health data</font>
+                </ion-col>
+                <ion-col>
+                    <img src="assets/icon/medication.ico" height="40" width="40" (click)="gotoMedicationHome()"><br>
+                    <font color="white">medications</font>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-footer>

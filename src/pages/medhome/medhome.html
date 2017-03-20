@@ -1,32 +1,52 @@
-<!--
-  Generated template for the Medhome page.
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            <ion-grid>
+                <ion-row>
+                    <ion-col class="toolbartitle">
+                        Medications in-Take
+                    </ion-col>
+                    <ion-col>
+                    </ion-col>
+                    <ion-col>
+                        <ion-buttons start>
+                            <button *ngIf="havePrint==true" ion-button class="btnTop" (click)="print()">
+                                <ion-icon name="print"></ion-icon>
+                            </button>
+                            <a href="mailto:?subject=Medications&body={{makeEmail()}}">
+                                <button ion-button class="btnTop">
+                                    <ion-icon name="mail"></ion-icon>
+                                </button>
+                            </a>
+                            <button class="btnTop" ion-button (click)="gotoMeddetails()">
+                                <ion-icon name="add-circle"></ion-icon>
+                            </button>
+                        </ion-buttons>
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
 <ion-content padding>
-    <!--<ion-header>-->
-    <ion-navbar>
-        <ion-title center>Home
-            < Medication </ion-title>
-                <button ion-button round color="dark" (click)="gotoMeddetails()">
-                Add new medication
-                </button>
-    </ion-navbar>
-    <!--</ion-header>-->
-
-    <!--<ion-content>-->
-    <ion-list>
-
-        <ion-item *ngFor="let medication of medications" (click)="openMed(medication['id'])">
-            <ion-avatar item-left>
-                <img src="assets/images/medication3.png">
-            </ion-avatar>
-            <h2>{{medication['discription']}}</h2>
-            <h3>{{medication['dosages']}}</h3>
-            <p>Member health insurance</p>
-            <ion-icon name="alarm" *ngIf="medication['alarm']"></ion-icon> {{medication['datetime']}}
-        </ion-item>
-    </ion-list>
-    <!--</ion-content>-->
+    <ion-grid>
+        <ion-row>
+            <ion-col class="labelFormList">
+                <ion-list>
+                    <ion-item *ngFor="let medication of medications " (click)="openMed(medication[ 'id']) ">
+                        <ion-thumbnail item-left>
+                            <img *ngIf="!medication[ 'image'] " src="assets/icon/medication.ico ">
+                            <img [src]="medication[ 'image'] " *ngIf="medication[ 'image'] " />
+                        </ion-thumbnail>
+                        <h1>{{medication['description']}}</h1>
+                        <h3>{{medication['dosages']}}</h3>
+                        <h3>{{medication['insurance']}}</h3>
+                        <h3>{{medication['pharmacy']}}</h3>
+                        <ion-icon name="alarm" *ngIf="medication['alarm']=='true' && medication['time']"></ion-icon> {{medication['time']}}
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

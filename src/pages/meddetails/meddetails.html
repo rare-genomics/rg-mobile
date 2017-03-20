@@ -1,41 +1,150 @@
-<!--
-  Generated template for the Meddetails page.
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <button class="btnTopWhite" ion-button (click)="closeWindow()">
+                                <ion-icon name="arrow-dropleft"></ion-icon>
+                        </button>
+                    </ion-col>
+                    <ion-col class="toolbartitle">
+                        Medication details
+                    </ion-col>
+                    <ion-col>
+                        <ion-buttons start>
+                            <button *ngIf="havePrint==true" ion-button class="btnTop" (click)="print()">
+                                <ion-icon name="print"></ion-icon>
+                            </button>
+                            <a href="mailto:?subject=Medications&body={{makeEmail()}}">
+                                <button ion-button class="btnTop">
+                                    <ion-icon name="mail"></ion-icon>
+                                </button>
+                            </a>
+                            <button *ngIf="todo.caregiver_id" class="btnTop" ion-button (click)="contactCaregiver()">
+                                <ion-icon name="contacts"></ion-icon>
+                            </button>
+                            <button class="btnTop" ion-button (click)="testNotification()">
+                                <ion-icon name="musical-notes"></ion-icon>
+                            </button>
+                        </ion-buttons>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-content padding>
-    <!--<ion-header>-->
-
-    <ion-navbar>
-        <ion-title>Home
-            < Medication < New medication</ion-title>
-    </ion-navbar>
-    <ion-list>
-        <form (ngSubmit)="saveMedicine()">
-            <ion-item>
-                <ion-label floating>Discription</ion-label>
-                <ion-input name="med_discription" type="text" [(ngModel)]="todo.discription"></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-label floating>Dosages</ion-label>
-                <ion-input name="med_dosages" type="text" [(ngModel)]="todo.dosages"></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-label>Time to take medicine</ion-label>
-                <ion-datetime name="med_datetime" displayFormat="HH:mm" [(ngModel)]="todo.datetime">
-                </ion-datetime>
-            </ion-item>
-
-            <ion-item>
-                <ion-label>Alarm</ion-label>
-                <ion-checkbox name="med_alarm" [(ngModel)]="todo.alarm"></ion-checkbox>
-            </ion-item><br>
-            <button ion-button round center large type="submit">Save</button>
-        </form><br><br>
-        <button *ngIf="medId" color="danger" large ion-button round (click)="deleteMedicine()">Delete</button>
-    </ion-list>
-    <!--</ion-header>-->
+    <ion-grid>
+        <ion-row>
+            <ion-col class="image">
+                <img *ngIf="!todo.image" src="assets/icon/camera.ico" height="80" (click)="runCamera()">
+                <img [src]="todo.image" *ngIf="todo.image" (click)="runCamera()" />
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="labelForm">
+                <ion-label>Description</ion-label>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="formFill">
+                <ion-item>
+                    <ion-input name="med_description" type="text" [(ngModel)]="todo.description "></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="labelForm">
+                <ion-label>Dosages</ion-label>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="formFill">
+                <ion-item>
+                    <ion-input name="med_dosages" type="number" [(ngModel)]="todo.dosages"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="labelForm">
+                <ion-label>Time to take medication</ion-label>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="formFill">
+                <ion-item>
+                    <ion-datetime name="med_datetime" displayFormat="HH:mm" [(ngModel)]="todo.time">
+                    </ion-datetime>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="labelForm">
+                <ion-label>Alarm on/off</ion-label>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="formFill">
+                <ion-item>
+                    <ion-toggle name="med_alarm" [(ngModel)]="todo.alarm"></ion-toggle>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="labelForm">
+                <ion-label>Caregiver</ion-label>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="formFill">
+                <ion-item>
+                    <ion-select name="med_caregiver" [(ngModel)]="todo.caregiver_id">
+                        <ion-option *ngFor="let caregiver of caregivers" [value]="caregiver.id">{{caregiver.name}}</ion-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="labelForm">
+                <ion-label>Insurance details</ion-label>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="formFill">
+                <ion-item>
+                    <ion-input name="med_insurance" type="text" [(ngModel)]="todo.insurance"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="labelForm">
+                <ion-label>Pharmacy</ion-label>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="formFill ">
+                <ion-item>
+                    <ion-input name="med_pharmacy" type="text" [(ngModel)]="todo.pharmacy"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
+<ion-footer no-border>
+    <ion-toolbar>
+        <ion-title>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <button class="btnSave" ion-button medium block (click)="save()">Save</button>
+                    </ion-col>
+                    <ion-col *ngIf="todo.id">
+                        <button class="btnDelete" ion-button medium block (click)="deleteMedicine()">Delete</button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-title>
+    </ion-toolbar>
+</ion-footer>
