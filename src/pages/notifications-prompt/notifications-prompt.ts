@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { InitDatabase } from '../../providers/init-database';
+import { Http, Headers, RequestOptions } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'page-notifications-prompt',
@@ -9,7 +11,7 @@ import { InitDatabase } from '../../providers/init-database';
 })
 export class NotificationsPromptPage {
 
-  constructor(public navCtrl: NavController, private db: InitDatabase) { }
+  constructor(public navCtrl: NavController, private db: InitDatabase, public http: Http) { }
 
   saveData(status) {
     this.db._db.transaction(function (tx) {
@@ -27,7 +29,27 @@ export class NotificationsPromptPage {
     this.navCtrl.pop();
   }
 
-  submitRegistration() {
-    console.log("At this poing should submit registartion");
+  private jsonToURLEncoded(jsonString) {
+    return Object.keys(jsonString).map(function (key) {
+      return encodeURIComponent(key) + '=' + encodeURIComponent(jsonString[key]);
+    }).join('&');
   }
+
+  submitRegistration() {
+    var link = 'http://localhost:3000/api/registration';
+    let headers      = new Headers({ 'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8' });
+    let options = new RequestOptions({
+      headers: headers
+    });
+    let body = this.jsonToURLEncoded({
+      email: "email",
+      password: "word"
+    });
+    this.http.post("http://localhost:3000/api/registration", body, options)
+      .subscribe(data => {
+      }, error => {
+        console.log(JSON.stringify(error.json()));
+      });
+  }
+
 }
