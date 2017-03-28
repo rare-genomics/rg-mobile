@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { NotificationsPromptPage } from '../notifications-prompt/notifications-prompt';
 import { InitDatabase } from '../../providers/init-database';
+import { AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-enter-birthday',
@@ -10,7 +11,7 @@ import { InitDatabase } from '../../providers/init-database';
 })
 export class EnterBirthdayPage {
   localdata = {};
-  constructor(public navCtrl: NavController, private db: InitDatabase) {
+  constructor(public navCtrl: NavController, private db: InitDatabase, public alertCtrl: AlertController) {
     this.loadData();
   }
 
@@ -20,7 +21,7 @@ export class EnterBirthdayPage {
       tx.executeSql('SELECT birthday FROM profile WHERE id=1', [], function (tx, res) {
         var len = res.rows.length;
         for (var i = 0; i < len; i++) {
-          bridge.localdata['birthday'] = res.rows.item(i).email;
+          bridge.localdata['birthday'] = res.rows.item(i).birthday;
         }
       }, function (e) {
       });
@@ -28,12 +29,16 @@ export class EnterBirthdayPage {
   }
 
   replaceUndefined() {
-    if (this.localdata['birthday'] == undefined) {
-      this.localdata['birthday'] = null;
+    if (this.localdata['birthday'] == undefined || this.localdata['birthday'] == "") {
+      this.doAlert("Missing birthday")
+      return 1;
     }
   }
 
   saveData() {
+     if(this.replaceUndefined() == 1){
+      return;
+    }
     this.replaceUndefined();
     let bridge = this.localdata;
     this.db._db.transaction(function (tx) {
@@ -44,13 +49,19 @@ export class EnterBirthdayPage {
         console.log(e.message + " Error updating the database " + e);
       });
     });
+    this.navCtrl.push(NotificationsPromptPage);
   }
 
   goBack() {
     this.navCtrl.pop();
   }
-  notificationsPrompt() {
-    this.saveData();
-    this.navCtrl.push(NotificationsPromptPage);
+
+  doAlert(msg) {
+    let alert = this.alertCtrl.create({
+      title: 'Message',
+      message: msg,
+      buttons: ['Ok']
+    });
+    alert.present()
   }
 }

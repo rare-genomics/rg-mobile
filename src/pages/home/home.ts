@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-import { CreateAccountPage } from '../create-account/create-account';
+import { TermsandconditionsPage } from '../termsandconditions/termsandconditions';
 import { MedhomePage } from '../medhome/medhome';
 import { InitDatabase } from '../../providers/init-database';
 import { ScheduleMedication } from '../../providers/schedule-medication';
@@ -32,7 +32,7 @@ export class HomePage {
   }
 
   createAccount() {
-    this.navCtrl.push(CreateAccountPage);
+    this.navCtrl.push(TermsandconditionsPage);
   }
 
   gotoMedicationHome() {

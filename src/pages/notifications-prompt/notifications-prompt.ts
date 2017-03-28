@@ -45,7 +45,7 @@ export class NotificationsPromptPage {
       email: "email",
       password: "word"
     });
-    this.http.post("http://localhost:3000/api/registration", body, options)
+    this.http.post(link, body, options)
       .subscribe(data => {
       }, error => {
         console.log(JSON.stringify(error.json()));
