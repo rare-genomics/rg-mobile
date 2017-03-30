@@ -59,23 +59,6 @@ export class NotificationsPromptPage {
         }
       }, function (e) {
       });
-    });
-    // console.log("Aqui 2");
-    // var link = 'http://localhost:3000/api/registration';
-    // let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
-    // let options = new RequestOptions({
-    //   headers: headers
-    // });
-    // let body = this.jsonToURLEncoded({
-    //   email: "email",
-    //   password: "word"
-    // });
-    // let body = this.jsonToURLEncoded(localdata);
-    // this.http.post(link, body, options)
-    //   .subscribe(data => {
-    //   }, error => {
-    //     console.log(JSON.stringify(error.json()));
-    //   });
+    });   
   }
-
 }
