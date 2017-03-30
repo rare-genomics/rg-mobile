@@ -35,21 +35,47 @@ export class NotificationsPromptPage {
     }).join('&');
   }
 
-  submitRegistration() {
+  sendDataToApi(localData) {
+    let body = this.jsonToURLEncoded(localData);
     var link = 'http://localhost:3000/api/registration';
-    let headers      = new Headers({ 'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8' });
+    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
     let options = new RequestOptions({
       headers: headers
-    });
-    let body = this.jsonToURLEncoded({
-      email: "email",
-      password: "word"
     });
     this.http.post(link, body, options)
       .subscribe(data => {
       }, error => {
         console.log(JSON.stringify(error.json()));
       });
+  }
+
+  submitRegistration() {
+    let bridge = { jsonToURLEncoded: this.jsonToURLEncoded, sendDataToApi: this.sendDataToApi, http: this.http };
+    this.db._db.transaction(function (tx) {
+      tx.executeSql('SELECT id, firstname, lastname, email, password, birthday, notification FROM profile WHERE id=1', [], function (tx, res) {
+        var len = res.rows.length;
+        for (var i = 0; i < len; i++) {
+          bridge.sendDataToApi(res.rows.item(i));
+        }
+      }, function (e) {
+      });
+    });
+    // console.log("Aqui 2");
+    // var link = 'http://localhost:3000/api/registration';
+    // let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
+    // let options = new RequestOptions({
+    //   headers: headers
+    // });
+    // let body = this.jsonToURLEncoded({
+    //   email: "email",
+    //   password: "word"
+    // });
+    // let body = this.jsonToURLEncoded(localdata);
+    // this.http.post(link, body, options)
+    //   .subscribe(data => {
+    //   }, error => {
+    //     console.log(JSON.stringify(error.json()));
+    //   });
   }
 
 }

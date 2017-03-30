@@ -23,7 +23,7 @@ export class InitDatabase {
   createDatabase() {
     console.log("Creating database");
     this._db.transaction(function (tx) {
-      tx.executeSql('CREATE TABLE IF NOT EXISTS alarms (id INTEGER PRIMARY KEY, description TEXT, dosages REAL, time TIME, alarm BOOLEAN, image TEXT, caregiver_id INTEGER, insurance TEXT, pharmacy TEXT, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)');      
+      tx.executeSql('CREATE TABLE IF NOT EXISTS alarms (id INTEGER PRIMARY KEY, description TEXT, dosages REAL, time TIME, time2 TIME, time3 TIME, time4 TIME, alarm BOOLEAN, image TEXT, caregiver_id INTEGER, insurance TEXT, pharmacy TEXT, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)');      
       tx.executeSql('CREATE TABLE IF NOT EXISTS caregiver (id INTEGER PRIMARY KEY, name TEXT, email TEXT, phone TEXT, address TEXT, notes TEXT, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)');      
       tx.executeSql('CREATE TABLE IF NOT EXISTS profile (id INTEGER PRIMARY KEY, firstname TEXT, lastname TEXT, email TEXT, password TEXT, birthday DATE, notification BOOLEAN, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)');      
     });
@@ -33,6 +33,7 @@ export class InitDatabase {
     this._db.transaction(function (tx) {
       tx.executeSql('DROP TABLE alarms');      
       tx.executeSql('DROP TABLE caregiver');      
+      tx.executeSql('DROP TABLE caregiver'); 
     });
     this.createDatabase();
   }
