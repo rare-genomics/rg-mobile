@@ -18,10 +18,10 @@ export class EnterBirthdayPage {
   loadData() {
     let bridge = { 'localdata': this.localdata };
     this.db._db.transaction(function (tx) {
-      tx.executeSql('SELECT birthday FROM profile WHERE id=1', [], function (tx, res) {
+      tx.executeSql('SELECT birthdate FROM profile WHERE id=1', [], function (tx, res) {
         var len = res.rows.length;
         for (var i = 0; i < len; i++) {
-          bridge.localdata['birthday'] = res.rows.item(i).birthday;
+          bridge.localdata['birthdate'] = res.rows.item(i).birthdate;
         }
       }, function (e) {
       });
@@ -29,8 +29,8 @@ export class EnterBirthdayPage {
   }
 
   replaceUndefined() {
-    if (this.localdata['birthday'] == undefined || this.localdata['birthday'] == "") {
-      this.doAlert("Missing birthday")
+    if (this.localdata['birthdate'] == undefined || this.localdata['birthdate'] == "") {
+      this.doAlert("Missing birthdate")
       return 1;
     }
   }
@@ -42,8 +42,8 @@ export class EnterBirthdayPage {
     this.replaceUndefined();
     let bridge = this.localdata;
     this.db._db.transaction(function (tx) {
-      tx.executeSql('UPDATE profile SET birthday = ?', [
-        bridge['birthday']
+      tx.executeSql('UPDATE profile SET birthdate = ?', [
+        bridge['birthdate']
       ], function (tx, res) {
       }, function (e) {
         console.log(e.message + " Error updating the database " + e);

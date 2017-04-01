@@ -52,7 +52,7 @@ export class NotificationsPromptPage {
   submitRegistration() {
     let bridge = { jsonToURLEncoded: this.jsonToURLEncoded, sendDataToApi: this.sendDataToApi, http: this.http };
     this.db._db.transaction(function (tx) {
-      tx.executeSql('SELECT id, firstname, lastname, email, password, birthday, notification FROM profile WHERE id=1', [], function (tx, res) {
+      tx.executeSql('SELECT id, firstname, lastname, email, password, birthdate, notification FROM profile WHERE id=1', [], function (tx, res) {
         var len = res.rows.length;
         for (var i = 0; i < len; i++) {
           bridge.sendDataToApi(res.rows.item(i));
