@@ -15,13 +15,13 @@ export class NotificationsPromptPage {
 
   saveData(status) {
     this.db._db.transaction(function (tx) {
-      tx.executeSql('UPDATE profile SET notification = ?', [
+      tx.executeSql('UPDATE profile SET allow_optin_flag = ?', [
         status
       ], function (tx, res) {
       }, function (e) {
         console.log(e.message + " Error updating the database " + e);
       });
-    });
+    });    
     this.submitRegistration();
   }
 
@@ -52,7 +52,7 @@ export class NotificationsPromptPage {
   submitRegistration() {
     let bridge = { jsonToURLEncoded: this.jsonToURLEncoded, sendDataToApi: this.sendDataToApi, http: this.http };
     this.db._db.transaction(function (tx) {
-      tx.executeSql('SELECT id, firstname, lastname, email, password, birthdate, notification FROM profile WHERE id=1', [], function (tx, res) {
+      tx.executeSql('SELECT id, firstname, lastname, email, password, birthdate, allow_optin_flag FROM profile WHERE id=1', [], function (tx, res) {
         var len = res.rows.length;
         for (var i = 0; i < len; i++) {
           bridge.sendDataToApi(res.rows.item(i));

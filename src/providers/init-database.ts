@@ -25,7 +25,7 @@ export class InitDatabase {
     this._db.transaction(function (tx) {
       tx.executeSql('CREATE TABLE IF NOT EXISTS alarms (id INTEGER PRIMARY KEY, description TEXT, dosages REAL, time TIME, time2 TIME, time3 TIME, time4 TIME, alarm BOOLEAN, image TEXT, caregiver_id INTEGER, insurance TEXT, pharmacy TEXT, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)');      
       tx.executeSql('CREATE TABLE IF NOT EXISTS caregiver (id INTEGER PRIMARY KEY, name TEXT, email TEXT, phone TEXT, address TEXT, notes TEXT, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)');      
-      tx.executeSql('CREATE TABLE IF NOT EXISTS profile (id INTEGER PRIMARY KEY, firstname TEXT, lastname TEXT, email TEXT, password TEXT, birthdate DATE, notification BOOLEAN, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, patient BOOLEAN, caregiver BOOLEAN, publicprofile BOOLEAN, mystory TEXT, myupdates TEXT, picture TEXT)');      
+      tx.executeSql('CREATE TABLE IF NOT EXISTS profile (id INTEGER PRIMARY KEY, firstname TEXT, lastname TEXT, email TEXT, password TEXT, birthdate DATE, allow_optin_flag BOOLEAN, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, patient BOOLEAN, caregiver BOOLEAN, publicprofile BOOLEAN, mystory TEXT, myupdates TEXT, picture TEXT)');      
     });
   }
   dropDatabase() {
