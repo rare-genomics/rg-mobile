@@ -154,6 +154,22 @@ ion-content {
     justify-content: center;
 }
 
+.toast-sms-failed {
+        div {
+            background: #21c6db !important;
+            background-color: #21c6db !important;
+            color: red !important;
+        }
+}
+
+.toast-sms-success {
+        div {
+            background: #21c6db !important;
+            background-color: #21c6db !important;
+            color: white !important;
+        }
+}
+
 ion-footer {
     ion-grid {
         padding: 0;

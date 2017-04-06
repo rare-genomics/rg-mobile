@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { InitDatabase } from '../../providers/init-database';
-import { CallNumber, SMS } from 'ionic-native';
+import { CallNumber } from 'ionic-native';
+import { ToastController } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
+import { SendSMSPage } from '../send-sms/send-sms';
 
 @Component({
   selector: 'page-caregiver-details',
@@ -11,7 +14,7 @@ import { CallNumber, SMS } from 'ionic-native';
 export class CaregiverDetailsPage {
   localId;
   todo = {};
-  constructor(public navCtrl: NavController, public navParams: NavParams, private db: InitDatabase) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private db: InitDatabase, public toastCtrl: ToastController, public modalCtrl: ModalController) {
     if (navParams.get("localId") != null) {
       this.loadData(navParams.get("localId"));
     }
@@ -114,18 +117,9 @@ export class CaregiverDetailsPage {
   }
 
   sendSMS() {
-    var options = {
-      replaceLineBreaks: true,
-      android: {
-        intent: ""
-      }
-    }
-    SMS.send(this.todo['phone'], 'Test RGI', options)
-      .then(() => {
-        alert("Sucess");
-      }, () => {
-        alert("Failed");
-      });
+    console.log(this.todo['phone']);
+    let smsModal = this.modalCtrl.create(SendSMSPage, { phoneNo: this.todo['phone'] });
+   smsModal.present();
   }
 
   closeWindow(){
