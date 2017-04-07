@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { InitDatabase } from '../../providers/init-database';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { PatientHomePage } from '../patient-home/patient-home';
 
 @Component({
   selector: 'page-notifications-prompt',
@@ -23,6 +24,7 @@ export class NotificationsPromptPage {
       });
     });    
     this.submitRegistration();
+    this.navCtrl.push(PatientHomePage);
   }
 
   goBack() {
