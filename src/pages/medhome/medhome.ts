@@ -29,14 +29,17 @@ export class MedhomePage {
   loadList() {
     let bridge = { 'medications': this.medications };
     this.db._db.transaction(function (tx) {
-      tx.executeSql('SELECT id, description, dosages, time, alarm, image, insurance, pharmacy FROM alarms', [], function (tx, res) {
+      tx.executeSql('SELECT id, description, dosages, time1, time2, time3, time4, alarm, image, insurance, pharmacy FROM alarms', [], function (tx, res) {
         var len = res.rows.length;
         for (var i = 0; i < len; i++) {
           let temparray = {};
           temparray['id'] = res.rows.item(i).id;
           temparray['description'] = res.rows.item(i).description;
           temparray['dosages'] = res.rows.item(i).dosages;
-          temparray['time'] = res.rows.item(i).time;
+          temparray['time1'] = res.rows.item(i).time1;
+          temparray['time2'] = res.rows.item(i).time2;
+          temparray['time3'] = res.rows.item(i).time3;
+          temparray['time4'] = res.rows.item(i).time4;
           temparray['alarm'] = res.rows.item(i).alarm;
           temparray['image'] = res.rows.item(i).image;
           temparray['insurance'] = res.rows.item(i).insurance;
@@ -74,8 +77,17 @@ export class MedhomePage {
       if (this.medications[i].dosages != null) {
         text += "Dosages: " + this.medications[i].dosages + "%0D%0A";
       }
-      if (this.medications[i].time != null) {
-        text += "Time: " + this.medications[i].time + "%0D%0A";
+      if (this.medications[i].time1 != null) {
+        text += "Time1: " + this.medications[i].time1 + "%0D%0A";
+      }
+      if (this.medications[i].time2 != null) {
+        text += "Time2: " + this.medications[i].time2 + "%0D%0A";
+      }
+      if (this.medications[i].time3 != null) {
+        text += "Time3: " + this.medications[i].time3 + "%0D%0A";
+      }
+      if (this.medications[i].time4 != null) {
+        text += "Time4: " + this.medications[i].time4 + "%0D%0A";
       }
       if (this.medications[i].insurance != null) {
         text += "Insurance: " + this.medications[i].insurance + "%0D%0A";
@@ -96,8 +108,17 @@ export class MedhomePage {
       if (this.medications[i].dosages != null) {
         text += "<b>Dosages:</b> " + this.medications[i].dosages + "<br>";
       }
-      if (this.medications[i].time != null) {
-        text += "<b>Time:</b> " + this.medications[i].time + "<br>";
+      if (this.medications[i].time1 != null) {
+        text += "Time1: " + this.medications[i].time1 + "%0D%0A";
+      }
+      if (this.medications[i].time2 != null) {
+        text += "Time2: " + this.medications[i].time2 + "%0D%0A";
+      }
+      if (this.medications[i].time3 != null) {
+        text += "Time3: " + this.medications[i].time3 + "%0D%0A";
+      }
+      if (this.medications[i].time4 != null) {
+        text += "Time4: " + this.medications[i].time4 + "%0D%0A";
       }
       if (this.medications[i].insurance != null) {
         text += "<b>Insurance:</b> " + this.medications[i].insurance + "<br>";

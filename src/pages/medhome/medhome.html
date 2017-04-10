@@ -43,7 +43,7 @@
                         <h3>{{medication['dosages']}}</h3>
                         <h3>{{medication['insurance']}}</h3>
                         <h3>{{medication['pharmacy']}}</h3>
-                        <ion-icon name="alarm" *ngIf="medication['alarm']=='true' && medication['time']"></ion-icon> {{medication['time']}}
+                        <ion-icon name="alarm" *ngIf="medication['alarm']=='true' && (medication['time1'] || medication['time2'] || medication['time3'] || medication['time4'])"></ion-icon> {{medication['time1']}} {{medication['time2']}} {{medication['time3']}} {{medication['time4']}}
                     </ion-item>
                 </ion-list>
             </ion-col>
