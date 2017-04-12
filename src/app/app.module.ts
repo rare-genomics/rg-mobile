@@ -14,15 +14,11 @@ import { MeddetailsPage } from '../pages/meddetails/meddetails';
 import { CaregiverPage } from '../pages/caregiver/caregiver';
 import { CaregiverDetailsPage } from '../pages/caregiver-details/caregiver-details';
 import { SendSMSPage } from '../pages/send-sms/send-sms';
-<<<<<<< HEAD
+
 import { ContactRGIPage } from '../pages/contact-rgi/contact-rgi';
-
-
-=======
 import { PatientHomePage } from '../pages/patient-home/patirment-home';
 import { PatientProfilePage } from '../pages/patient-profile/patient-profile';
 import { PreferencesPage } from '../pages/preferences/preferences';
->>>>>>> cbbf03e5cdf9d21772cfd3dbf4a6ec6c71f3c26f
 
 @NgModule({
   declarations: [
@@ -39,13 +35,10 @@ import { PreferencesPage } from '../pages/preferences/preferences';
     CaregiverPage,
     CaregiverDetailsPage,
     SendSMSPage,
-<<<<<<< HEAD
-    ContactRGIPage
-=======
+    ContactRGIPage,
     PatientHomePage,
     PatientProfilePage,
     PreferencesPage
->>>>>>> cbbf03e5cdf9d21772cfd3dbf4a6ec6c71f3c26f
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -65,13 +58,10 @@ import { PreferencesPage } from '../pages/preferences/preferences';
     CaregiverPage,
     CaregiverDetailsPage,
     SendSMSPage,
-<<<<<<< HEAD
-    ContactRGIPage
-=======
+    ContactRGIPage,
     PatientHomePage,
     PatientProfilePage,
     PreferencesPage
->>>>>>> cbbf03e5cdf9d21772cfd3dbf4a6ec6c71f3c26f
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
