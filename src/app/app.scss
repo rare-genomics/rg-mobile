@@ -140,6 +140,11 @@ ion-content {
         text-align: center;
         color: white;
     }
+    textarea {
+        max-width: 100%;
+        width: 100%;
+        height: 40vh;
+    }
 }
 
 .toolbar-background {
@@ -155,19 +160,19 @@ ion-content {
 }
 
 .toast-sms-failed {
-        div {
-            background: #21c6db !important;
-            background-color: #21c6db !important;
-            color: red !important;
-        }
+    div {
+        background: #21c6db !important;
+        background-color: #21c6db !important;
+        color: red !important;
+    }
 }
 
 .toast-sms-success {
-        div {
-            background: #21c6db !important;
-            background-color: #21c6db !important;
-            color: white !important;
-        }
+    div {
+        background: #21c6db !important;
+        background-color: #21c6db !important;
+        color: white !important;
+    }
 }
 
 ion-footer {

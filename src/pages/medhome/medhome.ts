@@ -18,7 +18,7 @@ export class MedhomePage {
       this.medications.length;
       this.havePrint;
     }, 1000);
-    this.checkPrinter();
+    this.checkPrinter();    
   }
 
   ionViewWillEnter() {
