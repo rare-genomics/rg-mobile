@@ -16,7 +16,7 @@ import { CaregiverDetailsPage } from '../pages/caregiver-details/caregiver-detai
 import { SendSMSPage } from '../pages/send-sms/send-sms';
 
 import { ContactRGIPage } from '../pages/contact-rgi/contact-rgi';
-import { PatientHomePage } from '../pages/patient-home/patirment-home';
+import { PatientHomePage } from '../pages/patient-home/patient-home';
 import { PatientProfilePage } from '../pages/patient-profile/patient-profile';
 import { PreferencesPage } from '../pages/preferences/preferences';
 
