@@ -14,6 +14,9 @@ import { MeddetailsPage } from '../pages/meddetails/meddetails';
 import { CaregiverPage } from '../pages/caregiver/caregiver';
 import { CaregiverDetailsPage } from '../pages/caregiver-details/caregiver-details';
 import { SendSMSPage } from '../pages/send-sms/send-sms';
+import { PatientHomePage } from '../pages/patient-home/patirment-home';
+import { PatientProfilePage } from '../pages/patient-profile/patient-profile';
+import { PreferencesPage } from '../pages/preferences/preferences';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { SendSMSPage } from '../pages/send-sms/send-sms';
     MeddetailsPage,
     CaregiverPage,
     CaregiverDetailsPage,
-    SendSMSPage
+    SendSMSPage,
+    PatientHomePage,
+    PatientProfilePage,
+    PreferencesPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -48,7 +54,10 @@ import { SendSMSPage } from '../pages/send-sms/send-sms';
     MeddetailsPage,
     CaregiverPage,
     CaregiverDetailsPage,
-    SendSMSPage
+    SendSMSPage,
+    PatientHomePage,
+    PatientProfilePage,
+    PreferencesPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
