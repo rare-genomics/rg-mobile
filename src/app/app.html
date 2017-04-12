@@ -1,3 +1,19 @@
+<ion-menu type="overlay" [content]="mycontent" swipeEnabled="false">
+
+    <ion-content>
+
+        <ion-list>
+            <button ion-item menu-close *ngFor="let p of pages" (click)="openPage(p)">
+                 {{p.title}}
+            </button>
+        </ion-list>
+    
+    </ion-content>
+
+</ion-menu>
+
+<ion-nav #mycontent [root]="PatientHomePage"></ion-nav>
+
 <ion-header color="dark">
     <ion-toolbar no-border color="dark">
         <ion-grid>
