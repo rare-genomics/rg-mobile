@@ -14,7 +14,7 @@ import { MeddetailsPage } from '../pages/meddetails/meddetails';
 import { CaregiverPage } from '../pages/caregiver/caregiver';
 import { CaregiverDetailsPage } from '../pages/caregiver-details/caregiver-details';
 import { SendSMSPage } from '../pages/send-sms/send-sms';
-import { PatientHomePage } from '../pages/patient-home/patirment-home';
+import { PatientHomePage } from '../pages/patient-home/patient-home';
 import { PatientProfilePage } from '../pages/patient-profile/patient-profile';
 import { PreferencesPage } from '../pages/preferences/preferences';
 
