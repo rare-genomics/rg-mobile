@@ -1,4 +1,4 @@
-<!--<ion-menu type="overlay" [content]="mycontent" swipeEnabled="false">
+<ion-menu type="overlay" [content]="mycontent" swipeEnabled="false">
     <ion-content>
         <ion-list>
             <button ion-item menu-close *ngFor="let p of pages" (click)="openPage(p)">
@@ -6,14 +6,21 @@
             </button>
         </ion-list>
     </ion-content>
-</ion-menu>-->
+</ion-menu>
 
-<!--<ion-nav #mycontent [root]="PatientHomePage"></ion-nav>-->
+<ion-menu [content]="mycontent">
+    <ion-content>
+        <ion-list>
+            <p>some menu content, could be list items</p>
+        </ion-list>
+    </ion-content>
+</ion-menu>
 
 <ion-header color="dark">
     <ion-toolbar no-border color="dark">
         <ion-grid>
             <ion-row>
+                <button ion-button menuToggle class="btnTopWhite"><ion-icon name="menu"></ion-icon></button>
                 <ion-col>
                     <a href="http://www.raregenomics.org/"><img src="assets/images/logo.png" height="40"></a><br>
                     <font color="white">home</font>
@@ -34,7 +41,7 @@
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-nav #myNav [root]="rootPage"></ion-nav>
+    <ion-nav #mycontent [root]="rootPage"></ion-nav>
 </ion-content>
 <ion-footer no-border>
     <ion-toolbar color="dark" no-border>
