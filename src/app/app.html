@@ -1,18 +1,14 @@
-<ion-menu type="overlay" [content]="mycontent" swipeEnabled="false">
-
+<!--<ion-menu type="overlay" [content]="mycontent" swipeEnabled="false">
     <ion-content>
-
         <ion-list>
             <button ion-item menu-close *ngFor="let p of pages" (click)="openPage(p)">
                  {{p.title}}
             </button>
         </ion-list>
-    
     </ion-content>
+</ion-menu>-->
 
-</ion-menu>
-
-<ion-nav #mycontent [root]="PatientHomePage"></ion-nav>
+<!--<ion-nav #mycontent [root]="PatientHomePage"></ion-nav>-->
 
 <ion-header color="dark">
     <ion-toolbar no-border color="dark">
@@ -25,6 +21,10 @@
                 <ion-col>
                     <img src="assets/icon/caregiver.ico" height="40" (click)="gotoCaregiver()"><br>
                     <font color="white">caregiver</font>
+                </ion-col>
+                <ion-col>
+                    <img src="assets/icon/profile.ico" height="40" (click)="gotoProfile()"><br>
+                    <font color="white">profile</font>
                 </ion-col>
                 <ion-col>
                     <button class="btnEmergency" (click)="callEmergency()"><b>911</b></button>
