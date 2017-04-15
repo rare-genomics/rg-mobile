@@ -16,7 +16,7 @@ import { PatientProfilePage } from '../pages/patient-profile/patient-profile';
 })
 
 export class MyApp {
-  @ViewChild('myNav') nav: NavController
+  @ViewChild('mycontent') nav: NavController
   rootPage = HomePage;
 
   pages: Array<{title: string, component: any}>;
