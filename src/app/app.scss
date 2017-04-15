@@ -220,6 +220,27 @@ textarea {
         margin: 0 auto;
     }
 
+    .previewLabelForm {
+        max-width: 600px;
+        background: transparent !important;
+        padding: 0;
+        font-size: 16px;
+        margin: 0 auto;
+        height: 35px;
+        text-align: left;
+        color: white;
+    }
+
+    .previewLabelFormFill {
+        color: white;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 0;
+        display: flex;
+        max-width: 600px;
+        text-align: left;
+        margin: 0 auto;
+    }
+
     textarea {
         max-width: 100%;
         width: 100%;

@@ -6,6 +6,8 @@ import { HomePage } from '../pages/home/home';
 import { MedhomePage } from '../pages/medhome/medhome';
 import { CaregiverPage } from '../pages/caregiver/caregiver';
 import { PreferencesPage } from '../pages/preferences/preferences';
+import { ContactUsPage } from '../pages/contact-us/contact-us';
+import { SettingsPage } from '../pages/settings/settings';
 
 
 @Component({
@@ -30,11 +32,12 @@ export class MyApp {
       { title : '-- Our Mission', component: CaregiverPage },
       { title : '-- Who We Are', component: CaregiverPage },
       { title : '-- Rare Disease Facts', component: CaregiverPage },
-      { title : '-- Contact Us', component: CaregiverPage },
+      { title : '-- Contact Us', component: ContactUsPage },
       { title : 'Patient Resources', component: CaregiverPage },
       { title : '-- RareReach', component: CaregiverPage },
       { title : '-- FAQ', component: CaregiverPage },
-      { title : 'Rare Genomics Institute News', component: CaregiverPage }
+      { title : 'Rare Genomics Institute News', component: CaregiverPage },
+      { title : 'Settings', component: SettingsPage }
     ];
 
   }

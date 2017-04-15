@@ -17,6 +17,12 @@ import { SendSMSPage } from '../pages/send-sms/send-sms';
 import { PatientHomePage } from '../pages/patient-home/patient-home';
 import { PatientProfilePage } from '../pages/patient-profile/patient-profile';
 import { PreferencesPage } from '../pages/preferences/preferences';
+import { ProfileViewPage } from '../pages/profile-view/profile-view';
+import { ContactUsPage } from '../pages/contact-us/contact-us';
+import { SettingsPage } from '../pages/settings/settings';
+import { Market } from '@ionic-native/market';
+import { EmailComposer } from '@ionic-native/email-composer';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +41,10 @@ import { PreferencesPage } from '../pages/preferences/preferences';
     SendSMSPage,
     PatientHomePage,
     PatientProfilePage,
-    PreferencesPage
+    PreferencesPage,
+    ProfileViewPage,
+    ContactUsPage,
+    SettingsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -57,11 +66,16 @@ import { PreferencesPage } from '../pages/preferences/preferences';
     SendSMSPage,
     PatientHomePage,
     PatientProfilePage,
-    PreferencesPage
+    PreferencesPage,
+    ProfileViewPage,
+    ContactUsPage,
+    SettingsPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     Storage,
+    Market,
+    EmailComposer
     // initDatabase
   ]
 })
