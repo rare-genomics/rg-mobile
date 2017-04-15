@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            <ion-grid>
+                <ion-row>
+                    <ion-col class="toolbartitle">
+                        Contact RGI suuport
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <ion-grid>
+        <ion-row>
+            <ion-col class="labelForm">
+                <ion-label>Enter your message</ion-label>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="formFill">
+                <ion-item>
+                    <ion-textarea placeholder="Enter a description" [(ngModel)]="formData.smsText"></ion-textarea>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<ion-footer no-border>
+    <ion-toolbar>
+        <ion-title>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <button class="btnSave" ion-button medium block (click)="sendDataToApi()">Send</button>
+                    </ion-col>
+                    <ion-col>
+                        <button class="btnDelete" ion-button medium block (click)="close()">Cancel</button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-title>
+    </ion-toolbar>
+</ion-footer>

@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { TermsandconditionsPage } from '../termsandconditions/termsandconditions';
-import { MedhomePage } from '../medhome/medhome';
 import { InitDatabase } from '../../providers/init-database';
 import { ScheduleMedication } from '../../providers/schedule-medication';
+import { ContactRGIPage } from '../contact-rgi/contact-rgi';
+
 
 @Component({
   selector: 'page-home',
@@ -35,11 +36,12 @@ export class HomePage {
     this.navCtrl.push(TermsandconditionsPage);
   }
 
-  gotoMedicationHome() {
-    this.navCtrl.push(MedhomePage);
+  gotoContactRGI() {
+    this.navCtrl.push(ContactRGIPage);
   }
 
   dropDatabase(){
     this.db.dropDatabase();
   }
+
 }
