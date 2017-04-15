@@ -1,6 +1,6 @@
 import { Platform } from 'ionic-angular';
 // import { StatusBar, Splashscreen, CallNumber } from 'ionic-native';
-// import { Splashscreen, CallNumber } from 'ionic-native';
+// import { Splashscreen, CallNumber } from 'ionic-native';;
 import { StatusBar } from 'ionic-native';
 import { Splashscreen, CallNumber } from 'ionic-native';
 import { Component, ViewChild } from '@angular/core';
