@@ -18,12 +18,6 @@ import { ContactRGIPage } from '../pages/contact-rgi/contact-rgi';
 import { PatientHomePage } from '../pages/patient-home/patient-home';
 import { PatientProfilePage } from '../pages/patient-profile/patient-profile';
 import { PreferencesPage } from '../pages/preferences/preferences';
-import { ProfileViewPage } from '../pages/profile-view/profile-view';
-import { ContactUsPage } from '../pages/contact-us/contact-us';
-import { SettingsPage } from '../pages/settings/settings';
-import { Market } from '@ionic-native/market';
-import { EmailComposer } from '@ionic-native/email-composer';
-
 
 @NgModule({
   declarations: [
@@ -43,10 +37,7 @@ import { EmailComposer } from '@ionic-native/email-composer';
     ContactRGIPage,
     PatientHomePage,
     PatientProfilePage,
-    PreferencesPage,
-    ProfileViewPage,
-    ContactUsPage,
-    SettingsPage
+    PreferencesPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -69,16 +60,11 @@ import { EmailComposer } from '@ionic-native/email-composer';
     ContactRGIPage,
     PatientHomePage,
     PatientProfilePage,
-    PreferencesPage,
-    ProfileViewPage,
-    ContactUsPage,
-    SettingsPage
+    PreferencesPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     Storage,
-    Market,
-    EmailComposer
     // initDatabase
   ]
 })

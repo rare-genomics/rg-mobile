@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { ProfileViewPage } from '../profile-view/profile-view'
 
 /*
   Generated class for the PatientProfile page.
@@ -22,10 +21,6 @@ export class PatientProfilePage {
 
   onChange(SelectedValue){
     console.log("Selected profile", SelectedValue);
-}
-
-previewProfile() {
-  this.navCtrl.push(ProfileViewPage);
 }
 
 closeWindow() {
