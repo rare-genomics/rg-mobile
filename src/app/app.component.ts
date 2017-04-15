@@ -8,7 +8,7 @@ import { CaregiverPage } from '../pages/caregiver/caregiver';
 import { PreferencesPage } from '../pages/preferences/preferences';
 import { ContactUsPage } from '../pages/contact-us/contact-us';
 import { SettingsPage } from '../pages/settings/settings';
-
+import { PatientProfilePage } from '../pages/patient-profile/patient-profile';
 
 @Component({
   templateUrl: 'app.html'
@@ -39,7 +39,6 @@ export class MyApp {
       { title : 'Rare Genomics Institute News', component: CaregiverPage },
       { title : 'Settings', component: SettingsPage }
     ];
-
   }
 
   gotoMedicationHome() {
