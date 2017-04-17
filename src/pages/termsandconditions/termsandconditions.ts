@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { CreateAccountPage } from '../create-account/create-account';
+import { EmailAddressPage } from '../email-address/email-address';
 
 @Component({
   selector: 'page-termsandconditions',
@@ -15,7 +15,7 @@ export class TermsandconditionsPage {
   }
 
   agree() {
-    this.navCtrl.push(CreateAccountPage);
+    this.navCtrl.push(EmailAddressPage);
   }
 
   disagree() {

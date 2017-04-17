@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CreatePasswordPage } from '../create-password/create-password';
+import { LoginPage } from '../login/login';
 import { InitDatabase } from '../../providers/init-database';
 import { AlertController } from 'ionic-angular';
+import { Http, Headers, RequestOptions } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'page-email-address',
@@ -11,7 +14,7 @@ import { AlertController } from 'ionic-angular';
 })
 export class EmailAddressPage {
   localdata = {};
-  constructor(public navCtrl: NavController, private db: InitDatabase, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private db: InitDatabase, public alertCtrl: AlertController, public http: Http) {
     this.loadData();
   }
 
@@ -34,15 +37,36 @@ export class EmailAddressPage {
       return 1;
     }
     var RegExp = /^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,24})$/;
-    if(RegExp.exec(this.localdata['email']) == null){
+    if (RegExp.exec(this.localdata['email']) == null) {
       this.doAlert("Invalid e-mail");
       return 1;
     }
     return 0;
   }
 
-  saveData() {    
-    if(this.replaceUndefined() == 1){
+  checkEmail() {
+    let body = this.jsonToURLEncoded({
+      email: this.localdata['email']
+    });
+    var link = 'http://localhost:3000/api/checkemail';
+    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
+    let options = new RequestOptions({
+      headers: headers
+    });
+    this.http.post(link, body, options)
+      .subscribe(data => {
+        if (data.status == 201) {          
+          this.saveData();
+        } else if (data.status == 202) {
+          this.navCtrl.push(LoginPage);
+        }
+      }, error => {
+        console.log(JSON.stringify(error.json()));
+      });
+  }
+
+  saveData() {
+    if (this.replaceUndefined() == 1) {
       return;
     }
     let bridge = this.localdata;
@@ -69,4 +93,11 @@ export class EmailAddressPage {
     });
     alert.present()
   }
+
+  private jsonToURLEncoded(jsonString) {
+    return Object.keys(jsonString).map(function (key) {
+      return encodeURIComponent(key) + '=' + encodeURIComponent(jsonString[key]);
+    }).join('&');
+  }
+
 }

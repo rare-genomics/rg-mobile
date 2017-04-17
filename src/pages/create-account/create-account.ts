@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { EmailAddressPage } from '../email-address/email-address';
+import { EnterBirthdayPage } from '../enter-birthday/enter-birthday';
 import { InitDatabase } from '../../providers/init-database';
 import { AlertController } from 'ionic-angular';
 
@@ -69,7 +69,7 @@ export class CreateAccountPage {
         });
       });
     }
-    this.navCtrl.push(EmailAddressPage);
+    this.navCtrl.push(EnterBirthdayPage);
   }
 
   goBack() {

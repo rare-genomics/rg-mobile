@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { EnterBirthdayPage } from '../enter-birthday/enter-birthday';
+import { CreateAccountPage } from '../create-account/create-account';
 import { InitDatabase } from '../../providers/init-database';
 import { AlertController } from 'ionic-angular';
 
@@ -61,7 +61,7 @@ export class CreatePasswordPage {
         console.log(e.message + " Error updating the database " + e);
       });
     });
-    this.navCtrl.push(EnterBirthdayPage);
+    this.navCtrl.push(CreateAccountPage);
   }
 
   goBack() {

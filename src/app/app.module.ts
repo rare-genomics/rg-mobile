@@ -18,6 +18,9 @@ import { ContactRGIPage } from '../pages/contact-rgi/contact-rgi';
 import { PatientHomePage } from '../pages/patient-home/patient-home';
 import { PatientProfilePage } from '../pages/patient-profile/patient-profile';
 import { PreferencesPage } from '../pages/preferences/preferences';
+import { LoginPage } from '../pages/login/login';
+
+
 
 @NgModule({
   declarations: [
@@ -37,7 +40,8 @@ import { PreferencesPage } from '../pages/preferences/preferences';
     ContactRGIPage,
     PatientHomePage,
     PatientProfilePage,
-    PreferencesPage
+    PreferencesPage,
+    LoginPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -60,7 +64,8 @@ import { PreferencesPage } from '../pages/preferences/preferences';
     ContactRGIPage,
     PatientHomePage,
     PatientProfilePage,
-    PreferencesPage
+    PreferencesPage,
+    LoginPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
