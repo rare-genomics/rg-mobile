@@ -117,10 +117,10 @@ export class MeddetailsPage {
     this.navCtrl.pop();
   }
 
-  closeWindow(){
+  closeWindow() {
     this.navCtrl.pop();
   }
-  
+
   replaceUndefined() {
     if (this.todo['dosages'] == undefined) {
       this.todo['dosages'] = null;
@@ -170,11 +170,15 @@ export class MeddetailsPage {
 
   testNotification() {
     LocalNotifications.schedule({
+      id: 1,
       title: this.todo['description'],
       text: this.todo['dosages'],
       led: "FF0000",
       sound: 'file://assets/sounds/alarm_bell.mp3'
     });
+    //LocalNotifications.on("click", function (notification) {
+    //  console.log("----- cheguei aqui -----" + notification.id);      
+    //});
   }
 
   runCamera() {

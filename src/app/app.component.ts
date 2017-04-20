@@ -8,6 +8,7 @@ import { CaregiverPage } from '../pages/caregiver/caregiver';
 import { PreferencesPage } from '../pages/preferences/preferences';
 import { PatientProfilePage } from '../pages/patient-profile/patient-profile';
 
+
 @Component({
   templateUrl: 'app.html'
 })

@@ -19,7 +19,7 @@ import { PatientHomePage } from '../pages/patient-home/patient-home';
 import { PatientProfilePage } from '../pages/patient-profile/patient-profile';
 import { PreferencesPage } from '../pages/preferences/preferences';
 import { LoginPage } from '../pages/login/login';
-
+import { MedicationPopupAlarmPage } from '../pages/medication-popup-alarm/medication-popup-alarm';
 
 
 @NgModule({
@@ -41,7 +41,8 @@ import { LoginPage } from '../pages/login/login';
     PatientHomePage,
     PatientProfilePage,
     PreferencesPage,
-    LoginPage
+    LoginPage,
+    MedicationPopupAlarmPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -65,7 +66,8 @@ import { LoginPage } from '../pages/login/login';
     PatientHomePage,
     PatientProfilePage,
     PreferencesPage,
-    LoginPage
+    LoginPage,
+    MedicationPopupAlarmPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

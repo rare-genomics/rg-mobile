@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { LocalNotifications } from 'ionic-native';
-
+import { MedicationPopupAlarmPage } from '../pages/medication-popup-alarm/medication-popup-alarm';
+//import { NavController, NavParams } from 'ionic-angular';
 const win: any = window;
-const alarmAhead = 30; // How many days the alarm should be set upfront
+const alarmAhead = 1; // How many days the alarm should be set upfront
 
 @Injectable()
 export class ScheduleMedication {
   public _db: any;
+
   constructor() {
     if (win.sqlitePlugin) {
       this._db = win.sqlitePlugin.openDatabase({
@@ -39,7 +41,7 @@ export class ScheduleMedication {
             tomorrow.setSeconds(0);
             if (tomorrow >= dateNow) {
               allAlarms[hasAlarms] = {
-                id: hasAlarms,
+                id: res.rows.item(i).id,
                 title: res.rows.item(i).description,
                 text: res.rows.item(i).dosages,
                 at: new Date(tomorrow),
@@ -53,9 +55,15 @@ export class ScheduleMedication {
         }
         if (hasAlarms > 0) {
           LocalNotifications.schedule(allAlarms);
+          LocalNotifications.on("click", function (notification) {
+            console.log("----- cheguei aqui -----" + notification.id);
+              this.navCtrl.push(MedicationPopupAlarmPage, {
+                'alarmId': notification.data.id
+              });
+          });
         }
       }, function (e) {
-      });      
+      });
     });
     // Time 2
     this._db.transaction(function (tx) {
@@ -72,7 +80,7 @@ export class ScheduleMedication {
             tomorrow.setSeconds(0);
             if (tomorrow >= dateNow) {
               allAlarms[hasAlarms] = {
-                id: hasAlarms,
+                id: res.rows.item(i).id,
                 title: res.rows.item(i).description,
                 text: res.rows.item(i).dosages,
                 at: new Date(tomorrow),
@@ -88,7 +96,7 @@ export class ScheduleMedication {
           LocalNotifications.schedule(allAlarms);
         }
       }, function (e) {
-      });      
+      });
     });
     // Time 3
     this._db.transaction(function (tx) {
@@ -105,7 +113,7 @@ export class ScheduleMedication {
             tomorrow.setSeconds(0);
             if (tomorrow >= dateNow) {
               allAlarms[hasAlarms] = {
-                id: hasAlarms,
+                id: res.rows.item(i).id,
                 title: res.rows.item(i).description,
                 text: res.rows.item(i).dosages,
                 at: new Date(tomorrow),
@@ -121,7 +129,7 @@ export class ScheduleMedication {
           LocalNotifications.schedule(allAlarms);
         }
       }, function (e) {
-      });      
+      });
     });
     // Time 4
     this._db.transaction(function (tx) {
@@ -138,7 +146,7 @@ export class ScheduleMedication {
             tomorrow.setSeconds(0);
             if (tomorrow >= dateNow) {
               allAlarms[hasAlarms] = {
-                id: hasAlarms,
+                id: res.rows.item(i).id,
                 title: res.rows.item(i).description,
                 text: res.rows.item(i).dosages,
                 at: new Date(tomorrow),
@@ -154,7 +162,7 @@ export class ScheduleMedication {
           LocalNotifications.schedule(allAlarms);
         }
       }, function (e) {
-      });      
+      });
     });
-  }     
+  }
 }
