@@ -17,7 +17,7 @@ export class MyApp {
   @ViewChild('mycontent') nav: NavController
   rootPage = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
   constructor(platform: Platform) {
     platform.ready().then(() => {
@@ -25,19 +25,19 @@ export class MyApp {
       Splashscreen.hide();
     });
 
-      this.pages = [
-        { title : 'My Preferences', component: PreferencesPage },
-        { title : 'Get a Diagnosis', component: CaregiverPage },
-        { title : 'What is Rare Genomics', component: CaregiverPage },
-        { title : '-- Our Mission', component: CaregiverPage },
-        { title : '-- Who We Are', component: CaregiverPage },
-        { title : '-- Rare Disease Facts', component: CaregiverPage },
-        { title : '-- Contact Us', component: CaregiverPage },
-        { title : 'Patient Resources', component: CaregiverPage },
-        { title : '-- RareReach', component: CaregiverPage },
-        { title : '-- FAQ', component: CaregiverPage },
-        { title : 'Rare Genomics Institute News', component: CaregiverPage }
-      ];
+    this.pages = [
+      { title: 'My Preferences', component: PreferencesPage },
+      { title: 'Get a Diagnosis', component: CaregiverPage },
+      { title: 'What is Rare Genomics', component: CaregiverPage },
+      { title: '-- Our Mission', component: CaregiverPage },
+      { title: '-- Who We Are', component: CaregiverPage },
+      { title: '-- Rare Disease Facts', component: CaregiverPage },
+      { title: '-- Contact Us', component: CaregiverPage },
+      { title: 'Patient Resources', component: CaregiverPage },
+      { title: '-- RareReach', component: CaregiverPage },
+      { title: '-- FAQ', component: CaregiverPage },
+      { title: 'Rare Genomics Institute News', component: CaregiverPage }
+    ];
   }
 
   gotoMedicationHome() {
