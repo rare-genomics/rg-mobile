@@ -29,7 +29,7 @@ export class MyApp {
       { title: 'My Preferences', component: PreferencesPage },
       { title: 'Get a Diagnosis', component: CaregiverPage },
       { title: 'What is Rare Genomics', component: CaregiverPage },
-      { title: '-- Our Mission', component: CaregiverPage },
+      { title: '--Our Mission', component: CaregiverPage },
       { title: '-- Who We Are', component: CaregiverPage },
       { title: '-- Rare Disease Facts', component: CaregiverPage },
       { title: '-- Contact Us', component: CaregiverPage },
