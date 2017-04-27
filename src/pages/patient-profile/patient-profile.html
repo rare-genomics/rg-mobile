@@ -38,9 +38,10 @@
 
             <ion-col class="formFill">
                 <ion-item>
-                    <ion-select [(ngModel)]="profileHolder" (change)="onChange(profile)">
-                        <ion-option value="patient" selected="true">Patient</ion-option>
-                        <ion-option value="caregiver">Caregiver</ion-option>
+                    <ion-select [(ngModel)]="profileForm.profileHolder" multiple="true">
+                        <ion-option value="patient">Patient</ion-option>
+                        <ion-option value="donor">Donor</ion-option>
+                        <ion-option value="caregiver">CareGiver</ion-option>
                         <ion-option value="other">Other</ion-option>
                     </ion-select>
                 </ion-item>
@@ -60,7 +61,7 @@
 
             <ion-col class="formFill">
                 <ion-item>
-                    <ion-textarea placeholder="Enter story"></ion-textarea>
+                    <ion-textarea placeholder="Enter story" [(ngModel)]="profileForm.story">></ion-textarea>
                 </ion-item>
             </ion-col>
 
@@ -78,7 +79,7 @@
 
             <ion-col class="formFill">
                 <ion-item>
-                    <ion-textarea placeholder="Enter updates"></ion-textarea>
+                    <ion-textarea placeholder="Enter updates" [(ngModel)]="profileForm.updates"></ion-textarea>
                 </ion-item>
             </ion-col>
 
@@ -96,16 +97,15 @@
 
             <ion-col class="formSelect">
                 <ion-item>
-                    <ion-select name="conditions" multiple="true" [(ngModel)]="conditions">
+                    <ion-select name="conditions" multiple="true" [(ngModel)]="profileForm.conditions">
                         <ion-option value="diabetes">Diabetes</ion-option>
                         <ion-option value="bronchiectasis">Bronchiectasis</ion-option>
+                        <ion-option value="otc">OTC-deficiency</ion-option>
                     </ion-select>
                 </ion-item>
-
             </ion-col>
 
             <ion-col class="formFill">
-
                 <button class="addBtn" ion-button icon-only (click)="addCondition()">
                     <ion-icon name="add"></ion-icon>
                 </button>
@@ -126,7 +126,7 @@
             <ion-col class="formFill">
                 <ion-item text-wrap>
                     <ion-label>Allow my profile to be visible in communities and donor searches</ion-label>
-                    <ion-checkbox [(ngModel)]="permission"></ion-checkbox>
+                    <ion-checkbox [(ngModel)]="profileForm.permission" checked="false"></ion-checkbox>
                 </ion-item>
             </ion-col>
 
@@ -147,7 +147,11 @@
                 <ion-row>
 
                     <ion-col>
-                        <button class="btnSave" ion-button medium block (click)="preview()">Preview</button>
+                        <button class="btnSave" ion-button medium block (click)="updateProfile()">Save</button>
+                    </ion-col>
+
+                    <ion-col>
+                        <button class="btnDelete" ion-button medium block (click)="cancelUpdate()">Cancel</button>
                     </ion-col>
 
                 </ion-row>

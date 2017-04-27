@@ -6,7 +6,7 @@ import { HomePage } from '../pages/home/home';
 import { MedhomePage } from '../pages/medhome/medhome';
 import { CaregiverPage } from '../pages/caregiver/caregiver';
 import { PreferencesPage } from '../pages/preferences/preferences';
-import { PatientProfilePage } from '../pages/patient-profile/patient-profile';
+import { ProfileViewPage } from '../pages/profile-view/profile-view';
 
 
 @Component({
@@ -47,7 +47,7 @@ export class MyApp {
     this.nav.push(CaregiverPage);
   }
   gotoProfile() {
-    this.nav.push(PatientProfilePage);
+    this.nav.push(ProfileViewPage);
   }
   callEmergency() {
     CallNumber.callNumber("911", true).then(() => console.log('Launched dialer!')).catch(() => console.log('Error launching dialer'));

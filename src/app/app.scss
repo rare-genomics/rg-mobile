@@ -140,6 +140,15 @@ ion-content {
         text-align: center;
         color: white;
     }
+    .viewFormFill {
+        color: white;
+        background:transparent !important;
+        padding: 0;
+        display: flex;
+        max-width: 600px;
+        text-align: center;
+        margin: 0 auto;
+    }
     textarea {
         max-width: 100%;
         width: 100%;

@@ -1,0 +1,84 @@
+<!--
+  Generated template for the ProfileView page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar>
+
+    <ion-title>
+      <ion-input class="toolbartitle" [(ngModel)]="profileView.name" readonly="true" disabled="true"></ion-input>
+    </ion-title>
+
+    <ion-buttons left>
+      <button class="btnTopWhite" ion-button icon-only (click)="closeWindow()">
+        <ion-icon name="arrow-dropleft"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons right>
+      <button class="btnTopWhite" ion-button icon-only (click)="editProfile()">
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-grid>
+
+    <ion-row>
+      <ion-col class="patientPhoto">
+        <img src="assets/icon/camera.ico" height="50" (click)="runCamera()">
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="labelForm">
+        <ion-label>Condition(s)</ion-label>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="viewFormFill">
+        <ion-item text-wrap>
+          <ion-input [(ngModel)]="profileView.conditions" readonly="true" disabled="true"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="labelForm">
+        <ion-label>My Story</ion-label>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="viewFormFill">
+        <ion-item text-wrap>
+          <ion-textarea [(ngModel)]="profileView.story" readonly="true" disabled="true"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="labelForm">
+        <ion-label>My Updates</ion-label>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="viewFormFill">
+        <ion-item text-wrap>
+          <ion-textarea [(ngModel)]="profileView.updates" readonly="true" disabled="true"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>
