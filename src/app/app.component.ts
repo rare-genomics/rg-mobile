@@ -53,7 +53,6 @@ export class MyApp {
     CallNumber.callNumber("911", true).then(() => console.log('Launched dialer!')).catch(() => console.log('Error launching dialer'));
   }
   openPage(page) {
-    // this.rootPage = page.component;
     this.nav.push(page.component);
   }
 }

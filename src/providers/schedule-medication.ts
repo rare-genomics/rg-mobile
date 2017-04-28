@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LocalNotifications } from 'ionic-native';
 import { MedicationPopupAlarmPage } from '../pages/medication-popup-alarm/medication-popup-alarm';
-//import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 const win: any = window;
 const alarmAhead = 1; // How many days the alarm should be set upfront
 
@@ -9,7 +9,8 @@ const alarmAhead = 1; // How many days the alarm should be set upfront
 export class ScheduleMedication {
   public _db: any;
 
-  constructor() {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    // constructor() {
     if (win.sqlitePlugin) {
       this._db = win.sqlitePlugin.openDatabase({
         name: '__RareGenomics',
@@ -26,6 +27,7 @@ export class ScheduleMedication {
   setAlarms() {
     console.log("Setting alarams");
     LocalNotifications.cancelAll();
+    let bridge = { 'navCtrl': this.navCtrl };
     // Time 1
     this._db.transaction(function (tx) {
       tx.executeSql("SELECT id, description, dosages, time1, alarm FROM alarms WHERE alarm='true' AND time1 > 0", [], function (tx, res) {
@@ -56,10 +58,7 @@ export class ScheduleMedication {
         if (hasAlarms > 0) {
           LocalNotifications.schedule(allAlarms);
           LocalNotifications.on("click", function (notification) {
-            console.log("----- cheguei aqui -----" + notification.id);
-              this.navCtrl.push(MedicationPopupAlarmPage, {
-                'alarmId': notification.data.id
-              });
+            bridge.navCtrl.setRoot(MedicationPopupAlarmPage);
           });
         }
       }, function (e) {
@@ -94,6 +93,9 @@ export class ScheduleMedication {
         }
         if (hasAlarms > 0) {
           LocalNotifications.schedule(allAlarms);
+          LocalNotifications.on("click", function (notification) {
+            bridge.navCtrl.setRoot(MedicationPopupAlarmPage);
+          });
         }
       }, function (e) {
       });
@@ -127,6 +129,9 @@ export class ScheduleMedication {
         }
         if (hasAlarms > 0) {
           LocalNotifications.schedule(allAlarms);
+          LocalNotifications.on("click", function (notification) {
+            bridge.navCtrl.setRoot(MedicationPopupAlarmPage);
+          });
         }
       }, function (e) {
       });
@@ -160,6 +165,9 @@ export class ScheduleMedication {
         }
         if (hasAlarms > 0) {
           LocalNotifications.schedule(allAlarms);
+          LocalNotifications.on("click", function (notification) {
+            bridge.navCtrl.setRoot(MedicationPopupAlarmPage);
+          });
         }
       }, function (e) {
       });

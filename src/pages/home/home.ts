@@ -6,7 +6,6 @@ import { InitDatabase } from '../../providers/init-database';
 import { ScheduleMedication } from '../../providers/schedule-medication';
 import { ContactRGIPage } from '../contact-rgi/contact-rgi';
 
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -15,7 +14,7 @@ import { ContactRGIPage } from '../contact-rgi/contact-rgi';
 export class HomePage {
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, private db: InitDatabase, private schedmed: ScheduleMedication) {
-    console.log("Inicia banco de dados");    
+    console.log("Inicia banco de dados");
     this.db.createDatabase();
   }
 
@@ -40,7 +39,7 @@ export class HomePage {
     this.navCtrl.push(ContactRGIPage);
   }
 
-  dropDatabase(){
+  dropDatabase() {
     this.db.dropDatabase();
   }
 
