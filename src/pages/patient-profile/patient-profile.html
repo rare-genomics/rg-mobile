@@ -29,7 +29,8 @@
         <ion-row>
 
             <ion-col class="patientPhoto">
-                <img src="assets/icon/camera.ico" height="80" (click)="runCamera()">
+                <img *ngIf="!profileForm.image" src="assets/icon/camera.ico" height="80" (click)="runCamera()">
+                <img [src]="profileForm.image" *ngIf="profileForm.image" (click)="runCamera()" />
             </ion-col>
 
         </ion-row>

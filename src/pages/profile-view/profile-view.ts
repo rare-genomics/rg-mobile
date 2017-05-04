@@ -29,7 +29,7 @@ export class ProfileViewPage {
 
   // loadData() {
   //   this.db._db.transaction(function (tx) {
-  //     tx.executeSql('INSERT INTO profile (id, firstname, lastname, patient, caregiver, publicprofile, mystory, myupdates) VALUES (100, "Elisa", "Jones", 1, 1, 0, "Elisa is a happy 7-year-old girl. She loves soccer, art, and Harry Potter..", "6/15/16 - Elisa came home from the hospital today. Thank you all for the kind letters and flowers.")', [], function (tx, res) {
+  //     tx.executeSql('INSERT INTO profile (id, firstname, lastname, patient, caregiver, publicprofile, mystory, myupdates) VALUES (1, "Elisa", "Jones", 1, 1, 0, "Elisa is a happy 7-year-old girl. She loves soccer, art, and Harry Potter..", "6/15/16 - Elisa came home from the hospital today. Thank you all for the kind letters and flowers.")', [], function (tx, res) {
   //     }, function (e) {
   //     });
   //   });

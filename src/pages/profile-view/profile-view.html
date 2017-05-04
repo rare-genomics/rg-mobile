@@ -8,7 +8,7 @@
   <ion-toolbar>
 
     <ion-title>
-      <ion-input class="toolbartitle" [(ngModel)]="profileView.name" readonly="true" disabled="true"></ion-input>
+      <ion-label class="toolbartitle">{{profileView['name']}}</ion-label>
     </ion-title>
 
     <ion-buttons left>
@@ -33,7 +33,8 @@
 
     <ion-row>
       <ion-col class="patientPhoto">
-        <img src="assets/icon/camera.ico" height="50" (click)="runCamera()">
+        <img *ngIf="!profileView.image" src="assets/icon/camera.ico" height="50">
+        <img [src]="profileView.image" *ngIf="profileView.image"/>
       </ion-col>
     </ion-row>
 
@@ -46,7 +47,7 @@
     <ion-row>
       <ion-col class="viewFormFill">
         <ion-item text-wrap>
-          <ion-input [(ngModel)]="profileView.conditions" readonly="true" disabled="true"></ion-input>
+          <ion-label>{{profileView['conditions']}}</ion-label>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -60,7 +61,7 @@
     <ion-row>
       <ion-col class="viewFormFill">
         <ion-item text-wrap>
-          <ion-textarea [(ngModel)]="profileView.story" readonly="true" disabled="true"></ion-textarea>
+          <ion-label>{{profileView['story']}}</ion-label>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -74,7 +75,7 @@
     <ion-row>
       <ion-col class="viewFormFill">
         <ion-item text-wrap>
-          <ion-textarea [(ngModel)]="profileView.updates" readonly="true" disabled="true"></ion-textarea>
+          <ion-label>{{profileView['updates']}}</ion-label>
         </ion-item>
       </ion-col>
     </ion-row>
