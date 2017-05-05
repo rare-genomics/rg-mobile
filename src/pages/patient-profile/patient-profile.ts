@@ -55,14 +55,15 @@ export class PatientProfilePage {
     let bridge = { 'profileForm': this.profileForm };
     console.log(bridge.profileForm['permission']);
     this.db._db.transaction(function (tx) {
-      tx.executeSql('UPDATE profile SET mystory = ?, myupdates = ?, allow_optin_flag = ?, patient = ?, caregiver = ?, donor = ?, type_other = ? WHERE id=1', [
+      tx.executeSql('UPDATE profile SET mystory = ?, myupdates = ?, allow_optin_flag = ?, patient = ?, caregiver = ?, donor = ?, type_other = ?, sync = ? WHERE id=1', [
         bridge.profileForm['story'],
         bridge.profileForm['updates'],
         (bridge.profileForm['permission'] == undefined || bridge.profileForm['permission'] == false) ? 0 : 1,
         (bridge.profileForm['profileHolder'].indexOf("patient") != -1) ? 1 : 0,
         (bridge.profileForm['profileHolder'].indexOf("caregiver") != -1) ? 1 : 0,
         (bridge.profileForm['profileHolder'].indexOf("donor") != -1) ? 1 : 0,
-        (bridge.profileForm['profileHolder'].indexOf("other") != -1) ? 1 : 0
+        (bridge.profileForm['profileHolder'].indexOf("other") != -1) ? 1 : 0,
+        0
       ], function (tx, res) {
       }, function (e) {
         console.log(e.message + " Error updating the database " + e);
