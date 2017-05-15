@@ -22,8 +22,12 @@
             <ion-row>
                 <button ion-button menuToggle class="btnTopWhite"><ion-icon name="menu"></ion-icon></button>
                 <ion-col>
-                    <a href="http://www.raregenomics.org/"><img src="assets/images/logo.png" height="40"></a><br>
+                    <img src="assets/images/logo.png" height="40" (click)="gotoHome()"><br>
                     <font color="white">home</font>
+                </ion-col>
+                <ion-col>
+                    <img src="assets/icon/rareshare.png" height="40" (click)="gotoRareshare()"><br>
+                    <font color="white">rareshare</font>
                 </ion-col>
                 <ion-col>
                     <img src="assets/icon/caregiver.png" height="40" (click)="gotoCaregiver()"><br>

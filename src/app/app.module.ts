@@ -22,6 +22,7 @@ import { LoginPage } from '../pages/login/login';
 import { MedicationPopupAlarmPage } from '../pages/medication-popup-alarm/medication-popup-alarm';
 import { ProfileViewPage } from '../pages/profile-view/profile-view';
 import { AddConditionPage } from '../pages/add-condition/add-condition';
+import { RaresharePage } from '../pages/rareshare/rareshare';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { AddConditionPage } from '../pages/add-condition/add-condition';
     LoginPage,
     MedicationPopupAlarmPage,
     ProfileViewPage,
-    AddConditionPage
+    AddConditionPage,
+    RaresharePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -73,7 +75,8 @@ import { AddConditionPage } from '../pages/add-condition/add-condition';
     LoginPage,
     MedicationPopupAlarmPage,
     ProfileViewPage,
-    AddConditionPage
+    AddConditionPage,
+    RaresharePage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

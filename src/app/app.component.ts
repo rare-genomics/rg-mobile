@@ -7,6 +7,7 @@ import { MedhomePage } from '../pages/medhome/medhome';
 import { CaregiverPage } from '../pages/caregiver/caregiver';
 import { PreferencesPage } from '../pages/preferences/preferences';
 import { ProfileViewPage } from '../pages/profile-view/profile-view';
+import { RaresharePage } from '../pages/rareshare/rareshare';
 
 
 @Component({
@@ -41,18 +42,24 @@ export class MyApp {
   }
 
   gotoMedicationHome() {
-    this.nav.push(MedhomePage);
+    this.nav.setRoot(MedhomePage);
   }
   gotoCaregiver() {
-    this.nav.push(CaregiverPage);
+    this.nav.setRoot(CaregiverPage);
   }
   gotoProfile() {
-    this.nav.push(ProfileViewPage);
+    this.nav.setRoot(ProfileViewPage);
+  }
+  gotoRareshare() {
+    this.nav.setRoot(RaresharePage);
+  }
+  gotoHome() {
+    this.nav.setRoot(HomePage);
   }
   callEmergency() {
     CallNumber.callNumber("911", true).then(() => console.log('Launched dialer!')).catch(() => console.log('Error launching dialer'));
   }
   openPage(page) {
-    this.nav.push(page.component);
+    this.nav.setRoot(page.component);
   }
 }
