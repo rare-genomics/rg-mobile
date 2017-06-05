@@ -179,7 +179,7 @@ public class Notification {
             getAlarmMgr().setRepeating(AlarmManager.RTC_WAKEUP,
                     triggerTime, options.getRepeatInterval(), pi);
         } else {
-            System.out.println("---- Line changed for Rare Genomics Institute ----");
+            System.out.println("---- Plugin changed by RGI ----");
             getAlarmMgr().setExact(AlarmManager.RTC_WAKEUP, triggerTime, pi);
         }
     }

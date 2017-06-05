@@ -31,16 +31,7 @@
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.rgmobile370969"
         },
-        "cordova-sqlite-storage": {
-            "PACKAGE_NAME": "com.ionicframework.rgmobile370969"
-        },
         "cordova-plugin-camera": {
-            "PACKAGE_NAME": "com.ionicframework.rgmobile370969"
-        },
-        "mx.ferreyra.callnumber": {
-            "PACKAGE_NAME": "com.ionicframework.rgmobile370969"
-        },
-        "cordova-sms-plugin": {
             "PACKAGE_NAME": "com.ionicframework.rgmobile370969"
         },
         "de.appplant.cordova.plugin.printer": {

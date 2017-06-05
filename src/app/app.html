@@ -1,43 +1,74 @@
+<ion-menu type="overlay" [content]="mycontent" swipeEnabled="false">
+    <ion-content>
+        <ion-list>
+            <button ion-item menu-close *ngFor="let p of pages" (click)="openPage(p)">
+                 {{p.title}}
+            </button>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+
+<ion-menu [content]="mycontent">
+    <ion-content>
+        <ion-list>
+            <p>some menu content, could be list items</p>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+
 <ion-header color="dark">
     <ion-toolbar no-border color="dark">
         <ion-grid>
             <ion-row>
+                <button ion-button menuToggle class="btnTopWhite"><ion-icon name="menu"></ion-icon></button>
                 <ion-col>
-                    <a href="http://www.raregenomics.org/"><img src="assets/images/logo.png" height="40"></a><br>
+                    <img src="assets/images/logo.png" height="40" (click)="gotoHome()"><br>
                     <font color="white">home</font>
                 </ion-col>
                 <ion-col>
-                    <img src="assets/icon/caregiver.ico" height="40" (click)="gotoCaregiver()"><br>
+                    <img src="assets/icon/rareshare.png" height="40" (click)="gotoRareshare()"><br>
+                    <font color="white">rareshare</font>
+                </ion-col>
+                <ion-col>
+                    <img src="assets/icon/caregiver.png" height="40" (click)="gotoCaregiver()"><br>
                     <font color="white">caregiver</font>
                 </ion-col>
                 <ion-col>
-                    <button class="btnEmergency" (click)="callEmergency()"><b>911</b></button>
+                    <img src="assets/icon/profile.png" height="40" (click)="gotoProfile()"><br>
+                    <font color="white">profile</font>
                 </ion-col>
+                <ion-col>
+                    <img src="assets/icon/911.png" height="40" (click)="callEmergency()"><br>
+                    <font color="white">emergency</font>
+                </ion-col>
+                <!--<ion-col>
+                    <button class="btnEmergency" (click)="callEmergency()"><b>911</b></button>
+                </ion-col>-->
             </ion-row>
         </ion-grid>
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-nav #myNav [root]="rootPage"></ion-nav>
+    <ion-nav #mycontent [root]="rootPage"></ion-nav>
 </ion-content>
 <ion-footer no-border>
     <ion-toolbar color="dark" no-border>
         <ion-grid>
             <ion-row>
                 <ion-col>
-                    <img src="assets/icon/calendar.ico" height="40" width="40"><br>
+                    <img src="assets/icon/calendar.png" height="40" width="40"><br>
                     <font color="white">calendar</font>
                 </ion-col>
                 <ion-col>
-                    <img src="assets/icon/records.ico" height="40" width="40"><br>
+                    <img src="assets/icon/records.png" height="40" width="40"><br>
                     <font color="white">records</font>
                 </ion-col>
                 <ion-col>
-                    <img src="assets/icon/health.ico" height="40" width="40"><br>
+                    <img src="assets/icon/health.png" height="40" width="40"><br>
                     <font color="white">health data</font>
                 </ion-col>
                 <ion-col>
-                    <img src="assets/icon/medication.ico" height="40" width="40" (click)="gotoMedicationHome()"><br>
+                    <img src="assets/icon/medication.png" height="40" width="40" (click)="gotoMedicationHome()"><br>
                     <font color="white">medications</font>
                 </ion-col>
             </ion-row>

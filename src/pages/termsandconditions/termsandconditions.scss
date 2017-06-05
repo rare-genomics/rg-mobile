@@ -1,0 +1,44 @@
+page-termsandconditions {
+    ion-header {
+        .toolbar-background {
+            background: none;
+        }
+        ion-grid {
+            padding: 0;
+            ion-row {
+                width: 20%;
+                border-top: 5px solid #097770;
+            }
+        }
+        ion-icon {
+            color: #FFF;
+        }
+    }
+    ion-content {
+        background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+        color: white;
+        .text {
+            color: #FFF;
+        }
+        h1 {
+            color: #FFF;
+            margin-bottom: 2em;
+        }
+        input {
+            color: #FFF;
+        }
+    }
+    ion-footer {
+        background: rgba(0, 0, 0, 0.8);
+        ion-grid {
+            padding: 0;
+        }
+        ion-row {
+            padding: 0;
+        }
+        ion-col {
+            text-align: center;
+            padding: 0;
+        }
+    }
+}

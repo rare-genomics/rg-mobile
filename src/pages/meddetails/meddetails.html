@@ -69,13 +69,25 @@
         </ion-row>
         <ion-row>
             <ion-col class="labelForm">
-                <ion-label>Time to take medication</ion-label>
+                <ion-label>Time for medication</ion-label>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col class="formFill">
                 <ion-item>
-                    <ion-datetime name="med_datetime" displayFormat="HH:mm" [(ngModel)]="todo.time">
+                    <ion-datetime name="med_datetime1" displayFormat="HH:mm" [(ngModel)]="todo.time1">
+                    </ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-datetime name="med_datetime2" displayFormat="HH:mm" [(ngModel)]="todo.time2">
+                    </ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-datetime name="med_datetime3" displayFormat="HH:mm" [(ngModel)]="todo.time3">
+                    </ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-datetime name="med_datetime4" displayFormat="HH:mm" [(ngModel)]="todo.time4">
                     </ion-datetime>
                 </ion-item>
             </ion-col>

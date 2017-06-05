@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-import { CreateAccountPage } from '../create-account/create-account';
-import { MedhomePage } from '../medhome/medhome';
+import { TermsandconditionsPage } from '../termsandconditions/termsandconditions';
 import { InitDatabase } from '../../providers/init-database';
 import { ScheduleMedication } from '../../providers/schedule-medication';
+import { ContactRGIPage } from '../contact-rgi/contact-rgi';
 
 @Component({
   selector: 'page-home',
@@ -14,7 +14,7 @@ import { ScheduleMedication } from '../../providers/schedule-medication';
 export class HomePage {
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, private db: InitDatabase, private schedmed: ScheduleMedication) {
-    console.log("Inicia banco de dados");    
+    console.log("Inicia banco de dados");
     this.db.createDatabase();
   }
 
@@ -32,14 +32,15 @@ export class HomePage {
   }
 
   createAccount() {
-    this.navCtrl.push(CreateAccountPage);
+    this.navCtrl.push(TermsandconditionsPage);
   }
 
-  gotoMedicationHome() {
-    this.navCtrl.push(MedhomePage);
+  gotoContactRGI() {
+    this.navCtrl.push(ContactRGIPage);
   }
 
-  dropDatabase(){
+  dropDatabase() {
     this.db.dropDatabase();
   }
+
 }

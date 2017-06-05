@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { TermsandconditionsPage } from '../pages/termsandconditions/termsandconditions';
 import { CreateAccountPage } from '../pages/create-account/create-account';
 import { EmailAddressPage } from '../pages/email-address/email-address';
 import { CreatePasswordPage } from '../pages/create-password/create-password';
@@ -12,11 +13,23 @@ import { MedhomePage } from '../pages/medhome/medhome';
 import { MeddetailsPage } from '../pages/meddetails/meddetails';
 import { CaregiverPage } from '../pages/caregiver/caregiver';
 import { CaregiverDetailsPage } from '../pages/caregiver-details/caregiver-details';
+import { SendSMSPage } from '../pages/send-sms/send-sms';
+import { ContactRGIPage } from '../pages/contact-rgi/contact-rgi';
+import { PatientHomePage } from '../pages/patient-home/patient-home';
+import { PatientProfilePage } from '../pages/patient-profile/patient-profile';
+import { PreferencesPage } from '../pages/preferences/preferences';
+import { LoginPage } from '../pages/login/login';
+import { MedicationPopupAlarmPage } from '../pages/medication-popup-alarm/medication-popup-alarm';
+import { ProfileViewPage } from '../pages/profile-view/profile-view';
+import { AddConditionPage } from '../pages/add-condition/add-condition';
+import { RaresharePage } from '../pages/rareshare/rareshare';
+
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
+    TermsandconditionsPage,
     CreateAccountPage,
     EmailAddressPage,
     CreatePasswordPage,
@@ -25,7 +38,17 @@ import { CaregiverDetailsPage } from '../pages/caregiver-details/caregiver-detai
     MedhomePage,
     MeddetailsPage,
     CaregiverPage,
-    CaregiverDetailsPage
+    CaregiverDetailsPage,
+    SendSMSPage,
+    ContactRGIPage,
+    PatientHomePage,
+    PatientProfilePage,
+    PreferencesPage,
+    LoginPage,
+    MedicationPopupAlarmPage,
+    ProfileViewPage,
+    AddConditionPage,
+    RaresharePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -34,6 +57,7 @@ import { CaregiverDetailsPage } from '../pages/caregiver-details/caregiver-detai
   entryComponents: [
     MyApp,
     HomePage,
+    TermsandconditionsPage,
     CreateAccountPage,
     EmailAddressPage,
     CreatePasswordPage,
@@ -42,7 +66,17 @@ import { CaregiverDetailsPage } from '../pages/caregiver-details/caregiver-detai
     MedhomePage,
     MeddetailsPage,
     CaregiverPage,
-    CaregiverDetailsPage
+    CaregiverDetailsPage,
+    SendSMSPage,
+    ContactRGIPage,
+    PatientHomePage,
+    PatientProfilePage,
+    PreferencesPage,
+    LoginPage,
+    MedicationPopupAlarmPage,
+    ProfileViewPage,
+    AddConditionPage,
+    RaresharePage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

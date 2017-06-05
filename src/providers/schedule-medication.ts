@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { LocalNotifications } from 'ionic-native';
-
+import { MedicationPopupAlarmPage } from '../pages/medication-popup-alarm/medication-popup-alarm';
+import { NavController, NavParams } from 'ionic-angular';
 const win: any = window;
-const alarmAhead = 30; // How many days the alarm should be set upfront
+const alarmAhead = 1; // How many days the alarm should be set upfront
 
 @Injectable()
 export class ScheduleMedication {
   public _db: any;
-  constructor() {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    // constructor() {
     if (win.sqlitePlugin) {
       this._db = win.sqlitePlugin.openDatabase({
         name: '__RareGenomics',
@@ -24,8 +27,10 @@ export class ScheduleMedication {
   setAlarms() {
     console.log("Setting alarams");
     LocalNotifications.cancelAll();
+    let bridge = { 'navCtrl': this.navCtrl };
+    // Time 1
     this._db.transaction(function (tx) {
-      tx.executeSql("SELECT id, description, dosages, time, alarm FROM alarms WHERE alarm='true' AND time > 0", [], function (tx, res) {
+      tx.executeSql("SELECT id, description, dosages, time1, alarm FROM alarms WHERE alarm='true' AND time1 > 0", [], function (tx, res) {
         var len = res.rows.length;
         let allAlarms = [];
         let hasAlarms = 0;
@@ -33,12 +38,12 @@ export class ScheduleMedication {
         for (var i = 0; i < len; i++) {
           let tomorrow = new Date();
           for (let iii = 0; iii < alarmAhead; iii++) {
-            tomorrow.setHours(res.rows.item(i).time.split(":")[0]);
-            tomorrow.setMinutes(res.rows.item(i).time.split(":")[1]);
+            tomorrow.setHours(res.rows.item(i).time1.split(":")[0]);
+            tomorrow.setMinutes(res.rows.item(i).time1.split(":")[1]);
             tomorrow.setSeconds(0);
             if (tomorrow >= dateNow) {
               allAlarms[hasAlarms] = {
-                id: hasAlarms,
+                id: res.rows.item(i).id,
                 title: res.rows.item(i).description,
                 text: res.rows.item(i).dosages,
                 at: new Date(tomorrow),
@@ -52,9 +57,120 @@ export class ScheduleMedication {
         }
         if (hasAlarms > 0) {
           LocalNotifications.schedule(allAlarms);
+          LocalNotifications.on("click", function (notification) {
+            bridge.navCtrl.setRoot(MedicationPopupAlarmPage);
+          });
         }
       }, function (e) {
       });
     });
-  }     
+    // Time 2
+    this._db.transaction(function (tx) {
+      tx.executeSql("SELECT id, description, dosages, time2, alarm FROM alarms WHERE alarm='true' AND time2 > 0", [], function (tx, res) {
+        var len = res.rows.length;
+        let allAlarms = [];
+        let hasAlarms = 0;
+        let dateNow = new Date();
+        for (var i = 0; i < len; i++) {
+          let tomorrow = new Date();
+          for (let iii = 0; iii < alarmAhead; iii++) {
+            tomorrow.setHours(res.rows.item(i).time2.split(":")[0]);
+            tomorrow.setMinutes(res.rows.item(i).time2.split(":")[1]);
+            tomorrow.setSeconds(0);
+            if (tomorrow >= dateNow) {
+              allAlarms[hasAlarms] = {
+                id: res.rows.item(i).id,
+                title: res.rows.item(i).description,
+                text: res.rows.item(i).dosages,
+                at: new Date(tomorrow),
+                led: "FF0000",
+                sound: 'file://assets/sounds/alarm_bell.mp3'
+              };
+              hasAlarms++;
+            }
+            tomorrow.setDate(tomorrow.getDate() + 1);
+          }
+        }
+        if (hasAlarms > 0) {
+          LocalNotifications.schedule(allAlarms);
+          LocalNotifications.on("click", function (notification) {
+            bridge.navCtrl.setRoot(MedicationPopupAlarmPage);
+          });
+        }
+      }, function (e) {
+      });
+    });
+    // Time 3
+    this._db.transaction(function (tx) {
+      tx.executeSql("SELECT id, description, dosages, time3, alarm FROM alarms WHERE alarm='true' AND time3 > 0", [], function (tx, res) {
+        var len = res.rows.length;
+        let allAlarms = [];
+        let hasAlarms = 0;
+        let dateNow = new Date();
+        for (var i = 0; i < len; i++) {
+          let tomorrow = new Date();
+          for (let iii = 0; iii < alarmAhead; iii++) {
+            tomorrow.setHours(res.rows.item(i).time3.split(":")[0]);
+            tomorrow.setMinutes(res.rows.item(i).time3.split(":")[1]);
+            tomorrow.setSeconds(0);
+            if (tomorrow >= dateNow) {
+              allAlarms[hasAlarms] = {
+                id: res.rows.item(i).id,
+                title: res.rows.item(i).description,
+                text: res.rows.item(i).dosages,
+                at: new Date(tomorrow),
+                led: "FF0000",
+                sound: 'file://assets/sounds/alarm_bell.mp3'
+              };
+              hasAlarms++;
+            }
+            tomorrow.setDate(tomorrow.getDate() + 1);
+          }
+        }
+        if (hasAlarms > 0) {
+          LocalNotifications.schedule(allAlarms);
+          LocalNotifications.on("click", function (notification) {
+            bridge.navCtrl.setRoot(MedicationPopupAlarmPage);
+          });
+        }
+      }, function (e) {
+      });
+    });
+    // Time 4
+    this._db.transaction(function (tx) {
+      tx.executeSql("SELECT id, description, dosages, time4, alarm FROM alarms WHERE alarm='true' AND time4 > 0", [], function (tx, res) {
+        var len = res.rows.length;
+        let allAlarms = [];
+        let hasAlarms = 0;
+        let dateNow = new Date();
+        for (var i = 0; i < len; i++) {
+          let tomorrow = new Date();
+          for (let iii = 0; iii < alarmAhead; iii++) {
+            tomorrow.setHours(res.rows.item(i).time4.split(":")[0]);
+            tomorrow.setMinutes(res.rows.item(i).time4.split(":")[1]);
+            tomorrow.setSeconds(0);
+            if (tomorrow >= dateNow) {
+              allAlarms[hasAlarms] = {
+                id: res.rows.item(i).id,
+                title: res.rows.item(i).description,
+                text: res.rows.item(i).dosages,
+                at: new Date(tomorrow),
+                led: "FF0000",
+                sound: 'file://assets/sounds/alarm_bell.mp3'
+              };
+              hasAlarms++;
+            }
+            tomorrow.setDate(tomorrow.getDate() + 1);
+          }
+        }
+        if (hasAlarms > 0) {
+          LocalNotifications.schedule(allAlarms);
+          LocalNotifications.on("click", function (notification) {
+            bridge.navCtrl.setRoot(MedicationPopupAlarmPage);
+          });
+        }
+      }, function (e) {
+      });
+    });
+  }
 }

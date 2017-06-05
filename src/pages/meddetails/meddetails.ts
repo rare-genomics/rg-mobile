@@ -46,14 +46,17 @@ export class MeddetailsPage {
   loadMedicine(medId) {
     let bridge = { 'todo': this.todo };
     this.db._db.transaction(function (tx) {
-      tx.executeSql('SELECT id, description, dosages, time, alarm, image, caregiver_id, insurance, pharmacy FROM alarms WHERE id=?', [medId], function (tx, res) {
+      tx.executeSql('SELECT id, description, dosages, time1, time2, time3, time4, alarm, image, caregiver_id, insurance, pharmacy FROM alarms WHERE id=?', [medId], function (tx, res) {
         var len = res.rows.length;
         for (var i = 0; i < len; i++) {
           console.log("Desc:" + res.rows.item(i).description);
           bridge.todo['id'] = res.rows.item(i).id;
           bridge.todo['description'] = res.rows.item(i).description;
           bridge.todo['dosages'] = res.rows.item(i).dosages;
-          bridge.todo['time'] = res.rows.item(i).time;
+          bridge.todo['time1'] = res.rows.item(i).time1;
+          bridge.todo['time2'] = res.rows.item(i).time2;
+          bridge.todo['time3'] = res.rows.item(i).time3;
+          bridge.todo['time4'] = res.rows.item(i).time4;
           bridge.todo['alarm'] = res.rows.item(i).alarm;
           bridge.todo['image'] = res.rows.item(i).image;
           bridge.todo['caregiver_id'] = res.rows.item(i).caregiver_id;
@@ -71,10 +74,13 @@ export class MeddetailsPage {
     if (todo['id'] != null) {
       // Changing
       this.db._db.transaction(function (tx) {
-        tx.executeSql('UPDATE alarms SET description = ?, dosages = ?, time = ?, alarm = ?, image = ?, caregiver_id = ?, insurance = ?, pharmacy = ? WHERE id = ?', [
+        tx.executeSql('UPDATE alarms SET description = ?, dosages = ?, time1 = ?, time2 = ?, time3 = ?, time4 = ?, alarm = ?, image = ?, caregiver_id = ?, insurance = ?, pharmacy = ? WHERE id = ?', [
           todo['description'],
           todo['dosages'],
-          todo['time'],
+          todo['time1'],
+          todo['time2'],
+          todo['time3'],
+          todo['time4'],
           todo['alarm'],
           todo['image'],
           todo['caregiver_id'],
@@ -89,10 +95,13 @@ export class MeddetailsPage {
     } else {
       // Creating a new one
       this.db._db.transaction(function (tx) {
-        tx.executeSql('INSERT INTO alarms (description, dosages, time, alarm, image, caregiver_id, insurance, pharmacy) VALUES (?,?,?,?,?,?,?,?)', [
+        tx.executeSql('INSERT INTO alarms (description, dosages, time1, time2, time3, time4, alarm, image, caregiver_id, insurance, pharmacy) VALUES (?,?,?,?,?,?,?,?,?,?,?)', [
           todo['description'],
           todo['dosages'],
-          todo['time'],
+          todo['time1'],
+          todo['time2'],
+          todo['time3'],
+          todo['time4'],
           todo['alarm'],
           todo['image'],
           todo['caregiver_id'],
@@ -108,16 +117,25 @@ export class MeddetailsPage {
     this.navCtrl.pop();
   }
 
-  closeWindow(){
+  closeWindow() {
     this.navCtrl.pop();
   }
-  
+
   replaceUndefined() {
     if (this.todo['dosages'] == undefined) {
       this.todo['dosages'] = null;
     }
-    if (this.todo['time'] == undefined) {
-      this.todo['time'] = null;
+    if (this.todo['time1'] == undefined) {
+      this.todo['time1'] = null;
+    }
+    if (this.todo['time2'] == undefined) {
+      this.todo['time2'] = null;
+    }
+    if (this.todo['time3'] == undefined) {
+      this.todo['time3'] = null;
+    }
+    if (this.todo['time4'] == undefined) {
+      this.todo['time4'] = null;
     }
     if (this.todo['alarm'] == undefined) {
       this.todo['alarm'] = false;
@@ -152,11 +170,15 @@ export class MeddetailsPage {
 
   testNotification() {
     LocalNotifications.schedule({
+      id: 1,
       title: this.todo['description'],
       text: this.todo['dosages'],
       led: "FF0000",
       sound: 'file://assets/sounds/alarm_bell.mp3'
     });
+    //LocalNotifications.on("click", function (notification) {
+    //  console.log("----- cheguei aqui -----" + notification.id);      
+    //});
   }
 
   runCamera() {
