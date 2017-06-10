@@ -19,12 +19,13 @@ export class EmailAddressPage {
   }
 
   loadData() {
-    let bridge = { 'localdata': this.localdata };
+    let bridge = { 'localdata': this.localdata};
     this.db._db.transaction(function (tx) {
       tx.executeSql('SELECT email FROM profile WHERE id=1', [], function (tx, res) {
         var len = res.rows.length;
         for (var i = 0; i < len; i++) {
           bridge.localdata['email'] = res.rows.item(i).email;
+          bridge.localdata['emailexist'] = true;
         }
       }, function (e) {
       });
@@ -70,14 +71,25 @@ export class EmailAddressPage {
       return;
     }
     let bridge = this.localdata;
-    this.db._db.transaction(function (tx) {
-      tx.executeSql('UPDATE profile SET email = ?', [
-        bridge['email']
-      ], function (tx, res) {
-      }, function (e) {
-        console.log(e.message + " Error updating the database " + e);
+    if(this.localdata['emailexist'] == true){
+      this.db._db.transaction(function (tx) {
+        tx.executeSql('UPDATE profile SET email = ?', [
+          bridge['email']
+        ], function (tx, res) {
+        }, function (e) {
+          console.log(e.message + " Error updating the database " + e);
+        });
       });
-    });
+    } else {
+      this.db._db.transaction(function (tx) {
+        tx.executeSql('INSERT INTO profile (id, email) VALUES (1,?)', [
+          bridge['email']
+        ], function (tx, res) {
+        }, function (e) {
+          console.log(e.message + " Error updating the database " + e);
+        });
+      });
+    }
     this.navCtrl.push(CreatePasswordPage);
   }
 

@@ -38,7 +38,7 @@ export class CreatePasswordPage {
       this.doAlert("Password must be at least 8 characters long");
       return 1;
     } else if(RegExp.exec(this.localdata['password']) == null){
-      this.doAlert("Password must include at least one number");
+      this.doAlert("Password must include at least one number and one capital letter");
       return 1;
     } else if (this.localdata['password'] != this.localdata['password2'] ) {
       this.doAlert("Password doesn't match");
