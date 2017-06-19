@@ -8,6 +8,7 @@ import { CaregiverPage } from '../pages/caregiver/caregiver';
 import { PreferencesPage } from '../pages/preferences/preferences';
 import { ProfileViewPage } from '../pages/profile-view/profile-view';
 import { RaresharePage } from '../pages/rareshare/rareshare';
+import { RarereachPage } from '../pages/rarereach/rarereach';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class MyApp {
       { title: '-- Rare Disease Facts', component: CaregiverPage },
       { title: '-- Contact Us', component: CaregiverPage },
       { title: 'Patient Resources', component: CaregiverPage },
-      { title: '-- RareReach', component: CaregiverPage },
+      { title: '-- RareReach', component: RarereachPage },
       { title: '-- FAQ', component: CaregiverPage },
       { title: 'Rare Genomics Institute News', component: CaregiverPage }
     ];

@@ -190,11 +190,51 @@ textarea {
     height: 30vh;
 }
 
+.slide-image {
+    max-height: 50% !important;
+    max-width: 60% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: auto;
+    padding-top: 10px;
+  }
+
+.slide-title {
+    color: white;
+    text-shadow: 1px 1px #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide-description {
+    color: white !important;
+    font-size: 16px;
+    text-align: left !important;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.card-md {
+    background: transparent !important;
+    color: white;
+    text-shadow: 1px 1px #000000 !important;
+}
+
+.card-ios {
+    background: transparent !important;
+    color: white;
+    text-shadow: 1px 1px #000000 !important;
+}
+
 .patientPhoto {
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
 }
+
+ion-slides { height:initial; }
 
 .formSelect {
     color: white;

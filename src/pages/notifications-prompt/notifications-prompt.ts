@@ -39,7 +39,7 @@ export class NotificationsPromptPage {
 
   sendDataToApi(localData) {
     let body = this.jsonToURLEncoded(localData);
-    var link = 'http://localhost:3000/api/registration';
+    var link = 'http://40.71.101.220:443/api/registration';
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
     let options = new RequestOptions({
       headers: headers
