@@ -74,7 +74,7 @@
     "cordova-plugin-camera": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-camera"
+            "id": "cordova-plugin-camera@~2.4.1"
         },
         "is_top_level": true,
         "variables": {}
@@ -82,7 +82,7 @@
     "cordova-plugin-compat": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-compat"
+            "id": "cordova-plugin-compat@^1.1.0"
         },
         "is_top_level": false,
         "variables": {}
@@ -90,7 +90,7 @@
     "de.appplant.cordova.plugin.printer": {
         "source": {
             "type": "registry",
-            "id": "de.appplant.cordova.plugin.printer"
+            "id": "de.appplant.cordova.plugin.printer@~0.7.1"
         },
         "is_top_level": true,
         "variables": {}

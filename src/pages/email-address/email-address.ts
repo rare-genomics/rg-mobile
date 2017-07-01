@@ -49,7 +49,7 @@ export class EmailAddressPage {
     let body = this.jsonToURLEncoded({
       email: this.localdata['email']
     });
-    var link = 'http://127.0.0.1:3000/api/checkemail';
+    var link = 'http://40.71.101.220:443/api/checkemail';
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
     let options = new RequestOptions({
       headers: headers
