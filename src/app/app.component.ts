@@ -1,4 +1,5 @@
 import { Platform } from 'ionic-angular';
+import { Events } from 'ionic-angular';
 import { StatusBar, Splashscreen, CallNumber } from 'ionic-native';
 import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
@@ -18,10 +19,11 @@ import { RarereachPage } from '../pages/rarereach/rarereach';
 export class MyApp {
   @ViewChild('mycontent') nav: NavController
   rootPage = HomePage;
+  showToolbar: boolean = false;
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(platform: Platform) {
+  constructor(platform: Platform, public events: Events) {
     platform.ready().then(() => {
       StatusBar.styleDefault();
       Splashscreen.hide();
@@ -40,9 +42,15 @@ export class MyApp {
       { title: '-- FAQ', component: CaregiverPage },
       { title: 'Rare Genomics Institute News', component: CaregiverPage }
     ];
+
+    events.subscribe('toggle:toolbar', () => {
+  this.toggleToolbar();
+});
+
   }
 
   gotoMedicationHome() {
+    this.toggleToolbar();
     this.nav.setRoot(MedhomePage);
   }
   gotoCaregiver() {
@@ -56,11 +64,15 @@ export class MyApp {
   }
   gotoHome() {
     this.nav.setRoot(HomePage);
+    this.toggleToolbar();
   }
   callEmergency() {
     CallNumber.callNumber("911", true).then(() => console.log('Launched dialer!')).catch(() => console.log('Error launching dialer'));
   }
   openPage(page) {
     this.nav.setRoot(page.component);
+  }
+  toggleToolbar() {
+    this.showToolbar = true;
   }
 }

@@ -17,7 +17,7 @@
 </ion-menu>
 
 <ion-header color="dark">
-    <ion-toolbar no-border color="dark">
+    <ion-toolbar no-border color="dark" *ngIf="showToolbar">
         <ion-grid>
             <ion-row>
                 <button ion-button menuToggle class="btnTopWhite"><ion-icon name="menu"></ion-icon></button>
@@ -48,11 +48,12 @@
         </ion-grid>
     </ion-toolbar>
 </ion-header>
-<ion-content>
+
+<ion-content has-header="true" has-subheader="true" has-footer="true">
     <ion-nav #mycontent [root]="rootPage"></ion-nav>
 </ion-content>
 <ion-footer no-border>
-    <ion-toolbar color="dark" no-border>
+    <ion-toolbar color="dark" no-border *ngIf="showToolbar">
         <ion-grid>
             <ion-row>
                 <ion-col>

@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { MedhomePage } from '../medhome/medhome';
+import { Component, ViewChild } from '@angular/core';
+import { Events } from 'ionic-angular';
+import { Content } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { TermsandconditionsPage } from '../termsandconditions/termsandconditions';
@@ -12,8 +15,9 @@ import { ContactRGIPage } from '../contact-rgi/contact-rgi';
   providers: [InitDatabase, ScheduleMedication]
 })
 export class HomePage {
+  @ViewChild(Content) content: Content
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private db: InitDatabase, private schedmed: ScheduleMedication) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private db: InitDatabase, private schedmed: ScheduleMedication, public events: Events) {
     console.log("Inicia banco de dados");
     this.db.createDatabase();
   }
@@ -41,6 +45,13 @@ export class HomePage {
 
   dropDatabase() {
     this.db.dropDatabase();
+  }
+
+  simulateLogin() {
+    this.content.resize();
+    this.events.publish('toggle:toolbar');
+    this.content.fullscreen = false;
+    this.navCtrl.push(MedhomePage);
   }
 
 }
