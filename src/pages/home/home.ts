@@ -8,6 +8,9 @@ import { TermsandconditionsPage } from '../termsandconditions/termsandconditions
 import { InitDatabase } from '../../providers/init-database';
 import { ScheduleMedication } from '../../providers/schedule-medication';
 import { ContactRGIPage } from '../contact-rgi/contact-rgi';
+import { PatientPagePage } from '../curatedtool/patient/patient';
+
+PatientPagePage
 
 @Component({
   selector: 'page-home',
@@ -41,6 +44,9 @@ export class HomePage {
 
   gotoContactRGI() {
     this.navCtrl.push(ContactRGIPage);
+  }
+  gotoPatient() {
+    this.navCtrl.setRoot(PatientPagePage);
   }
 
   dropDatabase() {

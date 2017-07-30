@@ -24,7 +24,7 @@ import { ProfileViewPage } from '../pages/profile-view/profile-view';
 import { AddConditionPage } from '../pages/add-condition/add-condition';
 import { RaresharePage } from '../pages/rareshare/rareshare';
 import { RarereachPage } from '../pages/rarereach/rarereach';
-
+import { PatientPagePage } from '../pages/curatedtool/patient/patient';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,8 @@ import { RarereachPage } from '../pages/rarereach/rarereach';
     ProfileViewPage,
     AddConditionPage,
     RaresharePage,
-    RarereachPage
+    RarereachPage,
+    PatientPagePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -79,7 +80,8 @@ import { RarereachPage } from '../pages/rarereach/rarereach';
     ProfileViewPage,
     AddConditionPage,
     RaresharePage,
-    RarereachPage
+    RarereachPage,
+    PatientPagePage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
