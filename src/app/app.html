@@ -1,23 +1,25 @@
 <ion-menu type="overlay" [content]="mycontent" swipeEnabled="false">
     <ion-content>
         <ion-list>
-            <button ion-item menu-close *ngFor="let p of pages" (click)="openPage(p)">
+            <ion-list-header text-center>More Menu</ion-list-header>
+            <button ion-item menuClose *ngFor="let p of pages" (click)="openPage(p)">
                  {{p.title}}
             </button>
-        </ion-list>
-    </ion-content>
-</ion-menu>
-
-<ion-menu [content]="mycontent">
-    <ion-content>
-        <ion-list>
-            <p>some menu content, could be list items</p>
+            <ion-list-header text-center>Rare Genomic Institute</ion-list-header>
+            <button ion-item menuClose *ngFor="let p1 of rgiMenuItems" (click)="openPage(p1)">
+                 {{p1.title}}
+            </button>
+            <ion-list-header text-center>Settings</ion-list-header>
+            <button ion-item menuClose *ngFor="let p2 of settingsMenuItems" (click)="openPage(p2)">
+                 {{p2.title}}
+            </button>
+            <ion-item text-center><button menuClose class="signOutMenuItem" (click)="signOut()">Sign out</button></ion-item>
         </ion-list>
     </ion-content>
 </ion-menu>
 
 <ion-header color="dark">
-    <ion-toolbar no-border color="dark" *ngIf="showToolbar">
+    <ion-toolbar no-border color="dark">
         <ion-grid>
             <ion-row>
                 <button ion-button menuToggle class="btnTopWhite"><ion-icon name="menu"></ion-icon></button>
@@ -49,11 +51,12 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content has-header="true" has-subheader="true" has-footer="true">
+<ion-content>
     <ion-nav #mycontent [root]="rootPage"></ion-nav>
 </ion-content>
+
 <ion-footer no-border>
-    <ion-toolbar color="dark" no-border *ngIf="showToolbar">
+    <ion-toolbar color="dark" no-border>
         <ion-grid>
             <ion-row>
                 <ion-col>

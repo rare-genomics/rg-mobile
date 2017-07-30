@@ -1,5 +1,5 @@
 import { Platform } from 'ionic-angular';
-import { Events } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import { StatusBar, Splashscreen, CallNumber } from 'ionic-native';
 import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
@@ -10,6 +10,8 @@ import { PreferencesPage } from '../pages/preferences/preferences';
 import { ProfileViewPage } from '../pages/profile-view/profile-view';
 import { RaresharePage } from '../pages/rareshare/rareshare';
 import { RarereachPage } from '../pages/rarereach/rarereach';
+import { ContactRGIPage } from '../pages/contact-rgi/contact-rgi';
+import { TermsandconditionsPage } from '../pages/termsandconditions/termsandconditions';
 
 
 @Component({
@@ -19,38 +21,42 @@ import { RarereachPage } from '../pages/rarereach/rarereach';
 export class MyApp {
   @ViewChild('mycontent') nav: NavController
   rootPage = HomePage;
-  showToolbar: boolean = false;
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(platform: Platform, public events: Events) {
+  rgiMenuItems: Array<{ title: string, component: any }>;
+
+  settingsMenuItems: Array<{ title: string, component: any }>;
+
+  constructor(platform: Platform, public alertCtrl: AlertController) {
     platform.ready().then(() => {
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
 
     this.pages = [
-      { title: 'My Preferences', component: PreferencesPage },
-      { title: 'Get a Diagnosis', component: CaregiverPage },
-      { title: 'What is Rare Genomics', component: CaregiverPage },
-      { title: '--Our Mission', component: CaregiverPage },
-      { title: '-- Who We Are', component: CaregiverPage },
-      { title: '-- Rare Disease Facts', component: CaregiverPage },
-      { title: '-- Contact Us', component: CaregiverPage },
-      { title: 'Patient Resources', component: CaregiverPage },
-      { title: '-- RareReach', component: RarereachPage },
-      { title: '-- FAQ', component: CaregiverPage },
-      { title: 'Rare Genomics Institute News', component: CaregiverPage }
+      { title: 'My Profile', component: ProfileViewPage },
+      { title: 'Rareshare', component: RaresharePage },
+      { title: 'Get a Diagnosis - RareREACH', component: RarereachPage }
     ];
 
-    events.subscribe('toggle:toolbar', () => {
-  this.toggleToolbar();
-});
+    this.rgiMenuItems = [
+      { title: 'Who we are?', component: RarereachPage },
+      { title: 'Rare Genomics FAQs', component: RarereachPage },
+      { title: 'Get RGI\'s Newsletter', component: RarereachPage },
+      { title: 'Contact Us.', component: ContactRGIPage }
+    ];
+
+    this.settingsMenuItems = [
+      { title: 'Terms and Conditions', component: TermsandconditionsPage },
+      { title: 'Privacy Policy', component: RarereachPage },
+      { title: 'My Settings', component: RarereachPage },
+      { title: 'Support & Feedback', component: RarereachPage }
+    ];  
 
   }
 
   gotoMedicationHome() {
-    this.toggleToolbar();
     this.nav.setRoot(MedhomePage);
   }
   gotoCaregiver() {
@@ -64,7 +70,6 @@ export class MyApp {
   }
   gotoHome() {
     this.nav.setRoot(HomePage);
-    this.toggleToolbar();
   }
   callEmergency() {
     CallNumber.callNumber("911", true).then(() => console.log('Launched dialer!')).catch(() => console.log('Error launching dialer'));
@@ -72,7 +77,18 @@ export class MyApp {
   openPage(page) {
     this.nav.setRoot(page.component);
   }
-  toggleToolbar() {
-    this.showToolbar = true;
+  signOut() {
+    let alert = this.alertCtrl.create({
+      message: 'You have now been signed out of the app.',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+          this.gotoHome();
+        }
+      }
+    ]
+  });
+  alert.present();
   }
 }

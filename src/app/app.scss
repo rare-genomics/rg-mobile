@@ -9,7 +9,6 @@ a {
 }
 
 ion-header {
-    position: relative !important;
     ion-grid {
         padding: 0;
     }
@@ -312,6 +311,11 @@ textarea {
     background: transparent;
     color: white;
     flex: 1;
+}
+
+.signOutMenuItem {
+    background: plum !important;
+    color: white !important;
 }
 
 textarea {

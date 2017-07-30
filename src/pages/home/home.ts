@@ -1,6 +1,5 @@
 import { MedhomePage } from '../medhome/medhome';
 import { Component, ViewChild } from '@angular/core';
-import { Events } from 'ionic-angular';
 import { Content } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
@@ -20,7 +19,7 @@ PatientPagePage
 export class HomePage {
   @ViewChild(Content) content: Content
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private db: InitDatabase, private schedmed: ScheduleMedication, public events: Events) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private db: InitDatabase, private schedmed: ScheduleMedication) {
     console.log("Inicia banco de dados");
     this.db.createDatabase();
   }
@@ -54,9 +53,6 @@ export class HomePage {
   }
 
   simulateLogin() {
-    this.content.resize();
-    this.events.publish('toggle:toolbar');
-    this.content.fullscreen = false;
     this.navCtrl.push(MedhomePage);
   }
 
