@@ -1,5 +1,6 @@
 {
   "name": "rg-mobile",
   "app_id": "a92db8ff",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {}
 }
