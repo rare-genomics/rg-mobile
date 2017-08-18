@@ -48,15 +48,7 @@ export class MyApp {
   gotoCaregiver() {
     this.nav.setRoot(CaregiverPage);
   }
-  gotoProfile() {
-    this.nav.setRoot(ProfileViewPage);
-  }
-  gotoRareshare() {
-    this.nav.setRoot(RaresharePage);
-  }
-  gotoHome() {
-    this.nav.setRoot(HomePage);
-  }
+  
   callEmergency() {
     CallNumber.callNumber("911", true).then(() => console.log('Launched dialer!')).catch(() => console.log('Error launching dialer'));
   }
