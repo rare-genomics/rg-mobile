@@ -1,0 +1,40 @@
+page-patient {
+    ion-content {       
+       background-image: url("../../assets/images/backgroundcurated.jpg");
+       //background-image: url("../assets/images/background6.jpg");
+       //background: linear-gradient(141deg, #000000 0%, #1fc8db 51%, #2cb5e8 75%);
+       // background: #e2e1e0;
+     //background: white;
+        ion-card {
+            //color: black;
+            //background: white;
+            //padding: 0;
+            //display: flex;            
+            //text-align: left;
+            //margin: 0 auto;
+                                    
+        }
+        ion-list {
+           padding: 0px !important;
+           //max-height: 20px;           
+           margin: 0 auto;  
+        }
+        ion-card-header {
+           background: linear-gradient(141deg, #dd0099 0%,  #0099ee 20%, #00bb88 50%, #ffee55 80%);
+           color: black;
+           padding: 0px !important;
+           text-shadow: 0px 0px black;
+           max-height: 20px;
+           text-align: center;
+           margin: 0 auto;       
+        }
+        ion-card-content {
+            background: white;
+            color: black;
+            text-shadow: 0px 0px #000000;
+            padding: 0px !important;
+            margin: 0 auto;       
+        }     
+    }    
+    
+}

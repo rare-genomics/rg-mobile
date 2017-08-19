@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { MedhomePage } from '../medhome/medhome';
+import { Component, ViewChild } from '@angular/core';
+import { Content } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { TermsandconditionsPage } from '../termsandconditions/termsandconditions';
 import { InitDatabase } from '../../providers/init-database';
 import { ScheduleMedication } from '../../providers/schedule-medication';
 import { ContactRGIPage } from '../contact-rgi/contact-rgi';
+import { PatientPagePage } from '../curatedtool/patient/patient';
 import { LoginPage } from '../login/login';
 
 @Component({
@@ -13,6 +16,7 @@ import { LoginPage } from '../login/login';
   providers: [InitDatabase, ScheduleMedication]
 })
 export class HomePage {
+  @ViewChild(Content) content: Content
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, private db: InitDatabase, private schedmed: ScheduleMedication) {
     console.log("Inicia banco de dados");
@@ -43,9 +47,16 @@ export class HomePage {
   gotoContactRGI() {
     this.navCtrl.push(ContactRGIPage);
   }
+  gotoPatient() {
+    this.navCtrl.setRoot(PatientPagePage);
+  }
 
   dropDatabase() {
     this.db.dropDatabase();
+  }
+
+  simulateLogin() {
+    this.navCtrl.push(MedhomePage);
   }
 
 }

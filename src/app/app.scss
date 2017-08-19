@@ -8,6 +8,36 @@ a {
     }
 }
 
+.ios, .md {
+ 
+    page-home {
+ 
+        p {
+            font-size: 0.8em;
+            color: #d2d2d2;
+        }
+ 
+        .swiper-slide {
+            display: block;
+        }
+ 
+        ion-label, .select-text {
+            margin-left: 10px;
+        }
+ 
+        ion-input, ion-select, ion-textarea {
+            background-color: #f2f2f2;
+            padding: 5px 10px;
+        }
+ 
+        .invalid {
+            border: 1px solid #ea6153;
+        }
+ 
+    }
+ 
+}
+
 ion-header {
     ion-grid {
         padding: 0;
@@ -131,6 +161,43 @@ ion-content {
         text-align: center;
         color: white;
     }
+    .labelTransBg {
+        max-width: 600px;
+        background: transparent !important;
+        padding: 0;
+        font-size: 16px;
+        margin: 0 auto;
+        height: 35px;
+        text-align: left;
+        color: white;
+    }
+
+    .ios, .md {
+ 
+        p {
+            font-size: 0.8em;
+            color: #d2d2d2;
+        }
+ 
+        .swiper-slide {
+            display: block;
+        }
+ 
+        ion-label, .select-text {
+            margin-left: 10px;
+        }
+ 
+        ion-input, ion-select, ion-textarea {
+            background-color: #f2f2f2;
+            padding: 5px 10px;
+        }
+ 
+        .invalid {
+            border: 1px solid #ea6153 !important;
+        }
+ 
+}
+
     .labelFormList {
         max-width: 600px;
         padding: 0;
@@ -311,6 +378,11 @@ textarea {
     background: transparent;
     color: white;
     flex: 1;
+}
+
+.signOutMenuItem {
+    background: plum !important;
+    color: white !important;
 }
 
 textarea {
