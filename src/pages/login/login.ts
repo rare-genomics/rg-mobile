@@ -79,12 +79,14 @@ export class LoginPage {
 
   saveData() {  
     let bridge = this.localdata;
+    let navctrlbridge = this.navCtrl;
     if(this.localdata['emailexist'] == true){
       this.db._db.transaction(function (tx) {
         tx.executeSql('UPDATE profile SET email = ?, password = ? , loggedin = \'true\'', [
           bridge['email'],
           bridge['password']
         ], function (tx, res) {
+          navctrlbridge.setRoot(MedhomePage);
         }, function (e) {
           console.log(e.message + " Error updating the database " + e);
         });
@@ -95,6 +97,7 @@ export class LoginPage {
           bridge['email'],
           bridge['password']
         ], function (tx, res) {
+          navctrlbridge.setRoot(MedhomePage);
         }, function (e) {
           console.log(e.message + " Error updating the database " + e);
         });
