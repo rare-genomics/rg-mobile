@@ -25,6 +25,7 @@ import { AddConditionPage } from '../pages/add-condition/add-condition';
 import { RaresharePage } from '../pages/rareshare/rareshare';
 import { RarereachPage } from '../pages/rarereach/rarereach';
 import { PatientPagePage } from '../pages/curatedtool/patient/patient';
+import { UsertypePagePage } from '../pages/usertype/usertype';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { PatientPagePage } from '../pages/curatedtool/patient/patient';
     AddConditionPage,
     RaresharePage,
     RarereachPage,
-    PatientPagePage
+    PatientPagePage,
+    UsertypePagePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -81,7 +83,8 @@ import { PatientPagePage } from '../pages/curatedtool/patient/patient';
     AddConditionPage,
     RaresharePage,
     RarereachPage,
-    PatientPagePage
+    PatientPagePage,
+    UsertypePagePage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

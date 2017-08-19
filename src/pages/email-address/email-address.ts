@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { CreatePasswordPage } from '../create-password/create-password';
+import { UsertypePagePage } from '../usertype/usertype';
 import { LoginPage } from '../login/login';
 import { InitDatabase } from '../../providers/init-database';
 import { AlertController } from 'ionic-angular';
@@ -90,7 +90,7 @@ export class EmailAddressPage {
         });
       });
     }
-    this.navCtrl.push(CreatePasswordPage);
+    this.navCtrl.push(UsertypePagePage);
   }
 
   goBack() {

@@ -1,0 +1,40 @@
+<ion-header no-border>
+  <ion-grid>
+    <ion-row>
+    </ion-row>
+  </ion-grid>
+  <ion-toolbar padding>
+    <ion-buttons start>
+      <button ion-button icon-only clear (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h1>Please, select from the options below:</h1>
+  <ion-list>
+    <!-- <form name="formlocal"> -->
+      <ion-item>
+        <ion-label>I am a patient</ion-label>
+        <ion-checkbox color="dark" checked="true" [(ngModel)]="localdata.patient"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>I am a Caragiver representing a patient with special needs</ion-label>
+        <ion-checkbox color="dark" checked="false" [(ngModel)]="localdata.caregiver"></ion-checkbox>
+      </ion-item>            
+    <!-- </form> -->
+
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-20 offset-80>
+        <button ion-button icon-only round (click)="saveData()">
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
