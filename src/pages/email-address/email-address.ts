@@ -49,7 +49,7 @@ export class EmailAddressPage {
     let body = this.jsonToURLEncoded({
       email: this.localdata['email']
     });
-    var link = 'http://40.71.101.220:443/api/checkemail';
+    var link = 'https://mobile.raregenomics.org/api/checkemail';
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
     let options = new RequestOptions({
       headers: headers

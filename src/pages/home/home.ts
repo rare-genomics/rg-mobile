@@ -8,8 +8,7 @@ import { InitDatabase } from '../../providers/init-database';
 import { ScheduleMedication } from '../../providers/schedule-medication';
 import { ContactRGIPage } from '../contact-rgi/contact-rgi';
 import { PatientPagePage } from '../curatedtool/patient/patient';
-
-PatientPagePage
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-home',
@@ -39,6 +38,10 @@ export class HomePage {
 
   createAccount() {
     this.navCtrl.push(TermsandconditionsPage);
+  }
+
+  gotoLogin() {
+    this.navCtrl.setRoot(LoginPage);
   }
 
   gotoContactRGI() {
