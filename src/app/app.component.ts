@@ -6,7 +6,7 @@ import { NavController } from 'ionic-angular';
 import { HomePage } from '../pages/home/home';
 import { MedhomePage } from '../pages/medhome/medhome';
 import { CaregiverPage } from '../pages/caregiver/caregiver';
-import { PreferencesPage } from '../pages/preferences/preferences';
+// import { PreferencesPage } from '../pages/preferences/preferences';
 import { ProfileViewPage } from '../pages/profile-view/profile-view';
 import { RaresharePage } from '../pages/rareshare/rareshare';
 import { RarereachPage } from '../pages/rarereach/rarereach';

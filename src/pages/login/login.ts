@@ -3,11 +3,13 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AlertController } from 'ionic-angular';
 import { MedhomePage } from '../medhome/medhome';
+import { HomePage } from '../home/home';
 import { InitDatabase } from '../../providers/init-database';
 
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html'
+  templateUrl: 'login.html',
+  providers: [InitDatabase]
 })
 export class LoginPage {
   localdata = {};
@@ -28,10 +30,11 @@ export class LoginPage {
   loadData() {
     let bridge = { 'localdata': this.localdata};
     this.db._db.transaction(function (tx) {
-      tx.executeSql('SELECT email FROM profile WHERE id=1', [], function (tx, res) {
+      tx.executeSql('SELECT email, password FROM profile WHERE id=1', [], function (tx, res) {
         var len = res.rows.length;
         for (var i = 0; i < len; i++) {
           bridge.localdata['email'] = res.rows.item(i).email;
+          bridge.localdata['password'] = res.rows.item(i).password;
           bridge.localdata['emailexist'] = true;
         }
       }, function (e) {
@@ -52,7 +55,7 @@ export class LoginPage {
     this.http.post(link, body, options)
       .subscribe(data => {
         if (data.status == 200) {                   
-          console.log("Login Certo");    
+          console.log("Login OK");    
           this.saveData();             
         } else if (data.status == 202) {
           let alert = this.alertCtrl.create({
@@ -78,8 +81,9 @@ export class LoginPage {
     let bridge = this.localdata;
     if(this.localdata['emailexist'] == true){
       this.db._db.transaction(function (tx) {
-        tx.executeSql('UPDATE profile SET email = ?', [
-          bridge['email']
+        tx.executeSql('UPDATE profile SET email = ?, password = ? , loggedin = \'true\'', [
+          bridge['email'],
+          bridge['password']
         ], function (tx, res) {
         }, function (e) {
           console.log(e.message + " Error updating the database " + e);
@@ -87,15 +91,15 @@ export class LoginPage {
       });
     } else {
       this.db._db.transaction(function (tx) {
-        tx.executeSql('INSERT INTO profile (id, email, password, loggedin) VALUES (1,?,?,true)', [
-          bridge['email']
+        tx.executeSql('INSERT INTO profile (id, email, password, loggedin) VALUES (1,?,?,\'true\')', [
+          bridge['email'],
+          bridge['password']
         ], function (tx, res) {
         }, function (e) {
           console.log(e.message + " Error updating the database " + e);
         });
       });
     }
-    this.navCtrl.setRoot(MedhomePage);   
   }
 
   forgotPassword() {
