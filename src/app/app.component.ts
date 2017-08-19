@@ -76,11 +76,11 @@ export class MyApp {
         {
           text: 'Ok',
           handler: () => {
-          this.gotoHome();
+            this.nav.setRoot(HomePage);
         }
       }
     ]
-  });
-  alert.present();
+    });
+    alert.present();
   }
 }
