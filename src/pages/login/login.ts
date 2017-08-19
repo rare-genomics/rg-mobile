@@ -3,7 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AlertController } from 'ionic-angular';
 import { MedhomePage } from '../medhome/medhome';
-import { HomePage } from '../home/home';
 import { InitDatabase } from '../../providers/init-database';
 
 @Component({
