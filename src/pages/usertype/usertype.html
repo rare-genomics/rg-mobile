@@ -15,7 +15,6 @@
 <ion-content padding>
   <h1>Please, select from the options below:</h1>
   <ion-list>
-    <!-- <form name="formlocal"> -->
       <ion-item>
         <ion-label>I am a patient</ion-label>
         <ion-checkbox color="dark" checked="true" [(ngModel)]="localdata.patient"></ion-checkbox>
@@ -23,9 +22,7 @@
       <ion-item>
         <ion-label>I am a Caragiver representing a patient with special needs</ion-label>
         <ion-checkbox color="dark" checked="false" [(ngModel)]="localdata.caregiver"></ion-checkbox>
-      </ion-item>            
-    <!-- </form> -->
-
+      </ion-item>           
   </ion-list>
   <ion-grid>
     <ion-row>

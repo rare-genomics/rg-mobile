@@ -11,17 +11,17 @@ import { InitDatabase } from '../../providers/init-database';
 export class UsertypePagePage {
   localdata = {};
   constructor(private db: InitDatabase, public navCtrl: NavController, public navParams: NavParams) {
-    // this.loadData();
+    this.loadData();
   }
 
   loadData() {
     let bridge = { 'localdata': this.localdata };
     this.db._db.transaction(function (tx) {
-      tx.executeSql('SELECT password FROM profile WHERE id=1', [], function (tx, res) {
+      tx.executeSql('SELECT patient, caregiver FROM profile WHERE id=1', [], function (tx, res) {
         var len = res.rows.length;
         for (var i = 0; i < len; i++) {
-          bridge.localdata['password'] = res.rows.item(i).password;
-          bridge.localdata['password2'] = res.rows.item(i).password;
+          bridge.localdata['patient'] = res.rows.item(i).patient;
+          bridge.localdata['caregiver'] = res.rows.item(i).caregiver;
         }
       }, function (e) {
       });
@@ -31,8 +31,9 @@ export class UsertypePagePage {
   saveData() {
     let bridge = this.localdata;
     this.db._db.transaction(function (tx) {
-      tx.executeSql('UPDATE profile SET password = ?', [
-        bridge['password']
+      tx.executeSql('UPDATE profile SET patient = ?, caregiver = ?', [
+        bridge['patient'],
+        bridge['caregiver']
       ], function (tx, res) {
       }, function (e) {
         console.log(e.message + " Error updating the database " + e);
