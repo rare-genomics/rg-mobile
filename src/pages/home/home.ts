@@ -47,6 +47,7 @@ export class HomePage {
   gotoContactRGI() {
     this.navCtrl.push(ContactRGIPage);
   }
+  
   gotoPatient() {
     this.navCtrl.setRoot(PatientPagePage);
   }
