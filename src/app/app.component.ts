@@ -12,7 +12,7 @@ import { RaresharePage } from '../pages/rareshare/rareshare';
 import { RarereachPage } from '../pages/rarereach/rarereach';
 import { ContactRGIPage } from '../pages/contact-rgi/contact-rgi';
 import { TermsandconditionsPage } from '../pages/termsandconditions/termsandconditions';
-
+import { SupportAndFeedbackPage } from '../pages/supportandfeedback/supportandfeedback';
 
 @Component({
   templateUrl: 'app.html'
@@ -51,7 +51,7 @@ export class MyApp {
       { title: 'Terms and Conditions', component: TermsandconditionsPage },
       { title: 'Privacy Policy', component: RarereachPage },
       { title: 'My Settings', component: RarereachPage },
-      { title: 'Support & Feedback', component: RarereachPage }
+      { title: 'Support & Feedback', component: SupportAndFeedbackPage }
     ];  
 
   }
@@ -67,7 +67,7 @@ export class MyApp {
     CallNumber.callNumber("911", true).then(() => console.log('Launched dialer!')).catch(() => console.log('Error launching dialer'));
   }
   openPage(page) {
-    this.nav.setRoot(page.component);
+    this.nav.push(page.component);
   }
   signOut() {
     let alert = this.alertCtrl.create({

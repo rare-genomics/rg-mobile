@@ -1,5 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { AppVersion } from '@ionic-native/app-version';
+import { EmailComposer } from '@ionic-native/email-composer';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { TermsandconditionsPage } from '../pages/termsandconditions/termsandconditions';
@@ -26,6 +28,7 @@ import { RaresharePage } from '../pages/rareshare/rareshare';
 import { RarereachPage } from '../pages/rarereach/rarereach';
 import { PatientPagePage } from '../pages/curatedtool/patient/patient';
 import { UsertypePagePage } from '../pages/usertype/usertype';
+import { SupportAndFeedbackPage } from '../pages/supportandfeedback/supportandfeedback';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,8 @@ import { UsertypePagePage } from '../pages/usertype/usertype';
     RaresharePage,
     RarereachPage,
     PatientPagePage,
-    UsertypePagePage
+    UsertypePagePage,
+    SupportAndFeedbackPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -84,11 +88,14 @@ import { UsertypePagePage } from '../pages/usertype/usertype';
     RaresharePage,
     RarereachPage,
     PatientPagePage,
-    UsertypePagePage
+    UsertypePagePage,
+    SupportAndFeedbackPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     Storage,
+    AppVersion,
+    EmailComposer
     // initDatabase
   ]
 })

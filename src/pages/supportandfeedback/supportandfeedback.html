@@ -1,0 +1,59 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            <ion-label class="toolbartitle">Support & Feedback</ion-label>
+        </ion-title>
+
+        <ion-buttons left>
+            <button class="btnTopWhite" ion-button icon-only (click)="closeWindow()">
+                <ion-icon name="arrow-dropleft"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <img src="assets/images/rg-logo.png" class="slide-image"/>
+    <ion-card>
+        <ion-item>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-6>
+                        Version
+                    </ion-col>
+                    <ion-col col-6 text-right>
+                        {{version}}
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+    </ion-card>
+    <ion-card (click)="emailComposerWindow()">
+        <ion-item>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-6>
+                        Submit Feedback
+                    </ion-col>
+                    <ion-col col-6 text-right>
+                        <ion-icon name="arrow-dropright-circle"></ion-icon>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+    </ion-card>
+    <ion-card (click)="helpCenterWindow()">
+        <ion-item>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-6>
+                        Help Center
+                    </ion-col>
+                    <ion-col col-6 text-right>
+                        <ion-icon name="arrow-dropright-circle"></ion-icon>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+    </ion-card>
+</ion-content>
